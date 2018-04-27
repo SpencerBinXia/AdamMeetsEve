@@ -23,6 +23,6 @@ public class loginController {
 	public String login(@ModelAttribute loginInfo info, HttpSession session)
 	{
 		boolean statusCode = service.loginUser(info, session);
-		return "profile";
+		return "profile.html";
 	}
 }

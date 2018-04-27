@@ -13,6 +13,7 @@ public class indexController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String home(Model model)
 	{
-		return "index";
+		System.out.println("sdfasdfasdf");
+		return "index.html";
 	}
 }
