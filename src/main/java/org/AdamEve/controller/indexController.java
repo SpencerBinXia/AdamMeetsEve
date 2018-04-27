@@ -13,6 +13,6 @@ public class indexController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String home(Model model)
 	{
-		return "home";
+		return "index";
 	}
 }
