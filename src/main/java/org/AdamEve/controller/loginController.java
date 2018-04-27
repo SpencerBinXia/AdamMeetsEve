@@ -22,6 +22,6 @@ public class loginController {
 	public String login(loginInfo info, HttpSession session)
 	{
 		boolean statusCode = service.loginUser(info, session);
-		return "index";
+		return "profile";
 	}
 }
