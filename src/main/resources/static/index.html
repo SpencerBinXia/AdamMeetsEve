@@ -14,14 +14,14 @@
     <form action="login" th:action="@{/login}" th:object="$(info)" method="post">
         <div style="float:left">
         Username:<br>
-        <input type="text" th:field="*{email}">
+        <input type="text" title="emailentry" th:field="*{email}"/>
         </div>
         <div style="float:left">
         Password:<br>
-        <input type="text" th:field="*{password}">
+        <input type="text" title="passwordentry" th:field="*{password}"/>
         </div>
         <br/>
-        <input type="submit" name="Login">
+        <input type="submit"/>
     </form>
 </div>
 </html>
