@@ -6,8 +6,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class userrepository {
 	
 	@Autowired
-	JdbcTemplate jdbcTemplace;
+	JdbcTemplate jdbcTemplate;
 	
-	
+	public boolean registerUser() {
+
+		//jdbcTemplate.update("INSERT INTO tablename(column1, column2) VALUES (?, ?)", var1, var2);
+		
+		return true;
+	}
 	
 }
