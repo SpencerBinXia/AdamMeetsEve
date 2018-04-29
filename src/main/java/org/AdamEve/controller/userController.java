@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/viewprofile/{ssn}")
+@RequestMapping("/viewuser/{ssn}")
 public class userController {
 	
 	@Autowired
@@ -21,7 +21,7 @@ public class userController {
 	{
 		user foundUser = userService.findUser(userid);
 		model.addAttribute("foundUser", foundUser);
-		return "profile";
+		return "user";
 	}
 	
 }
