@@ -17,12 +17,19 @@ public class loginController {
 	@Autowired
 	private loginRegisterService service;
 	
-	@PostMapping
-	public String login(@ModelAttribute("info") loginInfo info, HttpSession session)
+	@GetMapping
+	public String login(Model model)
 	{
-		System.out.println("logincontrol reached");
-		boolean statusCode = service.loginUser(info, session);
-		System.out.println("status code executed");
-		return "redirect:/profile.html";
+		model.addAttribute("info", new loginInfo());
+		return "index";
+	}
+	
+	@PostMapping
+	public String login(@ModelAttribute loginInfo info, HttpSession session)
+	{
+		System.out.println(info.getEmail());
+		System.out.println(info.getPassword());
+		service.loginUser(info, session);
+		return "profile";
 	}
 }
