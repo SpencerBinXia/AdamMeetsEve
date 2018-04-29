@@ -1,0 +1,168 @@
+@import url('http://fonts.googleapis.com/css?family=Alegreya+Sans');
+
+body {
+    font-family: 'Alegreya Sans', sans-serif;
+    color: #ffffff;
+}
+
+#navbar {
+    background-color: #ffa07a;
+}
+
+#loginBtn  {
+    background-color: #ffa07a;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+#button {
+    background-color: #008a6b;
+    border: 0;
+    color: #ffffff;
+}
+
+#myModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Sit on top */
+    width: 30%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+#textBox{
+    border: 1px solid #87CEFA;
+    border-radius: 5px;
+}
+/* Modal Content/Box */
+.modal-content {
+    vertical-align: top;
+    background-color: rgba(245, 245, 245, 0.98);
+    color: #000000;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*
+td.course_num
+{
+    font-family:monospace;
+}
+
+p,li,td,th {
+    font-size:13pt;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color:#003399
+}
+
+
+
+#banner {
+    font-size:24pt;
+    color:#ffffff;
+    background-color:#990000;
+}
+
+#desc {
+    background-color:#ffffff;
+    color:#000000;
+}
+
+a.nav {
+    color:#ffffff;
+    font-size:12pt;
+    font-weight:normal;
+}
+
+a.open_nav {
+    color:#ffffff;
+    font-size:18pt;
+    font-weight:bold;
+}
+
+hr {
+    color:#111155;
+}
+
+a.open_nav:hover {
+
+}
+
+a.nav:hover{
+    color:rgb(118,143,165);
+}
+
+a:hover {
+    color:rgb(118,143,165);
+}
+
+a {
+    text-decoration:none;
+    color:#006633;
+    font-weight:bold;
+}
+
+span {
+    color:#8888ff;
+    font-weight:bold;
+}
+
+span.reading {
+    color:#000000;
+    font-weight:normal;
+}
+
+span.tutorial {
+    color:#990099;
+    font-weight:normal;
+}
+
+span.hw {
+    color:#990000;
+    font-weight:normal;
+}
+
+span.grading {
+    color:#007700;
+    font-weight:normal;
+}
+
+td.highlight {
+    background-color:#00ffff;
+}
+
+table.hws {
+    border: 2px solid black;
+    border-collapse:collapse;
+}
+
+th.hws {
+    text-align:centered;
+    padding-right: 80px;
+}
+
+td.hws {
+    padding-right:80px;
+}
+*/
