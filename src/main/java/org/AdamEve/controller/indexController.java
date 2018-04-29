@@ -15,6 +15,6 @@ public class indexController {
 	public String home(Model model)
 	{
 		model.addAttribute("info", new loginInfo());
-		return "register";
+		return "index";
 	}
 }
