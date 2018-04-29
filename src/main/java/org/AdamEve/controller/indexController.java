@@ -1,5 +1,6 @@
 package org.AdamEve.controller;
 
+import org.AdamEve.object.loginInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ public class indexController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String home(Model model)
 	{
+		model.addAttribute("info", new loginInfo());
 		return "index";
 	}
 }

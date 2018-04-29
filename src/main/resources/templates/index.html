@@ -78,7 +78,7 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <p>Returning Users Login.</p><br>
-      <form action="login" th:action="@{/login}" th:object="$(info)" method="post">
+      <form action="login" th:action="@{/login}" th:object="${info}" method="post">
         <table style="width:100%">
           <tr>
             <th>E-mail:</th>
