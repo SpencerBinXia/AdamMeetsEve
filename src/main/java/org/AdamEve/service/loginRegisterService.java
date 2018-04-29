@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.AdamEve.object.loginInfo;
+import org.AdamEve.object.registerInfo;
+import org.AdamEve.object.user;
 //import org.AdamEve.object.registerInfo;
 //import org.AdamEve.object.user;
 import org.AdamEve.repository.userrepository;
@@ -16,7 +18,6 @@ public class  loginRegisterService {
 	@Autowired
 	private userrepository repository;
 
-	/**
 	public boolean loginUser(loginInfo info, HttpSession session) {
 		String emailAddress = info.getEmail();
 		user user = repository.findUserByEmail(emailAddress);
@@ -36,13 +37,12 @@ public class  loginRegisterService {
 		return false;		
 
 	}
-**/
-	/**
+
 	public boolean registerUser(registerInfo info, HttpSession session) {
 		long conflict = repository.checkSSN(info.getSsn());
 		
 		
 		return false;
 	}
-	**/
+
 }
