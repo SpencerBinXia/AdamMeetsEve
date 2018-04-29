@@ -16,6 +16,6 @@ public class indexController {
 	{
 		model.addAttribute("info", new loginInfo());
 		model.addAttribute("reginfo", new registerInfo());
-		return "index";
+		return "register";
 	}
 }

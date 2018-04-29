@@ -39,7 +39,7 @@ body {
 /* Modal Content/Box */
 .modal-content {
     vertical-align: top;
-    background-color: rgba(245, 245, 245, 0.98);
+    background-color: rgba(245, 245, 245, 0.96);
     color: #000000;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
