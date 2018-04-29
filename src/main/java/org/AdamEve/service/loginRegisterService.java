@@ -42,7 +42,7 @@ public class  loginRegisterService {
 
 	public boolean registerUser(registerInfo info, HttpSession session) {
 		user existing = repository.findBySsn(info.getSsn());
-		if (existing != null) {
+		if (existing == null) {
 			user newuser = new user();
 			newuser.setSsn(info.getSsn());
 			newuser.setEmail(info.getEmail());

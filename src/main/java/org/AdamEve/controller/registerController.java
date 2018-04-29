@@ -27,10 +27,10 @@ public class registerController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public boolean registerUser(@ModelAttribute registerInfo reginfo, HttpSession session)
+	public String registerUser(@ModelAttribute registerInfo reginfo, HttpSession session)
 	{
-		boolean statusCode = service.registerUser(reginfo, session);
-		return statusCode;
+		service.registerUser(reginfo, session);
+		return "profile";
 	}
 	
 }
