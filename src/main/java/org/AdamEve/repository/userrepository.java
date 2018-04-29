@@ -29,6 +29,7 @@ public class userrepository {
 	}
 
 	public void addUser(user newuser) {
+		System.out.println(newuser.getCity());
 		// TODO Auto-generated method stub
 		
 	}
