@@ -76,12 +76,12 @@
     <div class="index-body">
         <h1>Take Your First Step Towards Paradise.</h1><br>
         <p class="lead">
-        <form action="register" th:action="@{/register}" th:object="*{reginfo}" method="post"/>
+        <form action="register" th:action="@{/register}" th:object="${reginfo}" method="post">
         <table div id="registerTbl">
             <tr>
                 <th>E-mail:</th>
                 <th><input type="text" div id="textBox" title="emailentry" th:field="*{email}"/></th>
-            </tr>
+            </tr> 
             <tr>
                 <th>Password:</th>
                 <th><input type="text" div id="textBox" title="passwordentry" th:field="*{password}"/></th>

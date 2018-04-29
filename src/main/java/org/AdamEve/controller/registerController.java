@@ -2,6 +2,7 @@ package org.AdamEve.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.AdamEve.object.loginInfo;
 import org.AdamEve.object.registerInfo;
 import org.AdamEve.service.loginRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,15 @@ public class registerController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String displayRegister(Model model) {
+		model.addAttribute("info", new loginInfo());
 		model.addAttribute("reginfo", new registerInfo());
 		return "register";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public boolean registerUser(@ModelAttribute registerInfo info, HttpSession session)
+	public boolean registerUser(@ModelAttribute registerInfo reginfo, HttpSession session)
 	{
-		boolean statusCode = service.registerUser(info, session);
+		boolean statusCode = service.registerUser(reginfo, session);
 		return statusCode;
 	}
 	
