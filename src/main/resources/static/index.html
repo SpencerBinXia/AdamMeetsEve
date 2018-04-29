@@ -4,6 +4,7 @@
     <title>JSP Work Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <div class = "head">
     <img
@@ -14,11 +15,11 @@
     <form action="login" th:action="@{/login}" th:object="$(info)" method="post">
         <div style="float:left">
         Username:<br>
-        <input type="text" title="emailentry" th:field="*{email}"/>
+        <input type="text" th:field="*{email}"/>
         </div>
         <div style="float:left">
         Password:<br>
-        <input type="text" title="passwordentry" th:field="*{password}"/>
+        <input type="text" th:field="*{password}"/>
         </div>
         <br/>
         <input type="submit"/>

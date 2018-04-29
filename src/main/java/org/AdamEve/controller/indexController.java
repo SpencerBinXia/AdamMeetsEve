@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class indexController {
 
-	@GetMapping
+	@RequestMapping(method=RequestMethod.GET)
 	public String home(Model model)
 	{
-		System.out.println("yatta");
-		return "index.html";
+		return "index";
 	}
 }
