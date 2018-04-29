@@ -29,7 +29,7 @@ public class loginController {
 	{
 		System.out.println(info.getEmail());
 		System.out.println(info.getPassword());
-		service.loginUser(info, session);
+		//service.loginUser(info, session);
 		return "profile";
 	}
 }

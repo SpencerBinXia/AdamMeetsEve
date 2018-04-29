@@ -1,6 +1,6 @@
 package org.AdamEve.repository;
 
-import org.AdamEve.object.user;
+//import org.AdamEve.object.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,10 +22,10 @@ public class userrepository {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+/**
 	public user findUserByEmail(String emailAddress) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	**/
 }
