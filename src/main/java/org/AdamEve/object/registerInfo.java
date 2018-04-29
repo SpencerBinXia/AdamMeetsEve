@@ -10,7 +10,7 @@ public class registerInfo {
 	private String street;
 	private String city;
 	private String state;
-	private String zipcode;
+	private int zipcode;
 	private String telephone;
 	
 	public String getEmail() {
@@ -61,10 +61,10 @@ public class registerInfo {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getZipcode() {
+	public int getZipcode() {
 		return zipcode;
 	}
-	public void setZipcode(String zipcode) {
+	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
 	public String getTelephone() {

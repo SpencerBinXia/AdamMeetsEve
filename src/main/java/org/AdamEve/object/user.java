@@ -12,7 +12,7 @@ public class user {
 	private String street;
 	private String city;
 	private String state;
-	private String zipcode;
+	private int zipcode;
 	private String telephone;
 	private int ppp;
 	private int rating;
@@ -66,10 +66,10 @@ public class user {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getZipcode() {
+	public int getZipcode() {
 		return zipcode;
 	}
-	public void setZipcode(String zipcode) {
+	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
 	public String getTelephone() {
