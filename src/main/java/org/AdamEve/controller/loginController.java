@@ -18,11 +18,11 @@ public class loginController {
 	private loginRegisterService service;
 	
 	@PostMapping
-	public String login(@ModelAttribute("info") loginInfo info, HttpSession session)
+	public String login(@RequestBody loginInfo info, HttpSession session)
 	{
-		System.out.println("logincontrol reached");
-		boolean statusCode = service.loginUser(info, session);
-		System.out.println("status code executed");
+		System.out.println(info.getEmail());
+		System.out.println(info.getPassword());
+		service.loginUser(info, session);
 		return "redirect:/profile.html";
 	}
 }
