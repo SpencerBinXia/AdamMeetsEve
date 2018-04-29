@@ -18,14 +18,19 @@ public class userrepository {
 		return true;
 	}
 
-	public long checkSSN(String ssn) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	public user findUserByEmail(String emailAddress) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public user findBySsn(String ssn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addUser(user newuser) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

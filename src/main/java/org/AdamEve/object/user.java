@@ -78,5 +78,23 @@ public class user {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	public int getPpp() {
+		return ppp;
+	}
+	public void setPpp(int ppp) {
+		this.ppp = ppp;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+	public LocalDateTime getLastAct() {
+		return lastAct;
+	}
+	public void setLastAct(LocalDateTime lastAct) {
+		this.lastAct = lastAct;
+	}
 	
 }
