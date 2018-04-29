@@ -17,19 +17,13 @@ public class loginController {
 	@Autowired
 	private loginRegisterService service;
 	
-	@GetMapping
-	public String login(Model model)
-	{
-		model.addAttribute("info", new loginInfo());
-		return "index";
-	}
-	
 	@PostMapping
 	public String login(@ModelAttribute loginInfo info, HttpSession session)
 	{
 		System.out.println(info.getEmail());
 		System.out.println(info.getPassword());
-		//service.loginUser(info, session);
+		service.loginUser(info, session);
 		return "profile";
 	}
+	
 }
