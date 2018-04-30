@@ -24,25 +24,30 @@ public class userrepository {
 	public user findUserByEmail(String emailAddress) {
 	    String selectEmail = "SELECT * FROM Person WHERE Email='" + emailAddress + "';";
 	    user tempuser = new user();
-	    jdbcTemplate.queryForObject(selectEmail, new RowMapper<user>(){
-	        public user mapRow(ResultSet rs, int rowNum) throws SQLException {
-	            tempuser.setEmail(rs.getString("Email"));
-	            tempuser.setSsn(rs.getString("Ssn"));
-	            tempuser.setPassword(rs.getString("Password"));
-	            tempuser.setFirstName(rs.getString("FirstName"));
-	            tempuser.setLastName(rs.getString("LastName"));
-	            tempuser.setStreet(rs.getString("Street"));
-	            tempuser.setCity(rs.getString("City"));
-	            tempuser.setState(rs.getString("State"));
-	            tempuser.setZipcode(rs.getInt("Zipcode"));
-	            tempuser.setTelephone(rs.getString("Telephone"));
-	            System.out.println(tempuser.getSsn());
-	            return tempuser;
-            }
-        });
-
+	    try {
+			jdbcTemplate.queryForObject(selectEmail, new RowMapper<user>() {
+				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempuser.setEmail(rs.getString("Email"));
+					tempuser.setSsn(rs.getString("Ssn"));
+					tempuser.setPassword(rs.getString("Password"));
+					tempuser.setFirstName(rs.getString("FirstName"));
+					tempuser.setLastName(rs.getString("LastName"));
+					tempuser.setStreet(rs.getString("Street"));
+					tempuser.setCity(rs.getString("City"));
+					tempuser.setState(rs.getString("State"));
+					tempuser.setZipcode(rs.getInt("Zipcode"));
+					tempuser.setTelephone(rs.getString("Telephone"));
+					System.out.println(tempuser.getSsn());
+					return tempuser;
+				}
+			});
+			return tempuser;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 		// TODO Auto-generated method stub
-        return tempuser;
 	}
 
 	public user findBySsn(String ssn) {

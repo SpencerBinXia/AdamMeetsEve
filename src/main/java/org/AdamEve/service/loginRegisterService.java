@@ -20,7 +20,7 @@ public class  loginRegisterService {
 	@Autowired
 	private userrepository repository;
 
-	public boolean loginUser(loginInfo info, HttpSession session) {
+	public void loginUser(loginInfo info, HttpSession session) {
 		String emailAddress = info.getEmail();
 		user newuser = repository.findUserByEmail(emailAddress);
 		String password = info.getPassword();
@@ -30,14 +30,14 @@ public class  loginRegisterService {
 			{
 				System.out.println(validUser.getSsn());
 				session.setAttribute("currentUser", validUser);
-				return true;
+				//return true;
 			}
 			else
 			{
-				return false;
+				//return false;
 			}
 		}
-		return false;		
+		//return false;
 
 	}
 
