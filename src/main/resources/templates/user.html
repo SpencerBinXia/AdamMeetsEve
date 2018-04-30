@@ -28,6 +28,8 @@
     <![endif]-->
   </head>
 
+  <body style="background-color: #ffa07a">
+
   <!--
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -57,10 +59,13 @@
 
     <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
       <a class="navbar-brand abs" href="#">AdamMeetsEve</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="navbar-collapse collapse" id="collapsingNavbar">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <button type="button" button id="loginBtn" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Login</button>
+            <button type="button" button id="loginBtn" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Logout</button>
           </li>
         </ul>
       </div>
@@ -69,6 +74,7 @@
   <!-- Modal -->
   <div id="myModal" class="modal-fade" style="z-index:9999;" role="dialog";>
 
+    <!--
     <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -84,11 +90,12 @@
             <th><input type="text" div id="textBox" title="passwordentry" th:field="*{password}"/></th>
           </tr>
           <tr>
-            <th><input type="submit"/></th>
+            <th><input type="submit" th:unless="${validUser.isEmpty()}"/></th>
           </tr>
         </table>
       </form>
     </div>
+    -->
 
   </div>
 
@@ -125,10 +132,7 @@
 
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
-          $("#myModal").removeClass("in");
-          $(".modal-backdrop").remove();
-          $("#myModal").hide();
-          $("#myModal").removeData();
+          modal.style.display = "none";
       }
 
       // When the user clicks anywhere outside of the modal, close it
@@ -138,7 +142,6 @@
           }
       }
   </script>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

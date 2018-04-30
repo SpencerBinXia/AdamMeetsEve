@@ -2,11 +2,11 @@
 
 body {
     font-family: 'Alegreya Sans', sans-serif;
-    color: #ffffff;
 }
 
 #navbar {
     background-color: #ffa07a;
+    height: 65px;
 }
 
 #loginBtn  {
@@ -15,6 +15,14 @@ body {
     border: 1px solid #ffffff;
     border-radius: 5px;
 }
+
+#dropdownBtn  {
+    background-color: #ffa07a;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
 #button {
     background-color: #008a6b;
     border: 0;
