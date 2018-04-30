@@ -27,8 +27,7 @@ public class  loginRegisterService {
 		if (newuser != null) {
 			user validUser = newuser;
 			if (password.equals(validUser.getPassword()))
-			{
-				System.out.println(validUser.getSsn());
+			{;
 				session.setAttribute("currentUser", validUser);
 				//return true;
 			}
