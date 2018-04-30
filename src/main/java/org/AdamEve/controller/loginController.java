@@ -10,18 +10,24 @@ import org.AdamEve.service.loginRegisterService;
 
 import javax.servlet.http.HttpSession;
 
+@Controller
+@RequestMapping("/login")
 public class loginController {
 	
 	@Autowired
 	private loginRegisterService service;
 	
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public boolean login (@RequestBody loginInfo info, HttpSession session)
+	@PostMapping
+	public String login(@ModelAttribute loginInfo info, HttpSession session, Model model)
 	{
-		boolean statusCode = service.loginUser(info, session);
-		return statusCode;
+		if (service.loginUser(info, session) == true) {
+			model.addAttribute("failedlogin", false);
+			return "profile";
+		}
+		else {
+			model.addAttribute("failedlogin", true);
+			return "index";
+		}
 	}
-	
 	
 }
