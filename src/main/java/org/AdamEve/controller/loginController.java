@@ -10,18 +10,22 @@ import org.AdamEve.service.loginRegisterService;
 
 import javax.servlet.http.HttpSession;
 
+@Controller
+@RequestMapping("/login")
 public class loginController {
 	
 	@Autowired
 	private loginRegisterService service;
 	
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public boolean login (@RequestBody loginInfo info, HttpSession session)
+	@PostMapping
+	public String login(@ModelAttribute loginInfo info, HttpSession session)
 	{
-		boolean statusCode = service.loginUser(info, session);
-		return statusCode;
+		if (service.loginUser(info, session) == true) {
+			return "profile";
+		}
+		else {
+			return "index";
+		}
 	}
-	
 	
 }
