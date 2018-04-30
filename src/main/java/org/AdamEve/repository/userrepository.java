@@ -2,6 +2,7 @@ package org.AdamEve.repository;
 
 import org.AdamEve.object.employee;
 import org.AdamEve.object.likes;
+import org.AdamEve.object.profile;
 import org.AdamEve.object.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -48,10 +49,10 @@ public class userrepository {
 	}
 
 	public user findBySsn(String ssn) {
-		String selectEmail = "SELECT * FROM Person WHERE SSN='" + ssn + "';";
+		String selectSsn = "SELECT * FROM Person WHERE SSN='" + ssn + "';";
 	    user tempuser = new user();
 	    try {
-			jdbcTemplate.queryForObject(selectEmail, new RowMapper<user>() {
+			jdbcTemplate.queryForObject(selectSsn, new RowMapper<user>() {
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
 					tempuser.setEmail(rs.getString("Email"));
 					tempuser.setSsn(rs.getString("Ssn"));
@@ -135,6 +136,36 @@ public class userrepository {
 		
 		return likes;
 		
+	}
+	
+	public profile findProfilebyID(String ProfileID) {
+		String selectProfile = "SELECT * FROM Profile WHERE ProfileID='" + ProfileID + "';";
+	    profile tempprofile = new profile();
+	    try {
+			jdbcTemplate.queryForObject(selectProfile, new RowMapper<profile>() {
+				public profile mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempprofile.setProfileID(rs.getString("ProfileID"));
+					tempprofile.setSsn(rs.getString("OwnerSSN"));
+					tempprofile.setAge(rs.getInt("Age"));
+					tempprofile.setRangestart(rs.getInt("DatingAgeRangeStart"));
+					tempprofile.setRangeend(rs.getInt("DatingAgeRangeEnd"));
+					tempprofile.setGeorange(rs.getInt("DatingGeoRange"));
+					tempprofile.setMalefemale(rs.getString("M_F"));
+					tempprofile.setHobbies(rs.getString("Hobbies"));
+					tempprofile.setHeight(rs.getInt("Height"));
+					tempprofile.setWeight(rs.getInt("Weight"));
+					tempprofile.setHairColor(rs.getString("HairColor"));
+					tempprofile.setCreateDate((LocalDateTime)rs.getObject("CreationDate"));
+					tempprofile.setLastModDate((LocalDateTime)rs.getObject("LastModDate"));
+					return tempprofile;
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+        return tempprofile;
 	}
 
 }
