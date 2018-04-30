@@ -18,12 +18,14 @@ public class loginController {
 	private loginRegisterService service;
 	
 	@PostMapping
-	public String login(@ModelAttribute loginInfo info, HttpSession session)
+	public String login(@ModelAttribute loginInfo info, HttpSession session, Model model)
 	{
 		if (service.loginUser(info, session) == true) {
+			model.addAttribute("failedlogin", false);
 			return "profile";
 		}
 		else {
+			model.addAttribute("failedlogin", true);
 			return "index";
 		}
 	}
