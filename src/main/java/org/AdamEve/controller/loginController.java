@@ -26,6 +26,7 @@ public class loginController {
 		}
 		else {
 			model.addAttribute("failedlogin", true);
+			model.addAttribute("info", new loginInfo());
 			return "index";
 		}
 	}
