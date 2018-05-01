@@ -42,31 +42,6 @@
     </ul>
 </nav>
 
-<!-- Modal -->
-<div id="myModal" class="modal-fade" style="z-index:9999;" role="dialog";>
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Returning Users Login.</p><br>
-        <form action="login" th:action="@{/login}" th:object="${info}" method="post">
-            <table style="width:100%">
-                <tr>
-                    <th>E-mail:</th>
-                    <th><input type="text" div id="textBox" title="emailentry" th:field="*{email}"/></th>
-                </tr>
-                <tr>
-                    <th>Password:</th>
-                    <th><input type="text" div id="textBox" title="passwordentry" th:field="*{password}"/></th>
-                </tr>
-                <tr>
-                    <th><input type="submit"/></th>
-                </tr>
-            </table>
-        </form>
-    </div>
-
-</div>
 <div class="container">
 
     <div class="index-body">

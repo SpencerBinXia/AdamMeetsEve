@@ -69,45 +69,45 @@
 <div class="container">
 
     <div class="index-body">
-        <h1>Take Your First Step Towards Paradise.</h1><br>
+        <h1>Take Your First Step Towards Paradise.</h1>
         <p class="lead">
         <form action="register" th:action="@{/register}" th:object="${reginfo}" method="post">
-        <table div id="registerTbl">
-            <tr>
-                <th>E-mail:</th>
-                <th><input type="text" div id="textBox" placeholder="E-mail" th:field="*{email}"/></th>
-            </tr>
-            <tr>
-                <th>Password:</th>
-                <th><input type="text" div id="textBox" placeholder="Password" th:field="*{password}"/></th>
-            </tr>
-            <tr>
-                <th>Social Security #:</th>
-                <th><input type="text" div id="textBox" placeholder="Social Security #" th:field="*{ssn}"/></th>
-            </tr>
-            <tr>
-                <th>Name: </th>
-                <th><input type="text" div id="textBox" placeholder="First Name" th:field="*{firstName}"/></th>
-                <th><input type="text" div id="textBox" placeholder="Last Name" th:field="*{lastName}"/></th>
-            </tr>
-            <tr>
-                <th>Address: </th>
-                <th><input type="text" div id="textBox" placeholder="Street" th:field="*{street}"/></th>
-                <th><input type="text" div id="textBox" placeholder="City" th:field="*{city}"/></th>
-                <th><input type="text" div id="textBox" placeholder="State" th:field="*{state}"/></th>
-                <th><input type="text" div id="textBox" placeholder="Zip Code" th:field="*{zipcode}"/></th>
-            </tr>
-            <th>Telephone #:</th>
-            <th><input type="text" div id="textBox" placeholder="Phone #" th:field="*{telephone}"/></th>
-            </tr>
-            </tr>
-            <th>16-digit Credit Card:</th>
-            <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
-            </tr>
-            <tr>
-                <th><input type="submit"/></th>
-            </tr>
-        </table>
+            <table div id="ameTbl">
+                <tr>
+                    <th>E-mail:</th>
+                    <th><input type="text" div id="textBox" placeholder="E-mail" th:field="*{email}"/></th>
+                </tr>
+                <tr>
+                    <th>Password:</th>
+                    <th><input type="text" div id="textBox" placeholder="Password" th:field="*{password}"/></th>
+                </tr>
+                <tr>
+                    <th>Social Security #:</th>
+                    <th><input type="text" div id="textBox" placeholder="Social Security #" th:field="*{ssn}"/></th>
+                </tr>
+                <tr>
+                    <th>Name: </th>
+                    <th><input type="text" div id="textBox" placeholder="First Name" th:field="*{firstName}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Last Name" th:field="*{lastName}"/></th>
+                </tr>
+                <tr>
+                    <th>Address: </th>
+                    <th><input type="text" div id="textBox" placeholder="Street" th:field="*{street}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="City" th:field="*{city}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="State" th:field="*{state}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Zip Code" th:field="*{zipcode}"/></th>
+                </tr>
+                <th>Telephone #:</th>
+                <th><input type="text" div id="textBox" placeholder="Phone #" th:field="*{telephone}"/></th>
+                </tr>
+                </tr>
+                <th>16-digit Credit Card:</th>
+                <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
+                </tr>
+                <tr>
+                    <th><input type="submit"/></th>
+                </tr>
+            </table>
         </p>
         <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->
     </div>
