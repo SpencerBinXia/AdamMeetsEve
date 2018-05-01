@@ -74,6 +74,40 @@ public class userrepository {
 		}
         return tempuser;
 	}
+	
+	public List<profile> searchByPPP(int PPP){
+		String selectSSN = "SELECT * FROM User WHERE PPP='" + PPP + "';";
+		List<Integer> userssn = new ArrayList<Integer>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectSSN);
+		for (Map row : rows) {
+			userssn.add((int)row.get("Ssn"));
+		}
+		List<profile> profiles = new ArrayList<profile>();
+		for (int ssn : userssn) {
+			String selectProfiles = "SELECT * FROM Profile WHERE SSN='" + ssn + "';";
+			rows = jdbcTemplate.queryForList(selectProfiles);
+			for (Map row : rows) {
+				profile tempprofile = new profile();
+				tempprofile.setProfileID((String)row.get("ProfileID"));
+				tempprofile.setSsn((String)row.get("OwnerSSN"));
+				tempprofile.setAge((int)row.get("Age"));
+				tempprofile.setRangestart((int)row.get("DatingAgeRangeStart"));
+				tempprofile.setRangeend((int)row.get("DatingAgeRangeEnd"));
+				tempprofile.setGeorange((int)row.get("DatingGeoRange"));
+				tempprofile.setMalefemale((String)row.get("M_F"));
+				tempprofile.setHobbies((String)row.get("Hobbies"));
+				tempprofile.setHeight((int)row.get("Height"));
+				tempprofile.setWeight((int)row.get("Weight"));
+				tempprofile.setHairColor((String)row.get("HairColor"));
+				tempprofile.setCreateDate((LocalDateTime)row.get("CreationDate"));
+				tempprofile.setLastModDate((LocalDateTime)row.get("LastModDate"));
+				profiles.add(tempprofile);
+			}
+		}
+		
+		return profiles;
+		
+	}
 
 	public void addUser(user newuser) {
         jdbcTemplate.update("INSERT INTO Person(SSN, Password, FirstName, LastName, Street, City, State, Zipcode, Email, Telephone) " +
