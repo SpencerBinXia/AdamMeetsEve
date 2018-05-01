@@ -22,7 +22,7 @@ public class loginController {
 	{
 		if (service.loginUser(info, session) == true) {
 			model.addAttribute("failedlogin", false);
-			return "profile";
+			return "user";
 		}
 		else {
 			model.addAttribute("failedlogin", true);

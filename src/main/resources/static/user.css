@@ -1,8 +1,12 @@
 body {
     padding-top: 50px;
-    background-color: #ffffff;
-    color: #000000;
+    background: linear-gradient(to bottom, #fffff0 0%, #fffff0 30%,#000000 30%,white 30%,white 100%);
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+
+    color: #24282a;
 }
+
 .index-body {
     margin-top: 125px;
     padding-left: 100px;

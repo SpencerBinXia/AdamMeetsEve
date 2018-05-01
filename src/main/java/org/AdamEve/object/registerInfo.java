@@ -12,6 +12,7 @@ public class registerInfo {
 	private String state;
 	private int zipcode;
 	private String telephone;
+	private String ccard;
 	
 	public String getEmail() {
 		return email;
@@ -72,6 +73,12 @@ public class registerInfo {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	public String getccard() {
+		return ccard;
+	}
+	public void setccard(String ccard) {
+		this.ccard = ccard;
 	}
 	
 }

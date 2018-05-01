@@ -1,50 +1,138 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<link rel="stylesheet"
-      href="/Users/Qianyan/CSE305/web/WEB-INF/adameetseveCSS.css">
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>TODO supply a title</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/img/ameicon.png">
+
+    <title>Adam Meets Eve</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="user.css" rel="stylesheet">
+    <link href="AdamMeetsEve.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <![endif]-->
 </head>
-<style>
-        headContainer {position: relative;
-                   text-align: center;}
-        h1 {position: absolute;
-            top: 45%;
-            left: 70%;
-            text-align: center;
-            font-size: 100px;
-            font-family: Comic Sans MS;}
-        h2 {text-align: left;
-            }
-        br {line-height: 7}
-        profileImg {position: absolute;
-                    top: 5px;
-                    left:5%;
-                    border-style: outset;}
-        div.profilePage {background-color: orange;}
-    </style>
-<body>
-<div class="headContainer">
-    <img
-            src = "https://media.ldscdn.org/images/media-library/gospel-art/old-testament/garden-of-eden-clawson-art-37727-print.jpg?download=true"
-            alt ="Not Found"
-            style="width:100%;">
-    <h1>Profile</h1>
+
+
+<nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
+    <a class="navbar-brand abs" th:href="index.html">AdamMeetsEve</a>
+    <ul class="navbar-nav ml-auto">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Search</button>
+        </form>
+        <button type="button" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
+    </ul>
+</nav>
+
+<!-- Modal -->
+<div id="myModal" class="modal-fade" style="z-index:9999;" role="dialog";>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Returning Users Login.</p><br>
+        <form action="login" th:action="@{/login}" th:object="${info}" method="post">
+            <table style="width:100%">
+                <tr>
+                    <th>E-mail:</th>
+                    <th><input type="text" div id="textBox" title="emailentry" th:field="*{email}"/></th>
+                </tr>
+                <tr>
+                    <th>Password:</th>
+                    <th><input type="text" div id="textBox" title="passwordentry" th:field="*{password}"/></th>
+                </tr>
+                <tr>
+                    <th><input type="submit"/></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+
 </div>
-<br>
-<div class="profilePage">
-    <img id="profileImg"
-         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqDRNpZnsvzSQhpwB70KxTy3WVNTB66CwkVz0PGPZHJI6dh2GZ"
-    >
-    <h2>profile ID: </h2>
-    <h2>*profile Name:</h2>
-</div>
+<div class="container">
+
+    <div class="index-body">
+        <h1>Your Profile Page</h1><br><br>
+        <p class="lead">
+            <b>Hello, Profile.</b><br>
+        <hr size="2">
+        Your Info:<br>
+        <button type="btn-md" div id="button" href="profile">Edit Info:</button>
+        <hr size="2">
+        <button type="btn-md" data-toggle="collapse" div id="button" data-target="#like">Your Likes</button>
+
+        <div id="like" class="collapse">
+            Like Placeholder
+        </div><br>
+        <hr size="2">
+        <button type="btn-md" data-toggle="collapse" div id="button" data-target="#date">Your Dates</button>
+
+        <div id="date" class="collapse">
+            Date Placeholder
+        </div><br>
+        </p>
+        <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->
+    </div>
+
+
+
+</div><!-- /.container -->
+
+
+<script>
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("loginBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -30,7 +30,7 @@
 
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
-    <a class="navbar-brand abs" href="index.html">AdamMeetsEve</a>
+    <a class="navbar-brand abs" th:href="index">AdamMeetsEve</a>
     <div class="navbar-collapse collapse" id="collapsingNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -75,43 +75,34 @@
         <table div id="registerTbl">
             <tr>
                 <th>E-mail:</th>
-                <th><input type="text" div id="textBox" title="emailentry" th:field="*{email}"/></th>
-            </tr> 
+                <th><input type="text" div id="textBox" placeholder="E-mail" th:field="*{email}"/></th>
+            </tr>
             <tr>
                 <th>Password:</th>
-                <th><input type="text" div id="textBox" title="passwordentry" th:field="*{password}"/></th>
+                <th><input type="text" div id="textBox" placeholder="Password" th:field="*{password}"/></th>
             </tr>
             <tr>
                 <th>Social Security #:</th>
-                <th><input type="text" div id="textBox" title="SSNentry" th:field="*{ssn}"/></th>
+                <th><input type="text" div id="textBox" placeholder="Social Security #" th:field="*{ssn}"/></th>
             </tr>
             <tr>
-                <th>First Name:</th>
-                <th><input type="text" div id="textBox" title="fnameentry" th:field="*{firstName}"/></th>
+                <th>Name: </th>
+                <th><input type="text" div id="textBox" placeholder="First Name" th:field="*{firstName}"/></th>
+                <th><input type="text" div id="textBox" placeholder="Last Name" th:field="*{lastName}"/></th>
             </tr>
             <tr>
-                <th>Last Name:</th>
-                <th><input type="text" div id="textBox" title="lnameentry" th:field="*{lastName}"/></th>
-            </tr>
-            <tr>
-                <th>Street:</th>
-                <th><input type="text" div id="textBox" title="streetentry" th:field="*{street}"/></th>
-            </tr>
-            <tr>
-                <th>City:</th>
-                <th><input type="text" div id="textBox" title="cityentry" th:field="*{city}"/></th>
-            </tr>
-            <tr>
-                <th>State:</th>
-                <th><input type="text" div id="textBox" title="stateentry" th:field="*{state}"/></th>
-            </tr>
-            <tr>
-            <tr>
-                <th>Zip Code:</th>
-                <th><input type="text" div id="textBox" title="zipentry" th:field="*{zipcode}"/></th>
+                <th>Address: </th>
+                <th><input type="text" div id="textBox" placeholder="Street" th:field="*{street}"/></th>
+                <th><input type="text" div id="textBox" placeholder="City" th:field="*{city}"/></th>
+                <th><input type="text" div id="textBox" placeholder="State" th:field="*{state}"/></th>
+                <th><input type="text" div id="textBox" placeholder="Zip Code" th:field="*{zipcode}"/></th>
             </tr>
             <th>Telephone #:</th>
-            <th><input type="text" div id="textBox" title="phoneentry" th:field="*{telephone}"/></th>
+            <th><input type="text" div id="textBox" placeholder="Phone #" th:field="*{telephone}"/></th>
+            </tr>
+            </tr>
+            <th>16-digit Credit Card:</th>
+            <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
             </tr>
             <tr>
                 <th><input type="submit"/></th>
