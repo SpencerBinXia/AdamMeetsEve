@@ -24,7 +24,7 @@ public class loginController {
 		if (service.loginUser(info, session) == true) {
 			model.addAttribute("failedlogin", false);
 			user tempuser = (user)session.getAttribute("currentUser");
-			return "redirect/user/" + tempuser.getSsn();
+			return "redirect:/viewuser/" + tempuser.getSsn();
 		}
 		else {
 			model.addAttribute("failedlogin", true);

@@ -19,6 +19,7 @@ public class userController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String displayProfile(@PathVariable("ssn") String userid, Model model)
 	{
+		System.out.println("anything");
 		user foundUser = userService.findUser(userid);
 		model.addAttribute("foundUser", foundUser);
 		return "user";
