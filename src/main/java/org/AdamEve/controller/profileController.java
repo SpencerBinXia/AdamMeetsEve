@@ -1,6 +1,6 @@
 package org.AdamEve.controller;
 
-import org.AdamEve.object.user;
+import org.AdamEve.object.profile;
 import org.AdamEve.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/viewuser/{ssn}/{profileID}")
+@RequestMapping("/viewprofile/{profileID}")
 public class profileController {
 	
 	@Autowired
 	private userService userService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String displayProfile(@PathVariable("ssn") String userid,@PathVariable("profileID") String profileName, Model model)
+	public String displayProfile(@PathVariable("profileID") String profileID, Model model)
 	{
-		user foundUser = userService.findUser(userid);
-		model.addAttribute("foundUser", foundUser);
+		profile foundProfile = userService.findProfile(profileID);
+		model.addAttribute("foundProfile", foundProfile);
 		return "profile";
 	}
 	
