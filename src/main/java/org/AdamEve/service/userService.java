@@ -1,5 +1,6 @@
 package org.AdamEve.service;
 
+import org.AdamEve.object.profile;
 import org.AdamEve.object.user;
 import org.AdamEve.repository.userrepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,11 @@ public class userService {
 	public user findUser(String id){
 		user user = userRepo.findBySsn(id);
 		return user;
+	}
+
+	public profile findProfile(String profileID) {
+		profile profile = userRepo.findProfilebyID(profileID);
+		return profile;
 	}
 	
 	
