@@ -1,6 +1,7 @@
 package org.AdamEve.controller;
 
 import org.AdamEve.object.employee;
+import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.searchInfo;
 import org.AdamEve.object.user;
@@ -28,7 +29,9 @@ public class employeeController{
 		model.addAttribute("foundEmployeePerson", foundEmployeePerson);
 		searchInfo searchParameters = new searchInfo();
 		model.addAttribute("searchParameters", searchParameters);
-		return "user";
+		employeeChangeInfo employeeinfo = new employeeChangeInfo();
+		model.addAttribute("employeeChangeInfo", employeeinfo);
+		return "employee";
 	}
 	
 }

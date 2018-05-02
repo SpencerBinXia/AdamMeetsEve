@@ -19,18 +19,10 @@ public class changeInfoController{
 	private userService service;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String registerUser(@ModelAttribute registerInfo reginfo, HttpSession session)
+	public String changeInfoUser(@ModelAttribute registerInfo reginfo, HttpSession session)
 	{
 		service.changeUserInfo(reginfo, session);
 		return "user";
 	}
-	
-	/*@RequestMapping(method=RequestMethod.POST)
-	public String registerUser(@ModelAttribute profileInfo reginfo, HttpSession session)
-	{
-		service.changeUserInfo(reginfo, session);
-		return "user";
-	}*/
-	
 	
 }

@@ -1,6 +1,7 @@
 package org.AdamEve.repository;
 
 import org.AdamEve.object.employee;
+import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
@@ -246,5 +247,15 @@ public class userrepository {
 		}
         return tempemployee;
 	}
+
+	public void updateEmployee(employeeChangeInfo employeeinfo) {
+		
+		jdbcTemplate.update("update Person set Password = ?, FirstName = ?, LastName= ?, Street= ?, City = ?, State= ?, Zipcode=? Email=? Telephone=?" + 
+				"where SSN= ?",
+        employeeinfo.getPassword(),employeeinfo.getFirstName(),employeeinfo.getLastName(),employeeinfo.getStreet(),employeeinfo.getCity(),employeeinfo.getState(),
+        employeeinfo.getZipcode(),employeeinfo.getEmail(),employeeinfo.getTelephone(), employeeinfo.getSsn());
+		jdbcTemplate.update("update Employee set Role = ?, HourlyRate= ? where SSN = ?", employeeinfo.getRole(), employeeinfo.getHourlyRate(), employeeinfo.getSsn());
+	}	
+	
 
 }

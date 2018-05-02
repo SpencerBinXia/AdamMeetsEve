@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.AdamEve.object.employee;
+import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.registerInfo;
@@ -45,6 +46,10 @@ public class userService {
 	public employee findEmployee(String employeeid) {
 		employee employee = userRepo.findEmployeeBySsn(employeeid);
 		return employee;
+	}
+
+	public void changeEmployeeInfo(employeeChangeInfo employeeinfo, HttpSession session) {
+		userRepo.updateEmployee(employeeinfo);
 	}
 	
 }
