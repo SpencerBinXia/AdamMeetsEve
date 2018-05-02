@@ -12,25 +12,25 @@
     <title>Adam Meets Eve | Welcome!</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="register.css" rel="stylesheet">
-    <link href="AdamMeetsEve.css" rel="stylesheet">
+    <link href="/register.css" rel="stylesheet">
+    <link href="/AdamMeetsEve.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="/https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
-    <a class="navbar-brand abs" th:href="index">AdamMeetsEve</a>
+    <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
     <div class="navbar-collapse collapse" id="collapsingNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -105,6 +105,19 @@
                 <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
                 </tr>
                 <tr>
+                    <th>User Class (Higher levels get better matches!):</th>
+                    <th>
+                        <select th:field="*{ppp}">
+                            <div>
+                                <option disabled="true" selected="selected" value="">Select</option>
+                                <option value="User-User">Basic User (free!)</option>
+                                <option value="Good-User">Good User ($50/yr)</option>
+                                <option value="Super-User">Super User ($100/yr)</option>
+                            </div>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
                     <th><input type="submit"/></th>
                 </tr>
             </table>
@@ -148,10 +161,10 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="/https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/../../dist/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

@@ -13,6 +13,7 @@ public class registerInfo {
 	private int zipcode;
 	private String telephone;
 	private String ccard;
+	private String ppp;
 	
 	public String getEmail() {
 		return email;
@@ -80,5 +81,9 @@ public class registerInfo {
 	public void setccard(String ccard) {
 		this.ccard = ccard;
 	}
+	public String getppp() {
+		return ppp;
+	}
+	public void setPpp(String ppp) { this.ppp = ppp; }
 	
 }

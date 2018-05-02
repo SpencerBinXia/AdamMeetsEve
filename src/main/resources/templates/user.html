@@ -31,13 +31,15 @@
 </head>
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
-  <a class="navbar-brand abs" th:href="index.html">AdamMeetsEve</a>
+  <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
   <ul class="navbar-nav ml-auto">
     <form class="form-inline">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Search</button>
     </form>
-    <button type="button" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
+      <form action="logout" th:action="@{/logout}" method="post">
+      <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
+      </form>
   </ul>
 </nav>
 
@@ -46,25 +48,19 @@
 <div class="container">
 
   <div class="index-body">
-    <h1>Welcome To Your User Page!</h1><br><br>
+    <h1>Welcome To Your User Page, <span th:utext="${session.currentUser.getFirstName()}"></span> <span th:utext="${session.currentUser.getLastName()}"></span>!</h1><br><br>
     <p class="lead">
-      <b>Hello, firstName lastName. Select A Profile To Start Mingling.</b><br>
+      <b>Select A Profile To Start Mingling.</b><br>
     <hr size="2">
     Available Profiles:<br>
     <button type="btn-md" div id="button" href="profile">Create A New Profile</button>
     <hr size="2">
-    <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click here to see your user info.</button>
+    <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to see or edit your user data?</button>
 
     <div id="userinfo" class="collapse">
-      Placeholder<br>
-      SSN <br>
-      Email <br>
-      Password <br>
-      First Name =  Last Name = <br>
-      Address: Street City State Zipcode <br>
-      Telephone: <br>
-      Credit Card: <br>
-      User Type: <br>
+        <table div id="User Data Table">
+
+        </table>
 
       <button type="btn-sm" div id="button">Change Your User Settings?</button>
     </div><br>
@@ -106,13 +102,13 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="/https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/../../dist/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="/https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
