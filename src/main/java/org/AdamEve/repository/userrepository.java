@@ -3,12 +3,15 @@ package org.AdamEve.repository;
 import org.AdamEve.object.employee;
 import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
+import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.registerInfo;
 import org.AdamEve.object.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -214,6 +217,34 @@ public class userrepository {
         reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
 		jdbcTemplate.update("update User set PPP = ?, where SSN = ?", reginfo.getppp(), reginfo.getSsn());
 		jdbcTemplate.update("update Account set CardNumber = ? where SSN = ?", reginfo.getccard(), reginfo.getSsn());
+	}
+
+	public void addProfile(profileInfo profileInfo) {
+		jdbcTemplate.update("INSERT INTO Profile(ProfileID, OwnerSSN, Age, DatingAgeRangeStart, DatingAgeRangeEnd, DatingGeoRange, M_F, Hobbies, Height, Weight, HairColor, CreationDate, LastModDate) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                profileInfo.getProfileID(), profileInfo.getOwnerSSN(), profileInfo.getAge(), profileInfo.getRangeStart(), profileInfo.getRangeEnd(), profileInfo.getGeoRange(), profileInfo.getGender(),
+                profileInfo.getHobbies(), profileInfo.getHeight(), profileInfo.getWeight(), profileInfo.getHairColor(), LocalDateTime.now(), LocalDateTime.now());	
+	}
+
+	public employee findEmployeeBySsn(String employeeid) {
+		String selectSsn = "SELECT * FROM Person WHERE SSN='" + employeeid + "';";
+	    employee tempemployee = new employee();
+	    try {
+			jdbcTemplate.queryForObject(selectSsn, new RowMapper<employee>() {
+				public employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempemployee.setSsn(rs.getString("SSN"));
+					tempemployee.setRole(rs.getString("Role"));
+					tempemployee.setStartDate((Date)rs.getObject("StartDate"));
+					tempemployee.setHourlyRate(rs.getInt("HourlyRate"));
+					return tempemployee;
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+        return tempemployee;
 	}
 
 }
