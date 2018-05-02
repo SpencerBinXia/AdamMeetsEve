@@ -56,8 +56,7 @@ public class  loginRegisterService {
 			newuser.setPpp(info.getppp());
 			newuser.setRating(0);
 			newuser.setLastAct(LocalDateTime.now());
-			repository.addUser(newuser);
-			System.out.println("ummm");
+			repository.addUser(newuser, info.getccard());
 			session.setAttribute("currentUser", newuser);
 			return true;
 		}
