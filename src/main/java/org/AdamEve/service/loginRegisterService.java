@@ -53,10 +53,12 @@ public class  loginRegisterService {
 			newuser.setCity(info.getCity());
 			newuser.setState(info.getState());
 			newuser.setTelephone(info.getTelephone());
-			newuser.setPpp("User-User");
+			newuser.setPpp(info.getppp());
 			newuser.setRating(0);
 			newuser.setLastAct(LocalDateTime.now());
 			repository.addUser(newuser);
+			System.out.println("ummm");
+			session.setAttribute("currentUser", newuser);
 			return true;
 		}
 		
