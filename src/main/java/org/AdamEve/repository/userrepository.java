@@ -3,6 +3,7 @@ package org.AdamEve.repository;
 import org.AdamEve.object.employee;
 import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
+import org.AdamEve.object.registerInfo;
 import org.AdamEve.object.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -200,6 +201,16 @@ public class userrepository {
 			return null;
 		}
         return tempprofile;
+	}
+
+	public void updateUser(registerInfo reginfo) {
+		jdbcTemplate.update("update Person set Password = ?, FirstName = ?, LastName= ?, Street= ?, City = ?, State= ?, Zipcode=? Email=? Telephone=?" + 
+				"where SSN= ?",
+        reginfo.getPassword(),reginfo.getFirstName(),reginfo.getLastName(),reginfo.getStreet(),reginfo.getCity(),reginfo.getState(),
+        reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
+		//jdbcTemplate.update("INSERT INTO User(SSN,PPP,Rating,DateOfLastAct)" + "VALUES (?, ?, ?, ?)",
+		//		reginfo.getSsn(), reginfo.getPpp(), reginfo.getRating(),reginfo.getLastAct());
+		
 	}
 
 }
