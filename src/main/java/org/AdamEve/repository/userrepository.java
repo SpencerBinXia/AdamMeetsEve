@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -222,6 +224,27 @@ public class userrepository {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 profileInfo.getProfileID(), profileInfo.getOwnerSSN(), profileInfo.getAge(), profileInfo.getRangeStart(), profileInfo.getRangeEnd(), profileInfo.getGeoRange(), profileInfo.getGender(),
                 profileInfo.getHobbies(), profileInfo.getHeight(), profileInfo.getWeight(), profileInfo.getHairColor(), LocalDateTime.now(), LocalDateTime.now());	
+	}
+
+	public employee findEmployeeBySsn(String employeeid) {
+		String selectSsn = "SELECT * FROM Person WHERE SSN='" + employeeid + "';";
+	    employee tempemployee = new employee();
+	    try {
+			jdbcTemplate.queryForObject(selectSsn, new RowMapper<employee>() {
+				public employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempemployee.setSsn(rs.getString("SSN"));
+					tempemployee.setRole(rs.getString("Role"));
+					tempemployee.setStartDate((Date)rs.getObject("StartDate"));
+					tempemployee.setHourlyRate(rs.getInt("HourlyRate"));
+					return tempemployee;
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+        return tempemployee;
 	}
 
 }
