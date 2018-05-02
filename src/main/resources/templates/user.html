@@ -45,10 +45,12 @@
 
 
 </div>
+<h1>Welcome To Your User Page, <span th:utext="${session.currentUser.getFirstName()}"></span> <span th:utext="${session.currentUser.getLastName()}"></span>!</h1><br><br>
+
+
 <div class="container">
 
   <div class="index-body">
-    <h1>Welcome To Your User Page, <span th:utext="${session.currentUser.getFirstName()}"></span> <span th:utext="${session.currentUser.getLastName()}"></span>!</h1><br><br>
     <p class="lead">
       <b>Select A Profile To Start Mingling.</b><br>
     <hr size="2">
@@ -63,7 +65,7 @@
       <th><span th:utext="${session.currentUser.getState()}"></span></th>,
       <th><span th:utext="${session.currentUser.getZipcode()}"></span></th><br><br>
 
-      <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view your full user data.</button>
+      <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view and edit your full user data.</button>
 
     <div id="userinfo" class="collapse">
         <form action="changeinfo" th:action="@{/changeinfo}" th:object="${reginfo}" method="post">
@@ -72,19 +74,19 @@
                 <tr>
                     <th><b>E-mail:</b></th>
                     <th><span th:utext="${session.currentUser.getEmail()}"></span></th>
-                    <th><input type="text" div id="textBox" placeholder="Change E-mail" th:field="*{email}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getEmail()}" placeholder="Change E-mail" th:field="*{email}"/></th>
                 </tr>
                 <tr>
                     <th><b>Password:</b></th>
                     <th><span th:utext="${session.currentUser.getPassword()}"></span></th>
-                    <th><input type="text" div id="textBox" placeholder="Change Password" th:field="*{password}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getPassword()}" placeholder="Change Password" th:field="*{password}"/></th>
                 </tr>
                 <tr>
                     <th><b>Name: </b></th>
                     <th><span th:utext="${session.currentUser.getFirstName()}"></span></th>
-                    <th><input type="text" div id="textBox" placeholder="Change First Name" th:field="*{firstName}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getFirstName()}" placeholder="Change First Name" th:field="*{firstName}"/></th>
                     <th><span th:utext="${session.currentUser.getLastName()}"></span></th>
-                    <th><input type="text" div id="textBox" placeholder="Change Last Name" th:field="*{lastName}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getLastName()}" placeholder="Change Last Name" th:field="*{lastName}"/></th>
                 </tr>
                 <tr>
                     <th><b>Address: </b></th>
@@ -96,15 +98,15 @@
                     <th><span th:utext="${session.currentUser.getZipcode()}"></span></th>
                 </tr>
                 <tr>
-                    <th><input type="text" div id="textBox" placeholder="Change Street" th:field="*{street}"/></th>
-                    <th><input type="text" div id="textBox" placeholder="Change City" th:field="*{city}"/></th>
-                    <th><input type="text" div id="textBox" placeholder="Change State" th:field="*{state}"/></th>
-                    <th><input type="text" div id="textBox" placeholder="Change Zip Code" th:field="*{zipcode}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getStreet()}" placeholder="Change Street" th:field="*{street}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getCity()}" placeholder="Change City" th:field="*{city}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getState()}"placeholder="Change State" th:field="*{state}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getZipcode()}" placeholder="Change Zip Code" th:field="*{zipcode}"/></th>
                 </tr>
                 <tr>
                     <th><b>Telephone #:</b></th>
                 <th><span th:utext="${session.currentUser.getTelephone()}"></span><br></th>
-                <th><input type="text" div id="textBox" placeholder="Change Phone #" th:field="*{telephone}"/></th>
+                <th><input type="text" div id="textBox" th:value="${session.currentUser.getTelephone()}" placeholder="Change Phone #" th:field="*{telephone}"/></th>
                 </tr>
                 <tr>
                     <th><b>16-digit Credit Card:</b></th>

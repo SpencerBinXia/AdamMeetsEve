@@ -3,6 +3,7 @@ package org.AdamEve.controller;
 import javax.servlet.http.HttpSession;
 
 import org.AdamEve.object.registerInfo;
+import org.AdamEve.object.user;
 import org.AdamEve.service.loginRegisterService;
 import org.AdamEve.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;

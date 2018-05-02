@@ -217,7 +217,7 @@ public class userrepository {
         reginfo.getPassword(),reginfo.getFirstName(),reginfo.getLastName(),reginfo.getStreet(),reginfo.getCity(),reginfo.getState(),
         reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
 		//jdbcTemplate.update("update User set PPP = ? + where SSN = ?", reginfo.getppp(), reginfo.getSsn());
-		//jdbcTemplate.update("update Account set CardNumber = ? where SSN = ?", reginfo.getccard(), reginfo.getSsn());
+		jdbcTemplate.update("update Account set CardNumber = ? where OwnerSSN = ?", reginfo.getccard(), reginfo.getSsn());
 	}
 
 	public void addProfile(profileInfo profileInfo) {
