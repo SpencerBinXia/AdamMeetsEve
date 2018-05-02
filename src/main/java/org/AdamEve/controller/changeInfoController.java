@@ -19,10 +19,10 @@ public class changeInfoController{
 	private userService service;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String registerUser(@ModelAttribute registerInfo reginfo, HttpSession session)
+	public String changeInfo(@ModelAttribute registerInfo reginfo, HttpSession session)
 	{
 		service.changeUserInfo(reginfo, session);
-		return "user";
+		return "redirect:/viewuser/" + reginfo.getSsn();
 	}
 	
 	/*@RequestMapping(method=RequestMethod.POST)

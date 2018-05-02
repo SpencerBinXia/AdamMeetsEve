@@ -1,10 +1,8 @@
 package org.AdamEve.controller;
 
-import org.AdamEve.object.employee;
-import org.AdamEve.object.profileInfo;
-import org.AdamEve.object.searchInfo;
-import org.AdamEve.object.user;
+import org.AdamEve.object.*;
 import org.AdamEve.service.userService;
+import org.AdamEve.object.registerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +25,7 @@ public class userController {
 		searchInfo searchParameters = new searchInfo();
 		model.addAttribute("searchParameters", searchParameters);
 		profileInfo createProfile = new profileInfo();
+		model.addAttribute("regInfo", new registerInfo());
 		model.addAttribute("ProfileInfo", createProfile);
 		return "user";
 	}

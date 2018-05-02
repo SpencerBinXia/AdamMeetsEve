@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.AdamEve.object.loginInfo;
+import org.AdamEve.object.registerInfo;
 import org.AdamEve.object.user;
 import org.AdamEve.service.loginRegisterService;
 

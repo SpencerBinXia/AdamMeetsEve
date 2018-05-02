@@ -58,6 +58,83 @@
     <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to see or edit your user data?</button>
 
     <div id="userinfo" class="collapse">
+        <form action="changeinfo" th:action="@{/changeinfo}" th:object="${reginfo}" method="post">
+            <input type="text" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
+            <table div id="ameTbl">
+                <tr>
+                    <th>E-mail:</th>
+                    <th><span th:utext="${session.currentUser.getEmail()}"></span></th>
+                    <th><input type="text" div id="textBox" placeholder="Change E-mail" th:field="*{email}"/></th>
+                </tr>
+                <tr>
+                    <th>Password:</th>
+                    <th><span th:utext="${session.currentUser.getPassword()}"></span></th>
+                    <th><input type="text" div id="textBox" placeholder="Change Password" th:field="*{password}"/></th>
+                </tr>
+                <tr>
+                    <th>Name: </th>
+                    <th><span th:utext="${session.currentUser.getFirstName()}"></span></th>
+                    <th><span th:utext="${session.currentUser.getLastName()}"></span></th>
+                    <th><input type="text" div id="textBox" placeholder="Change First Name" th:field="*{firstName}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Change Last Name" th:field="*{lastName}"/></th>
+                </tr>
+                <tr>
+                    <th>Address: </th>
+                    <th><span th:utext="${session.currentUser.getStreet()}"></span></th>
+                    <th><span th:utext="${session.currentUser.getCity()}"></span></th>
+                    <th><span th:utext="${session.currentUser.getState()}"></span></th>
+                    <th><span th:utext="${session.currentUser.getZipcode()}"></span></th>
+                </tr>
+                <tr>
+                    <th><input type="text" div id="textBox" placeholder="Change Street" th:field="*{street}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Change City" th:field="*{city}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Change State" th:field="*{state}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Change Zip Code" th:field="*{zipcode}"/></th>
+                </tr>
+                <tr>
+                <th>Telephone #:</th>
+                <th><span th:utext="${session.currentUser.getTelephone()}"></span><br></th>
+                <th><input type="text" div id="textBox" placeholder="Change Phone #" th:field="*{telephone}"/></th>
+                </tr>
+                -->
+                <!--
+                <tr>
+                <th>16-digit Credit Card:</th>
+                    <th><span th:utext="${ccard}"></span></th>
+                    <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
+                </tr>
+                <tr>
+                    <th>User Class :</th>
+                    <th><span th:utext="${ppp}"></span><br></th>
+                    <th>
+                        <select th:field="*{ppp}">
+                            <div>
+                                <option disabled="true" selected="selected" value="">Select</option>
+                                <option value="User-User">Basic User (free!)</option>
+                                <option value="Good-User">Good User ($50/yr)</option>
+                                <option value="Super-User">Super User ($100/yr)</option>
+                            </div>
+                        </select>
+                    </th>
+                </tr>
+                -->
+                <tr>
+                    <th><input type="submit"/></th>
+                </tr>
+            </table>
+        </form>
+        <span th:utext="${session.currentUser.getLastName()}"></span><br>
+        <span th:utext="${session.currentUser.getSsn()}"></span><br>
+        <span th:utext="${session.currentUser.getEmail()}"></span><br>
+        <span th:utext="${session.currentUser.getPassword()}"></span><br>
+        <span th:utext="${session.currentUser.getStreet()}"></span><br>
+        <span th:utext="${session.currentUser.getCity()}"></span><br>
+        <span th:utext="${session.currentUser.getState()}"></span><br>
+        <span th:utext="${session.currentUser.getZipcode()}"></span><br>
+        <span th:utext="${session.currentUser.getTelephone()}"></span><br>
+        <span th:utext="${session.currentUser.getPpp()}"></span><br>
+
+
         <table div id="User Data Table">
 
         </table>
