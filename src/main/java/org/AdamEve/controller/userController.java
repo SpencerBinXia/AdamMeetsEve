@@ -1,5 +1,6 @@
 package org.AdamEve.controller;
 
+import org.AdamEve.object.searchInfo;
 import org.AdamEve.object.user;
 import org.AdamEve.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class userController {
 	{
 		user foundUser = userService.findUser(userid);
 		model.addAttribute("foundUser", foundUser);
+		searchInfo searchParameters = new searchInfo();
+		model.addAttribute("searchParameters", searchParameters);
 		return "user";
 	}
 	

@@ -1,6 +1,7 @@
 package org.AdamEve.controller;
 
 import org.AdamEve.object.profile;
+import org.AdamEve.object.searchInfo;
 import org.AdamEve.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class profileController {
 	{
 		profile foundProfile = userService.findProfile(profileID);
 		model.addAttribute("foundProfile", foundProfile);
+		searchInfo searchParameters = new searchInfo();
+		model.addAttribute("searchParameters", searchParameters);
 		return "profile";
 	}
 	
