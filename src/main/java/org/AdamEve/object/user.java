@@ -14,6 +14,7 @@ public class user {
 	private String state;
 	private int zipcode;
 	private String telephone;
+	private String ccard;
 	private String ppp;
 	private int rating;
 	private LocalDateTime lastAct;
@@ -83,6 +84,12 @@ public class user {
 	}
 	public void setPpp(String ppp) {
 		this.ppp = ppp;
+	}
+	public String getccard() {
+		return ccard;
+	}
+	public void setccard(String ccard) {
+		this.ccard = ccard;
 	}
 	public int getRating() {
 		return rating;

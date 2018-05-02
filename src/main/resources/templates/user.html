@@ -55,31 +55,41 @@
     Available Profiles:<br>
     <button type="btn-md" div id="button" href="profile">Create A New Profile</button>
     <hr size="2">
-    <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to see or edit your user data?</button>
+      <p class="lead"><b>Your user information:</b></p>
+      <b>Name:   </b> <th><span th:utext="${session.currentUser.getFirstName()}"></span></th> <th><span th:utext="${session.currentUser.getLastName()}"></span></th><br>
+      <b>Address:   </b>
+      <th><span th:utext="${session.currentUser.getStreet()}"></span></th>,
+      <th><span th:utext="${session.currentUser.getCity()}"></span></th>,
+      <th><span th:utext="${session.currentUser.getState()}"></span></th>,
+      <th><span th:utext="${session.currentUser.getZipcode()}"></span></th><br><br>
+
+      <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view your full user data.</button>
 
     <div id="userinfo" class="collapse">
         <form action="changeinfo" th:action="@{/changeinfo}" th:object="${reginfo}" method="post">
-            <input type="text" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
-            <table div id="ameTbl">
+            <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
+            <table div id="infoTbl">
                 <tr>
-                    <th>E-mail:</th>
+                    <th><b>E-mail:</b></th>
                     <th><span th:utext="${session.currentUser.getEmail()}"></span></th>
                     <th><input type="text" div id="textBox" placeholder="Change E-mail" th:field="*{email}"/></th>
                 </tr>
                 <tr>
-                    <th>Password:</th>
+                    <th><b>Password:</b></th>
                     <th><span th:utext="${session.currentUser.getPassword()}"></span></th>
                     <th><input type="text" div id="textBox" placeholder="Change Password" th:field="*{password}"/></th>
                 </tr>
                 <tr>
-                    <th>Name: </th>
+                    <th><b>Name: </b></th>
                     <th><span th:utext="${session.currentUser.getFirstName()}"></span></th>
-                    <th><span th:utext="${session.currentUser.getLastName()}"></span></th>
                     <th><input type="text" div id="textBox" placeholder="Change First Name" th:field="*{firstName}"/></th>
+                    <th><span th:utext="${session.currentUser.getLastName()}"></span></th>
                     <th><input type="text" div id="textBox" placeholder="Change Last Name" th:field="*{lastName}"/></th>
                 </tr>
                 <tr>
-                    <th>Address: </th>
+                    <th><b>Address: </b></th>
+                </tr>
+                <tr>
                     <th><span th:utext="${session.currentUser.getStreet()}"></span></th>
                     <th><span th:utext="${session.currentUser.getCity()}"></span></th>
                     <th><span th:utext="${session.currentUser.getState()}"></span></th>
@@ -92,20 +102,18 @@
                     <th><input type="text" div id="textBox" placeholder="Change Zip Code" th:field="*{zipcode}"/></th>
                 </tr>
                 <tr>
-                <th>Telephone #:</th>
+                    <th><b>Telephone #:</b></th>
                 <th><span th:utext="${session.currentUser.getTelephone()}"></span><br></th>
                 <th><input type="text" div id="textBox" placeholder="Change Phone #" th:field="*{telephone}"/></th>
                 </tr>
-                -->
-                <!--
                 <tr>
-                <th>16-digit Credit Card:</th>
-                    <th><span th:utext="${ccard}"></span></th>
+                    <th><b>16-digit Credit Card:</b></th>
+                    <th><span th:utext="${session.currentUser.getccard()}"></span></th>
                     <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
                 </tr>
                 <tr>
-                    <th>User Class :</th>
-                    <th><span th:utext="${ppp}"></span><br></th>
+                    <th><b>User Class: </b></th>
+                    <th><span th:utext="${session.currentUser.getPpp()}"></span><br></th>
                     <th>
                         <select th:field="*{ppp}">
                             <div>
@@ -117,29 +125,16 @@
                         </select>
                     </th>
                 </tr>
-                -->
                 <tr>
-                    <th><input type="submit"/></th>
+                    <th><input type="submit" div id="button"/></th>
                 </tr>
             </table>
         </form>
-        <span th:utext="${session.currentUser.getLastName()}"></span><br>
-        <span th:utext="${session.currentUser.getSsn()}"></span><br>
-        <span th:utext="${session.currentUser.getEmail()}"></span><br>
-        <span th:utext="${session.currentUser.getPassword()}"></span><br>
-        <span th:utext="${session.currentUser.getStreet()}"></span><br>
-        <span th:utext="${session.currentUser.getCity()}"></span><br>
-        <span th:utext="${session.currentUser.getState()}"></span><br>
-        <span th:utext="${session.currentUser.getZipcode()}"></span><br>
-        <span th:utext="${session.currentUser.getTelephone()}"></span><br>
-        <span th:utext="${session.currentUser.getPpp()}"></span><br>
 
 
         <table div id="User Data Table">
 
         </table>
-
-      <button type="btn-sm" div id="button">Change Your User Settings?</button>
     </div><br>
     </p>
     <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->

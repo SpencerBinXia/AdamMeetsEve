@@ -121,7 +121,7 @@ public class userrepository {
                 newuser.getZipcode(),newuser.getEmail(),newuser.getTelephone());
         jdbcTemplate.update("INSERT INTO User(SSN,PPP,Rating,DateOfLastAct)" + "VALUES (?, ?, ?, ?)",
                 newuser.getSsn(), newuser.getPpp(), newuser.getRating(),newuser.getLastAct());
-        String getMax = "SELECT MAX(INT(acctnum)) FROM Account";
+        String getMax = "SELECT MAX(AcctNum) FROM Account";
         Integer acctnum = jdbcTemplate.queryForObject(getMax, Integer.class) + 1;
         jdbcTemplate.update("INSERT INTO Account(OwnerSSN, CardNumber, AcctNum, AcctCreationDate)" + 
                 	"VALUES (?,?,?,?)",

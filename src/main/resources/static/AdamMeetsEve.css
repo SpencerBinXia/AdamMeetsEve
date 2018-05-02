@@ -4,6 +4,10 @@ body {
     font-family: 'Alegreya Sans', sans-serif;
 }
 
+th{
+    font-weight: normal;
+}
+
 #navbar {
     background-color: #ffa07a;
     height: 65px;
@@ -19,8 +23,21 @@ body {
 
 #ameTbl {
     border-collapse:separate;
-    border-spacing:10px 25px;
+    border-spacing:10px 20px;
+    font-weight: normal;
+    font-size: 17px;
+    font-family: 'Alegreya Sans', sans-serif;
+
 }
+
+#infoTbl {
+    border-collapse:separate;
+    border-spacing:5px 5px;
+    font-weight: normal;
+    font-family: 'Alegreya Sans', sans-serif;
+
+}
+
 #dropdownBtn  {
     background-color: #ffa07a;
     color: #ffffff;

@@ -25,8 +25,8 @@ public class userController {
 		searchInfo searchParameters = new searchInfo();
 		model.addAttribute("searchParameters", searchParameters);
 		profileInfo createProfile = new profileInfo();
-		model.addAttribute("regInfo", new registerInfo());
 		model.addAttribute("ProfileInfo", createProfile);
+		model.addAttribute("reginfo", new registerInfo());
 		return "user";
 	}
 	

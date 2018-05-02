@@ -55,6 +55,7 @@ public class  loginRegisterService {
 			newuser.setTelephone(info.getTelephone());
 			newuser.setPpp(info.getppp());
 			newuser.setRating(0);
+			newuser.setccard(info.getccard());
 			newuser.setLastAct(LocalDateTime.now());
 			repository.addUser(newuser, info.getccard());
 			session.setAttribute("currentUser", newuser);
