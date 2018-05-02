@@ -3,6 +3,7 @@ package org.AdamEve.repository;
 import org.AdamEve.object.employee;
 import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
+import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.registerInfo;
 import org.AdamEve.object.user;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,6 +215,13 @@ public class userrepository {
         reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
 		jdbcTemplate.update("update User set PPP = ?, where SSN = ?", reginfo.getppp(), reginfo.getSsn());
 		jdbcTemplate.update("update Account set CardNumber = ? where SSN = ?", reginfo.getccard(), reginfo.getSsn());
+	}
+
+	public void addProfile(profileInfo profileInfo) {
+		jdbcTemplate.update("INSERT INTO Profile(ProfileID, OwnerSSN, Age, DatingAgeRangeStart, DatingAgeRangeEnd, DatingGeoRange, M_F, Hobbies, Height, Weight, HairColor, CreationDate, LastModDate) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                profileInfo.getProfileID(), profileInfo.getOwnerSSN(), profileInfo.getAge(), profileInfo.getRangeStart(), profileInfo.getRangeEnd(), profileInfo.getGeoRange(), profileInfo.getGender(),
+                profileInfo.getHobbies(), profileInfo.getHeight(), profileInfo.getWeight(), profileInfo.getHairColor(), LocalDateTime.now(), LocalDateTime.now());	
 	}
 
 }

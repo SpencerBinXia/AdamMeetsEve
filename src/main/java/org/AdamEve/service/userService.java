@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.AdamEve.object.profile;
+import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.registerInfo;
 import org.AdamEve.object.searchInfo;
 import org.AdamEve.object.user;
@@ -34,6 +35,10 @@ public class userService {
 
 	public void changeUserInfo(registerInfo reginfo, HttpSession session) {
 		userRepo.updateUser(reginfo);
+	}
+
+	public void createProfile(profileInfo profileInfo) {
+		userRepo.addProfile(profileInfo);
 	}
 	
 }

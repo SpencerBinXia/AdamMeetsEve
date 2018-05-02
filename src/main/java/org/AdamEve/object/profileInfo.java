@@ -3,6 +3,7 @@ package org.AdamEve.object;
 public class profileInfo {
 	
 	private String ProfileID;
+	private String OwnerSSN;
 	private int Age;
 	private int RangeStart;
 	private int RangeEnd;
@@ -72,6 +73,12 @@ public class profileInfo {
 	}
 	public void setHairColor(String hairColor) {
 		HairColor = hairColor;
+	}
+	public String getOwnerSSN() {
+		return OwnerSSN;
+	}
+	public void setOwnerSSN(String ownerSSN) {
+		OwnerSSN = ownerSSN;
 	}
 	
 }
