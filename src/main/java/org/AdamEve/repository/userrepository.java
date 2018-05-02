@@ -110,14 +110,18 @@ public class userrepository {
 		
 	}
 
-	public void addUser(user newuser) {
+	public void addUser(user newuser, String ccard) {
         jdbcTemplate.update("INSERT INTO Person(SSN, Password, FirstName, LastName, Street, City, State, Zipcode, Email, Telephone) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 newuser.getSsn(), newuser.getPassword(),newuser.getFirstName(),newuser.getLastName(),newuser.getStreet(),newuser.getCity(),newuser.getState(),
                 newuser.getZipcode(),newuser.getEmail(),newuser.getTelephone());
         jdbcTemplate.update("INSERT INTO User(SSN,PPP,Rating,DateOfLastAct)" + "VALUES (?, ?, ?, ?)",
                 newuser.getSsn(), newuser.getPpp(), newuser.getRating(),newuser.getLastAct());
-		
+        String getMax = "SELECT MAX(INT(acctnum)) FROM Account";
+        Integer acctnum = jdbcTemplate.queryForObject(getMax, Integer.class) + 1;
+        jdbcTemplate.update("INSERT INTO Account(OwnerSSN, CardNumber, AcctNum, AcctCreationDate)" + 
+                	"VALUES (?,?,?,?)",
+                	newuser.getSsn(), ccard, acctnum.toString(), newuser.getLastAct());
 	}
 	
 	
@@ -208,9 +212,8 @@ public class userrepository {
 				"where SSN= ?",
         reginfo.getPassword(),reginfo.getFirstName(),reginfo.getLastName(),reginfo.getStreet(),reginfo.getCity(),reginfo.getState(),
         reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
-		//jdbcTemplate.update("INSERT INTO User(SSN,PPP,Rating,DateOfLastAct)" + "VALUES (?, ?, ?, ?)",
-		//		reginfo.getSsn(), reginfo.getPpp(), reginfo.getRating(),reginfo.getLastAct());
-		
+		jdbcTemplate.update("update User set PPP = ?, where SSN = ?", reginfo.getppp(), reginfo.getSsn());
+		jdbcTemplate.update("update Account set CardNumber = ? where SSN = ?", reginfo.getccard(), reginfo.getSsn());
 	}
 
 }
