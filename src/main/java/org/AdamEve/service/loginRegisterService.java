@@ -56,31 +56,12 @@ public class  loginRegisterService {
 			newuser.setPpp(info.getppp());
 			newuser.setRating(0);
 			newuser.setLastAct(LocalDateTime.now());
-			//repository.addUser(newuser);
+			repository.addUser(newuser, info.getccard());
 			session.setAttribute("currentUser", newuser);
 			return true;
 		}
-
+		
 		return false;
 	}
 
-	public boolean changeUser(registerInfo info, HttpSession session) {
-		user existing = repository.findBySsn(info.getSsn());
-			user newuser = new user();
-			newuser.setSsn(info.getSsn());
-			newuser.setEmail(info.getEmail());
-			newuser.setPassword(info.getPassword());
-			newuser.setFirstName(info.getFirstName());
-			newuser.setLastName(info.getLastName());
-			newuser.setStreet(info.getStreet());
-			newuser.setCity(info.getCity());
-			newuser.setState(info.getState());
-			newuser.setTelephone(info.getTelephone());
-			newuser.setPpp(info.getppp());
-			newuser.setRating(0);
-			newuser.setLastAct(LocalDateTime.now());
-			//repository.addUser(newuser);
-			session.setAttribute("currentUser", newuser);
-			return true;
-		}
 }
