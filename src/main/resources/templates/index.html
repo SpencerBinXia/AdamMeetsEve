@@ -31,11 +31,11 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
 
-        var failed  Log = [[${failedlogin}]];
+        var failedLog = [[${failedlogin}]];
             if (failedLog == true){
                 alert("Login failed.");
             }
-        var curuser = [[${session.currentUser}]]; //Your Thymleaf variable
+        var curuser = [[${session.currentUser}]];
             if(curuser != null)
             {
                 var ssn = curuser.ssn;

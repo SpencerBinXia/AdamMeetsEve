@@ -21,6 +21,11 @@ th{
     border-radius: 5px;
 }
 
+#buttonpic{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
 .modal-open {
     overflow-y: scroll;
 }
