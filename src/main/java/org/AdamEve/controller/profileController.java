@@ -30,6 +30,7 @@ public class profileController {
 		System.out.println(foundProfile.getSsn() + foundProfile.getAge() + "profile");
 		System.out.println(((user)session.getAttribute("currentUser")).getSsn() + "session");
 		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
+			session.setAttribute("activeProfile", profileID);
 			return "profile";
 		}
 		else {

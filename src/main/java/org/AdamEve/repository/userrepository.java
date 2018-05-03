@@ -526,6 +526,12 @@ public class userrepository {
 			return true;
 		}
 		return false;
+	}
+
+	public void addLike(String liker, String likee) {
+		jdbcTemplate.update("INSERT INTO Likes(Liker, Likee, Date_Time)" + 
+				"VALUES (?, ?, ?)",
+				liker, likee, LocalDateTime.now());
 	}	
 	
 

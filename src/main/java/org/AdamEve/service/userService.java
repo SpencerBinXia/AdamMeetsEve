@@ -65,5 +65,9 @@ public class userService {
 	public List<profile> getAllProfiles() {
 		return userRepo.getAllProfiles();
 	}
+
+	public void addLike(String liker, String likee) {
+		userRepo.addLike(liker, likee);
+	}
 	
 }
