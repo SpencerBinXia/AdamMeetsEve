@@ -48,7 +48,8 @@ public class userrepository {
 			});
 
 			String selectPPP = "SELECT * FROM User WHERE SSN='" + tempuser.getSsn() + "';";
-			String selectCcard = "SELECT * FROM Account WHERE SSN='" + tempuser.getSsn() + "';";
+			String selectCcard = "SELECT * FROM Account WHERE OwnerSSN='" + tempuser.getSsn() + "';";
+
 
 			jdbcTemplate.queryForObject(selectPPP, new RowMapper<user>(){
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -56,7 +57,6 @@ public class userrepository {
 					return tempuser;
 				}
 			});
-
 			jdbcTemplate.queryForObject(selectCcard, new RowMapper<user>(){
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
 					tempuser.setccard(rs.getString("CardNumber"));
@@ -74,7 +74,7 @@ public class userrepository {
 	public user findBySsn(String ssn) {
 		String selectSsn = "SELECT * FROM Person WHERE SSN='" + ssn + "';";
 		String selectPPP = "SELECT * FROM User WHERE SSN='" + ssn + "';";
-		String selectCcard = "SELECT * FROM Account WHERE SSN='" + ssn + "';";
+		String selectCcard = "SELECT * FROM Account WHERE OwnerSSN='" + ssn + "';";
 		user tempuser = new user();
 		try {
 			jdbcTemplate.queryForObject(selectSsn, new RowMapper<user>() {
@@ -306,7 +306,7 @@ public class userrepository {
 				"where SSN= ?",
         reginfo.getPassword(),reginfo.getFirstName(),reginfo.getLastName(),reginfo.getStreet(),reginfo.getCity(),reginfo.getState(),
         reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
-		jdbcTemplate.update("update User set PPP = ? + where SSN = ?", reginfo.getppp(), reginfo.getSsn());
+		//jdbcTemplate.update("update User set PPP = ? + where SSN = ?", reginfo.getppp(), reginfo.getSsn());
 		jdbcTemplate.update("update Account set CardNumber = ? where OwnerSSN = ?", reginfo.getccard(), reginfo.getSsn());
 	}
 
