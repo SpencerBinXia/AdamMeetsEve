@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.AdamEve.object.date;
+import org.AdamEve.object.dateInfo;
 import org.AdamEve.object.employee;
 import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.likes;
@@ -82,6 +84,14 @@ public class userService {
 
 	public List<likes> likedTo(String profileID) {
 		return userRepo.likesByUser(profileID);
+	}
+	
+	public List<date> getallDates(String profileID){
+		return userRepo.datebyProfileID(profileID);
+	}
+
+	public void addDate(dateInfo dateInfo) {
+		userRepo.addDate(dateInfo);
 	}
 
 	
