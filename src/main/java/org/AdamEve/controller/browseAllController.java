@@ -14,18 +14,18 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/serchresult")
-public class searchResultController {
+@RequestMapping("/displayall")
+public class browseAllController {
 	
 	@Autowired
 	private userService service;
 	
 	@PostMapping
-	public String search(@ModelAttribute searchInfo info, Model model)
+	public String getAllProfiles(Model model)
 	{
-		List<profile> searchResults = service.searchProfiles(info);
-		model.addAttribute("searchResults", searchResults);
-		return "searchresult";
+		List<profile> allProfiles = service.getAllProfiles();
+		model.addAttribute("allProfiles", allProfiles);
+		return "displayall";
 	}
 	
 }

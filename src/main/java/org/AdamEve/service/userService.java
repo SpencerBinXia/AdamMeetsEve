@@ -61,5 +61,9 @@ public class userService {
 	public List<employee> getEmployees() {
 		return userRepo.getAllEmployees();
 	}
+
+	public List<profile> getAllProfiles() {
+		return userRepo.getAllProfiles();
+	}
 	
 }

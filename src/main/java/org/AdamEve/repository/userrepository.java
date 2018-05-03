@@ -488,6 +488,31 @@ public class userrepository {
 		}
 		
 		return Employees;
+	}
+
+	public List<profile> getAllProfiles() {
+		String selectProfiles = "SELECT * FROM Profile;";
+		List<profile> Profiles = new ArrayList<profile>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectProfiles);
+		for (Map row : rows) {
+			profile newprofile = new profile();
+			newprofile.setProfileID((String)row.get("ProfileID"));
+			newprofile.setSsn((String)row.get("OwnerSSN"));
+			newprofile.setAge((int)row.get("Age"));
+			newprofile.setRangestart((int)row.get("DatingAgeRangeStart"));
+			newprofile.setRangeend((int)row.get("DatingAgeRangeEnd"));
+			newprofile.setGeorange((int)row.get("DatingGeoRange"));
+			newprofile.setMalefemale((String)row.get("M_F"));
+			newprofile.setHobbies((String)row.get("Hobbies"));
+			newprofile.setHeight((double)row.get("Height"));
+			newprofile.setWeight((int)row.get("Weight"));
+			newprofile.setHairColor((String)row.get("HairColor"));
+			newprofile.setCreateDate(((Timestamp)row.get("CreationDate")).toLocalDateTime());
+			newprofile.setLastModDate(((Timestamp)row.get("LastModDate")).toLocalDateTime());
+			Profiles.add(newprofile);
+		}
+		
+		return Profiles;
 	}	
 	
 
