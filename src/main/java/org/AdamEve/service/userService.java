@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.AdamEve.object.employee;
 import org.AdamEve.object.employeeChangeInfo;
+import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.registerInfo;
@@ -69,5 +70,14 @@ public class userService {
 	public void addLike(String liker, String likee) {
 		userRepo.addLike(liker, likee);
 	}
+
+	public List<likes> likedBy(String profileID) {
+		return userRepo.likedByUser(profileID);
+	}
+
+	public List<likes> likedTo(String profileID) {
+		return userRepo.likesByUser(profileID);
+	}
+
 	
 }

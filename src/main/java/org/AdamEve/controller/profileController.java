@@ -1,7 +1,11 @@
 package org.AdamEve.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.searchInfo;
 import org.AdamEve.object.user;
@@ -27,8 +31,10 @@ public class profileController {
 		model.addAttribute("foundProfile", foundProfile);
 		searchInfo searchParameters = new searchInfo();
 		model.addAttribute("searchParameters", searchParameters);
-		System.out.println(foundProfile.getSsn() + foundProfile.getAge() + "profile");
-		System.out.println(((user)session.getAttribute("currentUser")).getSsn() + "session");
+		List<likes> likedBy = userService.likedBy(profileID);
+		List<likes> likedTo = userService.likedTo(profileID);
+		model.addAttribute("likedBy", likedBy);
+		model.addAttribute("likedTo", likedTo);
 		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
 			session.setAttribute("activeProfile", profileID);
 			return "profile";
