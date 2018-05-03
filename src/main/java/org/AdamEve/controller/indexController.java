@@ -15,7 +15,7 @@ public class indexController {
 	public String home(Model model)
 	{
 		model.addAttribute("info", new loginInfo());
-		model.addAttribute("failedlogin", false);
+		model.addAttribute("failedlogin", true);
 		return "index";
 	}
 }

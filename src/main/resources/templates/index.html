@@ -31,6 +31,10 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
 
+        var failedLog = [[${session.failedlogin}]];
+            if (failedLog == true){
+                alert("Login failed.");
+            }
         var curuser = [[${session.currentUser}]]; //Your Thymleaf variable
             if(curuser != null)
             {

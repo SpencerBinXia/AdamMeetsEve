@@ -18,7 +18,7 @@
     <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/user.css" rel="stylesheet">
+    <link href="/profile.css" rel="stylesheet">
     <link href="/AdamMeetsEve.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -30,41 +30,85 @@
     <![endif]-->
 </head>
 
-
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
-    <a class="navbar-brand abs" th:href="index.html">AdamMeetsEve</a>
+    <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
     <ul class="navbar-nav ml-auto">
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Search</button>
-        </form>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Search</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Advanced Search</button>
         <form action="logout" th:action="@{/logout}" method="post">
             <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
         </form>
     </ul>
 </nav>
 
+
+</div>
+<h1>Welcome To placeholderID's profile page!</h1><br><br>
+
+
 <div class="container">
 
     <div class="index-body">
-        <h1>Your Profile Page</h1><br><br>
         <p class="lead">
-            <b>Hello, Profile.</b><br>
+            <b>Name: Placeholder</b><br>
         <hr size="2">
-        Your Info:<br>
-        <button type="btn-md" div id="button" href="profile">Edit Info:</button>
-        <hr size="2">
-        <button type="btn-md" data-toggle="collapse" div id="button" data-target="#like">Your Likes</button>
-
-        <div id="like" class="collapse">
-            Like Placeholder
-        </div><br>
-        <hr size="2">
-        <button type="btn-md" data-toggle="collapse" div id="button" data-target="#date">Your Dates</button>
-
-        <div id="date" class="collapse">
-            Date Placeholder
-        </div><br>
+        Available Profiles:<br>
+        <!--
+                <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
+                <table div id="infoTbl">
+                    <tr>
+                        <th><input type="text" div id="textBox" placeholder="New Profile ID" th:field="*{ProfileID}"/> Your New Profile ID</th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox"placeholder="Your Age" th:field="*{age}"/> Your Age </th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox" placeholder="Youngest Age You're Interested In Dating" th:field="*{RangeStart}"/>
+                            <input type="text" div id="textBox" placeholder="Oldest Age You're Interested In Dating" th:field="*{RangeEnd}"/>
+                            Youngest to Oldest Ages You'd Like to Date (ex: 20, 30)</th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox" placeholder="Distance (in miles) you're willing to go for dates" th:field="*{GeoRange}"/>
+                            Distance In Miles You're Interested In For Dating (ex: 50)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <select th:field="*{Gender}">
+                                <div>
+                                    <option disabled="true" selected="selected" value="">Your Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </div>
+                            </select>
+                            Your Gender:
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox" placeholder="Height (as decimal. 5'11 = 5.11)" th:field="*{Height}"/>
+                            Your Height (in decimals. If you're 5'8", type 5.8)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox" placeholder="Weight in pounds" th:field="*{Weight}"/>
+                            Your Weight in Pounds (ex: 160)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox" placeholder="Hair color" th:field="*{HairColor}"/>
+                            Your Hair Color (ex: Red)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox" placeholder="Enter your hobbies!" th:field="*{Hobbies}"/>
+                            Your Hobbies!
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><input type="submit" div id="button"/></th>
+                    </tr>
+                </table>
+                -->
         </p>
         <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->
     </div>

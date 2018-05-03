@@ -33,10 +33,10 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
   <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
   <ul class="navbar-nav ml-auto">
-      <button class="btn btn-outline-success my-2 my-sm-0 barBtn" type="submit">Search</button>
-      <button class="btn btn-outline-success my-2 my-sm-0 barBtn" id="advSearchBtn" data-toggle="modal" data-target="#searchModal">Advanced Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Advanced Search</button>
       <form action="logout" th:action="@{/logout}" method="post">
-      <button type="submit" class="btn btn-info btn-md barBtn">Logout</button>
+      <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
       </form>
   </ul>
 </nav>
@@ -45,45 +45,6 @@
 </div>
 <h1>Welcome To Your User Page, <span th:utext="${session.currentUser.getFirstName()}"></span> <span th:utext="${session.currentUser.getLastName()}"></span>!</h1><br><br>
 
-<!-- Modal -->
-<div id="searchModal" class="modal-fade" style="z-index:9999;" role="dialog";>
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Advanced Search. Who Are You Looking For?</p><br>
-            <table div id="infoTbl" style="width:100%">
-                <tr>
-                    <th>ProfileID: </th>
-                   <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
-                </tr>
-                <tr>
-                    <th>Gender:</th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
-                </tr>
-                <tr>
-                    <th>Age: </th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
-                </tr>
-                <tr>
-                    <th>Height:</th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
-                </tr>
-                <tr>
-                    <th>Weight: </th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
-                </tr>
-                <tr>
-                    <th>Hair Color:</th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
-                </tr>
-                <tr>
-                   <!-- <th><input type="submit"/></th> -->
-                </tr>
-            </table>
-    </div>
-
-</div>
 
 <div class="container">
 
@@ -218,7 +179,7 @@
                     </th>
                 </tr>
                 <tr>
-                    <th><input type="submit" div id="button" onclick="reloadPage()"/></th>
+                    <th><input type="submit" div id="button"/></th>
                 </tr>
             </table>
         </form>
@@ -231,17 +192,12 @@
 
 </div><!-- /.container -->
 
-<script>
-    function reloadPage(){
-        location.reload();
-    }
-</script>
 
 <script>
-    var modal = document.getElementById('searchModal');
+    var modal = document.getElementById('myModal');
 
     // Get the button that opens the modal
-    var btn = document.getElementById("advSearchBtn");
+    var btn = document.getElementById("loginBtn");
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -253,10 +209,7 @@
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        $("#searchModal").removeClass("in");
-        $(".modal-backdrop").remove();
-        $("#searchModal").hide();
-        $("#searchModal").removeData();
+        modal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
@@ -266,7 +219,6 @@
         }
     }
 </script>
-
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

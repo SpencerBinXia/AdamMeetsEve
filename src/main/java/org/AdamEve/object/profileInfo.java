@@ -10,7 +10,7 @@ public class profileInfo {
 	private int GeoRange;
 	private String Gender;
 	private String Hobbies;
-	private int Height;
+	private double Height;
 	private int Weight;
 	private String HairColor;
 	
@@ -56,10 +56,10 @@ public class profileInfo {
 	public void setHobbies(String hobbies) {
 		Hobbies = hobbies;
 	}
-	public int getHeight() {
+	public double getHeight() {
 		return Height;
 	}
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		Height = height;
 	}
 	public int getWeight() {

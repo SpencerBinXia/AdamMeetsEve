@@ -12,7 +12,7 @@ public class profile{
 	private int georange;
 	private String malefemale;
 	private String hobbies;
-	private float height;
+	private double height;
 	private int weight;
 	private String hairColor;
 	private LocalDateTime createDate;
@@ -66,10 +66,10 @@ public class profile{
 	public void setHobbies(String hobbies) {
 		this.hobbies = hobbies;
 	}
-	public float getHeight() {
+	public double getHeight() {
 		return height;
 	}
-	public void setHeight(float height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 	public int getWeight() {
