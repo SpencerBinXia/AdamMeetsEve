@@ -586,10 +586,12 @@ public class userrepository {
 	}
 
 	public void addDate(dateInfo dateInfo) {
-		jdbcTemplate.update("INSERT INTO Dates(Profile1, Profile2, Date_Time, Location, BookingFee)" + 
-				"VALUES (?, ?, ?, ?, ?)",
+		LocalDateTime dateTime = LocalDateTime.now();
+		int tempRating2 = 0;
+		jdbcTemplate.update("INSERT INTO Date(Profile1, Profile2, Date_Time, Location, BookingFee, User1Rating, User2Rating, Comments)" +
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
 				dateInfo.getProfileID1(), dateInfo.getProfileID2(), 
-				dateInfo.getDateTime(), dateInfo.getLocation(), dateInfo.getBookFee());	
+				dateTime, dateInfo.getLocation(), dateInfo.getBookFee(), dateInfo.getRating1(), dateInfo.getRating2(), dateInfo.getComments());
 	}
 
 	public void addReferral(String referee, String referTo, String profileID) {

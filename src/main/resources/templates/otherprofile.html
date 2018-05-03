@@ -87,9 +87,9 @@
     <table>
         <tr>
             <th>
-    <button class="btn btn-default profBtn" div id="dateButton">
-        <img src="https://cdn4.iconfinder.com/data/icons/signicon-pt-1-1/100/049_-_meet-256.png" div id="buttonimg">
-    </button>
+        <button type="button" button id="dateButton" class="btn btn-info profBtn" data-toggle="modal" data-target="#dateModal">
+            <img src="https://cdn4.iconfinder.com/data/icons/signicon-pt-1-1/100/049_-_meet-256.png" div id="buttonimg">
+        </button>
             </th>
             <th>
     <form action="like" th:action="@{${foundProfile.getProfileID()} + '/addLike'}" method="post">
@@ -107,9 +107,45 @@
     </table>
 </h1><br><br>
 
+
+<div id="dateModal" class="modal-fade" style="z-index:9999;" role="dialog";>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close2">&times;</span>
+        <form action="date" th:action="@{${foundProfile.getProfileID()} + '/addDate'}" th:object="${dateInfo}" method="post">
+            <p>Record Your Date</p><br>
+            <table div id="infoTbl" style="width:100%">
+                <tr>
+                    <th><input type="text" div id="textBox" placeholder="Location" th:field="*{location}"/> Date Location</th>
+                </tr>
+                <tr>
+                    <th><input type="text" div id="textBox" placeholder="Location" th:field="*{rating1}"/> Your rating of the date</th>
+                </tr>
+                <tr>
+                    <th><input type="text" div id="textBox" placeholder="Location" th:field="*{rating2}"/> Their rating of the date</th>
+                </tr>
+                <tr>
+                    Comments:
+                </tr>
+                <tr>
+                    <th><input type="text" div id="textBox" placeholder="Comments" th:field="*{comments}"  style="width: 150px; height: 80px;"/></th>
+                </tr>
+                <tr>
+                    <th><input type="submit" onclick="dateAlert()"/></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>
+
 <script>
     function likeAlert(){
         alert("Like added!");
+    }
+
+    function dateAlert(){
     }
 </script>
 
@@ -222,8 +258,39 @@
 
 </div><!-- /.container -->
 
+
 <script>
 
+</script>
+
+<script>
+    var modal2 = document.getElementById('dateModal');
+
+    // Get the button that opens the modal
+    var btn2 = document.getElementById("dateButton");
+
+    // Get the <span> element that closes the modal
+    var span2 = document.getElementsByClassName("close2")[0];
+
+    // When the user clicks on the button, open the modal
+    btn2.onclick = function() {
+        modal2.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span2.onclick = function() {
+        $("#dateModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $("#dateModal").hide();
+        $("#dateModal").removeData();
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal2) {
+            modal2.style.display = "none";
+        }
+    }
 </script>
 
 <script>
