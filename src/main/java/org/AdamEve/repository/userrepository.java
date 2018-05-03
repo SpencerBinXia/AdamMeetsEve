@@ -307,7 +307,7 @@ public class userrepository {
 		}
 	}
 	
-	public List<profile> searchByPPP(int PPP){
+	public List<profile> searchByPPP(String PPP){
 		String selectSSN = "SELECT * FROM User WHERE PPP='" + PPP + "';";
 		List<Integer> userssn = new ArrayList<Integer>();
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectSSN);
@@ -577,9 +577,21 @@ public class userrepository {
 	}
 
 	public List<profile> getAllProfiles() {
+		List<profile> SuperUsers = searchByPPP("Super-User");
+		List<profile> GoodUsers = searchByPPP("Super-User");
+		List<profile> UserUsers = searchByPPP("Super-User");
 		String selectProfiles = "SELECT * FROM Profile;";
 		List<profile> Profiles = new ArrayList<profile>();
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectProfiles);
+		for (profile x : SuperUsers) {
+			Profiles.add(x);
+		}
+		for (profile x : GoodUsers) {
+			Profiles.add(x);
+		}
+		for (profile x : UserUsers) {
+			Profiles.add(x);
+		}
+		/*List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectProfiles);
 		for (Map row : rows) {
 			profile newprofile = new profile();
 			newprofile.setProfileID((String)row.get("ProfileID"));
@@ -596,7 +608,7 @@ public class userrepository {
 			newprofile.setCreateDate(((Timestamp)row.get("CreationDate")).toLocalDateTime());
 			newprofile.setLastModDate(((Timestamp)row.get("LastModDate")).toLocalDateTime());
 			Profiles.add(newprofile);
-		}
+		}*/
 		
 		return Profiles;
 	}
