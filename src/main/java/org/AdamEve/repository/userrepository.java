@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,10 @@ public class userrepository {
 
 	public user findBySsn(String ssn) {
 		String selectSsn = "SELECT * FROM Person WHERE SSN='" + ssn + "';";
-	    user tempuser = new user();
-	    try {
+		String selectPPP = "SELECT * FROM User WHERE SSN='" + ssn + "';";
+		String selectCcard = "SELECT * FROM Account WHERE SSN='" + ssn + "';";
+		user tempuser = new user();
+		try {
 			jdbcTemplate.queryForObject(selectSsn, new RowMapper<user>() {
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
 					tempuser.setEmail(rs.getString("Email"));
@@ -72,12 +75,52 @@ public class userrepository {
 					return tempuser;
 				}
 			});
+
+			jdbcTemplate.queryForObject(selectPPP, new RowMapper<user>(){
+				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempuser.setPpp(rs.getString("PPP"));
+					return tempuser;
+				}
+			});
+
+			jdbcTemplate.queryForObject(selectCcard, new RowMapper<user>(){
+				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempuser.setccard(rs.getString("CardNumber"));
+					return tempuser;
+				}
+			});
 		}
 		catch (Exception e)
 		{
 			return null;
 		}
-        return tempuser;
+		return tempuser;
+	}
+
+	public List<profile> findProfilesbySSN(String ssn){
+		String selectProfiles = "SELECT * FROM Profile WHERE OwnerSSN='" + ssn + "';";
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectProfiles);
+		List<profile> profiles = new ArrayList<profile>();
+		rows = jdbcTemplate.queryForList(selectProfiles);
+		for (Map row : rows) {
+			profile tempprofile = new profile();
+			tempprofile.setProfileID((String)row.get("ProfileID"));
+			tempprofile.setSsn((String)row.get("OwnerSSN"));
+			tempprofile.setAge((int)row.get("Age"));
+			tempprofile.setRangestart((int)row.get("DatingAgeRangeStart"));
+			tempprofile.setRangeend((int)row.get("DatingAgeRangeEnd"));
+			tempprofile.setGeorange((int)row.get("DatingGeoRange"));
+			tempprofile.setMalefemale((String)row.get("M_F"));
+			tempprofile.setHobbies((String)row.get("Hobbies"));
+			tempprofile.setHeight((double)row.get("Height"));
+			tempprofile.setWeight((int)row.get("Weight"));
+			tempprofile.setHairColor((String)row.get("HairColor"));
+			tempprofile.setCreateDate(((Timestamp)row.get("CreationDate")).toLocalDateTime());
+			tempprofile.setLastModDate(((Timestamp)row.get("LastModDate")).toLocalDateTime());
+			profiles.add(tempprofile);
+		}
+		return profiles;
+
 	}
 	
 	public List<profile> searchByPPP(int PPP){
@@ -89,7 +132,7 @@ public class userrepository {
 		}
 		List<profile> profiles = new ArrayList<profile>();
 		for (int ssn : userssn) {
-			String selectProfiles = "SELECT * FROM Profile WHERE SSN='" + ssn + "';";
+			String selectProfiles = "SELECT * FROM Profile WHERE OwnerSSN='" + ssn + "';";
 			rows = jdbcTemplate.queryForList(selectProfiles);
 			for (Map row : rows) {
 				profile tempprofile = new profile();
@@ -101,11 +144,11 @@ public class userrepository {
 				tempprofile.setGeorange((int)row.get("DatingGeoRange"));
 				tempprofile.setMalefemale((String)row.get("M_F"));
 				tempprofile.setHobbies((String)row.get("Hobbies"));
-				tempprofile.setHeight((int)row.get("Height"));
+				tempprofile.setHeight((double)row.get("Height"));
 				tempprofile.setWeight((int)row.get("Weight"));
 				tempprofile.setHairColor((String)row.get("HairColor"));
-				tempprofile.setCreateDate((LocalDateTime)row.get("CreationDate"));
-				tempprofile.setLastModDate((LocalDateTime)row.get("LastModDate"));
+				tempprofile.setCreateDate(((Timestamp)row.get("CreationDate")).toLocalDateTime());
+				tempprofile.setLastModDate(((Timestamp)row.get("LastModDate")).toLocalDateTime());
 				profiles.add(tempprofile);
 			}
 		}
@@ -180,7 +223,7 @@ public class userrepository {
 		return likes;
 		
 	}
-	
+
 	public profile findProfilebyID(String ProfileID) {
 		String selectProfile = "SELECT * FROM Profile WHERE ProfileID='" + ProfileID + "';";
 	    profile tempprofile = new profile();
@@ -195,11 +238,11 @@ public class userrepository {
 					tempprofile.setGeorange(rs.getInt("DatingGeoRange"));
 					tempprofile.setMalefemale(rs.getString("M_F"));
 					tempprofile.setHobbies(rs.getString("Hobbies"));
-					tempprofile.setHeight(rs.getInt("Height"));
+					tempprofile.setHeight(rs.getDouble("Height"));
 					tempprofile.setWeight(rs.getInt("Weight"));
 					tempprofile.setHairColor(rs.getString("HairColor"));
-					tempprofile.setCreateDate((LocalDateTime)rs.getObject("CreationDate"));
-					tempprofile.setLastModDate((LocalDateTime)rs.getObject("LastModDate"));
+					tempprofile.setCreateDate(((Timestamp)rs.getObject("CreationDate")).toLocalDateTime());
+					tempprofile.setLastModDate(((Timestamp)rs.getObject("LastModDate")).toLocalDateTime());
 					return tempprofile;
 				}
 			});
@@ -211,12 +254,42 @@ public class userrepository {
         return tempprofile;
 	}
 
+	public profile findProfilebySSN(String ssn) {
+		String selectProfile = "SELECT * FROM Profile WHERE OwnerSSN='" + ssn + "';";
+		profile tempprofile = new profile();
+		try {
+			jdbcTemplate.queryForObject(selectProfile, new RowMapper<profile>() {
+				public profile mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempprofile.setProfileID(rs.getString("ProfileID"));
+					tempprofile.setSsn(rs.getString("OwnerSSN"));
+					tempprofile.setAge(rs.getInt("Age"));
+					tempprofile.setRangestart(rs.getInt("DatingAgeRangeStart"));
+					tempprofile.setRangeend(rs.getInt("DatingAgeRangeEnd"));
+					tempprofile.setGeorange(rs.getInt("DatingGeoRange"));
+					tempprofile.setMalefemale(rs.getString("M_F"));
+					tempprofile.setHobbies(rs.getString("Hobbies"));
+					tempprofile.setHeight(rs.getDouble("Height"));
+					tempprofile.setWeight(rs.getInt("Weight"));
+					tempprofile.setHairColor(rs.getString("HairColor"));
+					tempprofile.setCreateDate(((Timestamp)rs.getObject("CreationDate")).toLocalDateTime());
+					tempprofile.setLastModDate(((Timestamp)rs.getObject("LastModDate")).toLocalDateTime());					tempprofile.setLastModDate((LocalDateTime)rs.getObject("LastModDate"));
+					return tempprofile;
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+		return tempprofile;
+	}
+
 	public void updateUser(registerInfo reginfo) {
 		jdbcTemplate.update("update Person set Password = ?, FirstName = ?, LastName= ?, Street= ?, City = ?, State= ?, Zipcode=?, Email=?, Telephone=?" +
 				"where SSN= ?",
         reginfo.getPassword(),reginfo.getFirstName(),reginfo.getLastName(),reginfo.getStreet(),reginfo.getCity(),reginfo.getState(),
         reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
-		//jdbcTemplate.update("update User set PPP = ? + where SSN = ?", reginfo.getppp(), reginfo.getSsn());
+		jdbcTemplate.update("update User set PPP = ? + where SSN = ?", reginfo.getppp(), reginfo.getSsn());
 		jdbcTemplate.update("update Account set CardNumber = ? where OwnerSSN = ?", reginfo.getccard(), reginfo.getSsn());
 	}
 

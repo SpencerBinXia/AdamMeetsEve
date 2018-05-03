@@ -30,7 +30,12 @@ public class userService {
 		profile profile = userRepo.findProfilebyID(profileID);
 		return profile;
 	}
-	
+
+	public List<profile> finduserProfiles(String ssn) {
+		List<profile> profiles = userRepo.findProfilesbySSN(ssn);
+		return profiles;
+	}
+
 	public List<profile> searchProfiles(searchInfo parameters){
 		return null;
 	}

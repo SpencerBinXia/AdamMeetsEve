@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/viewuser/{ssn}")
 public class userController {
@@ -26,6 +28,8 @@ public class userController {
 		model.addAttribute("searchParameters", searchParameters);
 		profileInfo createProfile = new profileInfo();
 		model.addAttribute("ProfileInfo", createProfile);
+		List<profile> profileList = userService.finduserProfiles(userid);
+		model.addAttribute("userProfiles", profileList);
 		model.addAttribute("reginfo", new registerInfo());
 		return "user";
 	}
