@@ -7,6 +7,7 @@ import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
+import org.AdamEve.object.referral;
 import org.AdamEve.object.registerInfo;
 import org.AdamEve.object.searchInfo;
 import org.AdamEve.object.user;
@@ -394,6 +395,22 @@ public class userrepository {
 		
 		return dates;
 	}
+	
+	public List<referral> referralbyProfileID(String ProfileID){
+		String selectreferrals = "SELECT * FROM Referral WHERE ProfileB='" + ProfileID + "';";
+		List<referral> referrals = new ArrayList<referral>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectreferrals);
+		for (Map row : rows) {
+			referral referral = new referral();
+			referral.setProfileID1((String)row.get("ProfileA"));
+			referral.setProfileID2((String)row.get("ProfileB"));
+			referral.setProfileID3((String)row.get("ProfileC"));
+			referral.setReferredDate(((Timestamp)row.get("Date_Time")).toLocalDateTime());;
+			referrals.add(referral);
+		}
+		
+		return referrals;
+	}
 
 	public profile findProfilebyID(String ProfileID) {
 		String selectProfile = "SELECT * FROM Profile WHERE ProfileID='" + ProfileID + "';";
@@ -566,6 +583,13 @@ public class userrepository {
 				"VALUES (?, ?, ?, ?, ?)",
 				dateInfo.getProfileID1(), dateInfo.getProfileID2(), 
 				dateInfo.getDateTime(), dateInfo.getLocation(), dateInfo.getBookFee());	
+	}
+
+	public void addReferral(String referee, String referTo, String profileID) {
+		jdbcTemplate.update("INSERT INTO Referral(ProfileA, ProfileB, ProfileC, Date_Time)" + 
+				"VALUES (?, ?, ?, ?)",
+				referee, referTo, profileID, LocalDateTime.now());	
+		
 	}	
 	
 

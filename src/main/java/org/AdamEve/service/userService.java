@@ -12,6 +12,7 @@ import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
+import org.AdamEve.object.referral;
 import org.AdamEve.object.registerInfo;
 import org.AdamEve.object.searchInfo;
 import org.AdamEve.object.user;
@@ -89,9 +90,17 @@ public class userService {
 	public List<date> getallDates(String profileID){
 		return userRepo.datebyProfileID(profileID);
 	}
+	
+	public List<referral> getreferralByID(String profileID){
+		return userRepo.referralbyProfileID(profileID);
+	}
 
 	public void addDate(dateInfo dateInfo) {
 		userRepo.addDate(dateInfo);
+	}
+
+	public void addReferral(String Referee, String referTo, String profileID) {
+		userRepo.addReferral(Referee, referTo, profileID);
 	}
 
 	
