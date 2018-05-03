@@ -92,6 +92,9 @@
       <b>Select A Profile To Start Mingling.</b><br>
     <hr size="2">
     Available Profiles:<br>
+      <th:block th:each="profile: ${userProfiles}">
+          <a th:href="@{'/viewprofile/'+ ${profile.getProfileID()}}"><span th:text="${profile.getProfileID()}"></span></a><br>
+      </th:block>
     <button type="btn-md" div id="button" data-toggle="collapse" data-target="#newprofile">Create A New Profile</button>
       <div id="newprofile" class="collapse">
           <form action="newprofile" th:action="@{createProfile}" th:object="${ProfileInfo}" method="post">
