@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.AdamEve.object.date;
+import org.AdamEve.object.dateInfo;
 import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.searchInfo;
@@ -33,13 +35,16 @@ public class profileController {
 		model.addAttribute("searchParameters", searchParameters);
 		List<likes> likedBy = userService.likedBy(profileID);
 		List<likes> likedTo = userService.likedTo(profileID);
+		List<date> dates = userService.getallDates(profileID);
 		model.addAttribute("likedBy", likedBy);
 		model.addAttribute("likedTo", likedTo);
+		model.addAttribute("allDates", dates);
 		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
 			session.setAttribute("activeProfile", profileID);
 			return "profile";
 		}
 		else {
+			model.addAttribute("dateInfo", new dateInfo());
 			return "otherProfile";
 		}
 	}

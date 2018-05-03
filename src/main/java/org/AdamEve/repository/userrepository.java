@@ -1,5 +1,7 @@
 package org.AdamEve.repository;
 
+import org.AdamEve.object.date;
+import org.AdamEve.object.dateInfo;
 import org.AdamEve.object.employee;
 import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.likes;
@@ -347,7 +349,7 @@ public class userrepository {
 			likes like = new likes();
 			like.setLiker((String)row.get("Liker"));
 			like.setLikee((String)row.get("Likee"));
-			like.setTimeLike((LocalDateTime)row.get("Date_Time"));
+			like.setTimeLike(((Timestamp)row.get("Date_Time")).toLocalDateTime());
 			liked.add(like);
 		}
 		
@@ -363,12 +365,34 @@ public class userrepository {
 			likes like = new likes();
 			like.setLiker((String)row.get("Liker"));
 			like.setLikee((String)row.get("Likee"));
-			like.setTimeLike((LocalDateTime)row.get("Date_Time"));
+			like.setTimeLike(((Timestamp)row.get("Date_Time")).toLocalDateTime());
 			likes.add(like);
 		}
 		
 		return likes;
 		
+	}
+	
+	public List<date> datebyProfileID(String ProfileID){
+		String selectdates = "SELECT * FROM Dates WHERE ProfileID1='" + ProfileID + 
+				"' OR ProfileID2='" + ProfileID + "';";
+		List<date> dates = new ArrayList<date>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectdates);
+		for (Map row : rows) {
+			date date = new date();
+			date.setProfileID1((String)row.get("Profile1"));
+			date.setProfileID2((String)row.get("Profile2"));
+			date.setCustRep((String)row.get("CustRep"));
+			date.setDateTime(((Timestamp)row.get("Date_Time")).toLocalDateTime());
+			date.setLocation((String)row.get("Location"));
+			date.setBookFee((int)row.get("BookingFee"));
+			date.setComments((String)row.get("Comments"));
+			date.setUser1rate((int)row.get("User1Rating"));
+			date.setUser2rate((int)row.get("User2Rating"));
+			dates.add(date);
+		}
+		
+		return dates;
 	}
 
 	public profile findProfilebyID(String ProfileID) {
@@ -535,6 +559,13 @@ public class userrepository {
 		jdbcTemplate.update("INSERT INTO Likes(Liker, Likee, Date_Time)" + 
 				"VALUES (?, ?, ?)",
 				liker, likee, LocalDateTime.now());
+	}
+
+	public void addDate(dateInfo dateInfo) {
+		jdbcTemplate.update("INSERT INTO Dates(Profile1, Profile2, Date_Time, Location, BookingFee)" + 
+				"VALUES (?, ?, ?, ?, ?)",
+				dateInfo.getProfileID1(), dateInfo.getProfileID2(), 
+				dateInfo.getDateTime(), dateInfo.getLocation(), dateInfo.getBookFee());	
 	}	
 	
 
