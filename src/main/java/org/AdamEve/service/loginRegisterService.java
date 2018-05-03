@@ -67,4 +67,8 @@ public class  loginRegisterService {
 		return false;
 	}
 
+	public boolean isEmployee(String ssn) {
+		return repository.isEmployee(ssn);
+	}
+
 }

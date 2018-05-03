@@ -516,6 +516,25 @@ public class userrepository {
 		}
 		
 		return Profiles;
+	}
+
+	public boolean isEmployee(String ssn) {
+		String selectEmployees = "SELECT * FROM Employee";
+		List<String> employeeSSN = new ArrayList<String>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectEmployees);
+		for (Map row : rows) {
+			employeeSSN.add((String)row.get("SSN"));
+		}
+		if (employeeSSN.contains(ssn)) {
+			return true;
+		}
+		return false;
+	}
+
+	public void addLike(String liker, String likee) {
+		jdbcTemplate.update("INSERT INTO Likes(Liker, Likee, Date_Time)" + 
+				"VALUES (?, ?, ?)",
+				liker, likee, LocalDateTime.now());
 	}	
 	
 
