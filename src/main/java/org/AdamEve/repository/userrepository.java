@@ -472,6 +472,22 @@ public class userrepository {
         employeeinfo.getPassword(),employeeinfo.getFirstName(),employeeinfo.getLastName(),employeeinfo.getStreet(),employeeinfo.getCity(),employeeinfo.getState(),
         employeeinfo.getZipcode(),employeeinfo.getEmail(),employeeinfo.getTelephone(), employeeinfo.getSsn());
 		jdbcTemplate.update("update Employee set Role = ?, HourlyRate= ? where SSN = ?", employeeinfo.getRole(), employeeinfo.getHourlyRate(), employeeinfo.getSsn());
+	}
+
+	public List<employee> getAllEmployees() {
+		String selectEmployee = "SELECT * FROM Employee;";
+		List<employee> Employees = new ArrayList<employee>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectEmployee);
+		for (Map row : rows) {
+			employee newemployee = new employee();
+			newemployee.setSsn((String)row.get("SSN"));
+			newemployee.setRole((String)row.get("Role"));
+			newemployee.setStartDate((Date)row.get("StartDate"));
+			newemployee.setHourlyRate((int)row.get("HourlyRate"));
+			Employees.add(newemployee);
+		}
+		
+		return Employees;
 	}	
 	
 

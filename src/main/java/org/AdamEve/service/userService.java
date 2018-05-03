@@ -57,5 +57,9 @@ public class userService {
 	public void changeEmployeeInfo(employeeChangeInfo employeeinfo, HttpSession session) {
 		userRepo.updateEmployee(employeeinfo);
 	}
+
+	public List<employee> getEmployees() {
+		return userRepo.getAllEmployees();
+	}
 	
 }

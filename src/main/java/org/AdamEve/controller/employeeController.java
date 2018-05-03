@@ -1,5 +1,7 @@
 package org.AdamEve.controller;
 
+import java.util.List;
+
 import org.AdamEve.object.employee;
 import org.AdamEve.object.employeeChangeInfo;
 import org.AdamEve.object.profileInfo;
@@ -25,6 +27,15 @@ public class employeeController{
 	{
 		employee foundEmployee = userService.findEmployee(employeeid);
 		model.addAttribute("foundEmployee", foundEmployee);
+		if (foundEmployee.getRole().equals("Manager")) {
+			model.addAttribute("isManager", true);
+			List<employee> allEmployees = userService.getEmployees();
+			model.addAttribute("allEmployees", allEmployees);
+		}
+		else {
+			model.addAttribute("isManager", false);
+			model.addAttribute("allEmployees", null);
+		}
 		user foundEmployeePerson = userService.findUser(employeeid);
 		model.addAttribute("foundEmployeePerson", foundEmployeePerson);
 		searchInfo searchParameters = new searchInfo();
