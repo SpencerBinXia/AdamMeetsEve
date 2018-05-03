@@ -94,6 +94,7 @@
         Height: <span th:utext="${foundProfile.getHeight()}"></span><br>
         Weight: <span th:utext="${foundProfile.getWeight()}"></span><br>
         Hair Color: <span th:utext="${foundProfile.getHairColor()}"></span><br>
+        Hobbies: <span th:utext="${foundProfile.getHobbies()}"></span><br>
         </p>
         <hr size="2">
         <p>
@@ -104,20 +105,35 @@
                 </button>
             </div>
             <div id="dates" class="collapse">
-                <!--
                 <table div id="infoTbl">
                     <tr>
+                        <th>See your dates.</th>
                     </tr>
-                    <tr th:each="profile: ${searchResults}">
-                        <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID()}}"><span th:text="${profile.getProfileID()}"></span></a></td>
-                        <td th:text="${profile.getAge()}"></td>
-                        <td th:text="${profile.getMalefemale()}"></td>
-                        <td th:text="${profile.getWeight()}"></td>
-                        <td th:text="${profile.getHairColor()}"></td>
-
+                    <tr>
+                        <b>
+                        <th>Profile 1</th>
+                        <th>Profile 2</th>
+                            <th>Customer Representative</th>
+                            <th>Booking Fee</th>
+                            <th>Date Location</th>
+                            <th>Profile 1's Rating</th>
+                            <th>Profile 2's Rating</th>
+                            <th>Date's Time and Date</th>
+                            <th>Date Comments</th>
+                        </b>
+                    </tr>
+                    <tr th:each="profile: ${allDates}">
+                        <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID1()}}"><span th:text="${profile.getProfileID1()}"></span></a></td>
+                        <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID2()}}"><span th:text="${profile.getProfileID2()}"></span></a></td>
+                        <td><span th:text="${profile.getCustRep()}"></span></a></td>
+                        <td><span th:text="${profile.getBookFee()}"></span></a></td>
+                        <td><span th:text="${profile.getLocation()}"></span></a></td>
+                        <td><span th:text="${profile.getUser1rate()}"></span></a></td>
+                        <td><span th:text="${profile.getUser2rate()}"></span></a></td>
+                        <td><span th:text="${profile.getDateTime()}"></span></a></td><br>
+                        <td><span th:text="${profile.getComments()}"></span></a></td>
                     </tr>
                 </table>
-                -->
             </div>
             <div>
         <hr size="2">

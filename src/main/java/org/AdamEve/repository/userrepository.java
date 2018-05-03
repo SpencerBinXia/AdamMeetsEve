@@ -374,8 +374,8 @@ public class userrepository {
 	}
 	
 	public List<date> datebyProfileID(String ProfileID){
-		String selectdates = "SELECT * FROM Dates WHERE ProfileID1='" + ProfileID + 
-				"' OR ProfileID2='" + ProfileID + "';";
+		String selectdates = "SELECT * FROM Date WHERE Profile1='" + ProfileID +
+				"' OR Profile2='" + ProfileID + "';";
 		List<date> dates = new ArrayList<date>();
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectdates);
 		for (Map row : rows) {

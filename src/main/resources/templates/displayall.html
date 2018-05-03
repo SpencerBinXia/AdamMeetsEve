@@ -88,6 +88,14 @@
     <p class="lead">
         <table div id="infoTbl">
       <tr>
+          <b>
+          <th>Profile ID</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Hair Color</th>
+          </b>
       </tr>
         <tr th:each="profile: ${allProfiles}">
             <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID()}}"><span th:text="${profile.getProfileID()}"></span></a></td>

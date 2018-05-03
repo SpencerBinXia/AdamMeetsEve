@@ -25,6 +25,8 @@ public class searchResultController {
 	{
 		List<profile> searchResults = service.searchProfiles(info);
 		model.addAttribute("searchResults", searchResults);
+		searchInfo searchParameters = new searchInfo();
+		model.addAttribute("searchParameters", searchParameters);
 		return "searchresult";
 	}
 	

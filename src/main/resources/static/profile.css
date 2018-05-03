@@ -14,6 +14,11 @@ h1 {
     margin:0;
     background-color: #fffff0;
 }
+
+table, tr, th, td {
+    border: 1px gray;
+}
+
 .index-body {
     padding-left: 100px;
     text-align: left;

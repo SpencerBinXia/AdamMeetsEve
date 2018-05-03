@@ -25,6 +25,8 @@ public class browseAllController {
 	{
 		List<profile> allProfiles = service.getAllProfiles();
 		model.addAttribute("allProfiles", allProfiles);
+		searchInfo searchParameters = new searchInfo();
+		model.addAttribute("searchParameters", searchParameters);
 		return "displayall";
 	}
 	
