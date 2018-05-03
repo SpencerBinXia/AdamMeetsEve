@@ -41,6 +41,19 @@ table, tr, th, td {
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
 }
+
+#referModal
+{
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
 #buttonimg
 {
     background: transparent;

@@ -3,6 +3,7 @@ package org.AdamEve.controller;
 import javax.servlet.http.HttpSession;
 
 import org.AdamEve.object.dateInfo;
+import org.AdamEve.object.referInfo;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.user;
@@ -23,9 +24,9 @@ public class addReferralController {
 	private userService userService;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String createProfile(@PathVariable("profileID") String profileID, @ModelAttribute String referTo, HttpSession session, Model model)
+	public String createProfile(@PathVariable("profileID") String profileID, @ModelAttribute referInfo referinfo, HttpSession session, Model model)
 	{
-		userService.addReferral((String)session.getAttribute("activeProfile"), referTo, profileID);
+		userService.addReferral((String)session.getAttribute("activeProfile"), referinfo.getReferredID(), profileID);
 		return "redirect:/viewprofile/" + profileID;
 	}
 	

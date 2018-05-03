@@ -36,6 +36,7 @@ public class profileController {
 		model.addAttribute("likedTo", likedTo);
 		model.addAttribute("allDates", dates);
 		model.addAttribute("allReferrals", referrals);
+		model.addAttribute("referinfo", new referInfo());
 		System.out.println(foundProfile.getSsn() +"found");
 		System.out.println(((user)session.getAttribute("currentUser")).getSsn() + "current");
 		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
@@ -46,7 +47,7 @@ public class profileController {
 		else {
 			model.addAttribute("dateInfo", new dateInfo());
 			String referTo = "";
-			model.addAttribute("referTo", referTo);
+			model.addAttribute("referinfo", new referInfo());
 			return "otherProfile";
 		}
 	}

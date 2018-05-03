@@ -99,7 +99,7 @@
     </form>
             </th>
             <th>
-    <button class="btn btn-default profBtn" div id="referButton">
+    <button type="button" button id="referButton" class="btn btn-default profBtn" data-toggle="modal" data-target="referModal">
         <img src="http://www.iconsplace.com/icons/preview/orange/arrow-256.png" div id="buttonimg">
     </button>
             </th>
@@ -130,6 +130,26 @@
                 </tr>
                 <tr>
                     <th><input type="text" div id="textBox" placeholder="Comments" th:field="*{comments}"  style="width: 150px; height: 80px;"/></th>
+                </tr>
+                <tr>
+                    <th><input type="submit" onclick="dateAlert()"/></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<div id="referModal" class="modal-fade" style="z-index:9999;" role="dialog";>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close3">&times;</span>
+        <form action="refer" th:action="@{${foundProfile.getProfileID()} + '/addReferral'}" th:object="${referinfo}" method="post">
+            <p>Who do you want to refer this user to?</p><br>
+            <table div id="infoTbl" style="width:100%">
+                <tr>
+                    <th><input type="text" div id="textBox" placeholder="ID to refer" th:field="*{referredID}"/> Enter the ProfileID to refer</th>
                 </tr>
                 <tr>
                     <th><input type="submit" onclick="dateAlert()"/></th>
@@ -261,6 +281,36 @@
 
 <script>
 
+</script>
+
+<script>
+    var modal3 = document.getElementById('referModal');
+
+    // Get the button that opens the modal
+    var btn3 = document.getElementById("referButton");
+
+    // Get the <span> element that closes the modal
+    var span3 = document.getElementsByClassName("close3")[0];
+
+    // When the user clicks on the button, open the modal
+    btn3.onclick = function() {
+        modal3.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span3.onclick = function() {
+        $("#referModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $("#referModal").hide();
+        $("#referModal").removeData();
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal3) {
+            modal3.style.display = "none";
+        }
+    }
 </script>
 
 <script>
