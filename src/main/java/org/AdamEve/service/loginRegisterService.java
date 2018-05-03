@@ -55,7 +55,8 @@ public class  loginRegisterService {
 			newuser.setCity(info.getCity());
 			newuser.setState(info.getState());
 			newuser.setTelephone(info.getTelephone());
-			newuser.setPpp(info.getppp());
+			newuser.setZipcode(info.getZipcode());
+			newuser.setppp(info.getppp());
 			newuser.setRating(0);
 			newuser.setccard(info.getccard());
 			newuser.setLastAct(LocalDateTime.now());

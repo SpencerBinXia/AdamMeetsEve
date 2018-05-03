@@ -79,10 +79,10 @@ public class user {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public String getPpp() {
+	public String getppp() {
 		return ppp;
 	}
-	public void setPpp(String ppp) {
+	public void setppp(String ppp) {
 		this.ppp = ppp;
 	}
 	public String getccard() {

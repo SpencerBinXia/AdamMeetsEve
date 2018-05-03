@@ -5,13 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.AdamEve.object.date;
-import org.AdamEve.object.dateInfo;
-import org.AdamEve.object.likes;
-import org.AdamEve.object.profile;
-import org.AdamEve.object.referral;
-import org.AdamEve.object.searchInfo;
-import org.AdamEve.object.user;
+import org.AdamEve.object.*;
 import org.AdamEve.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,8 +36,11 @@ public class profileController {
 		model.addAttribute("likedTo", likedTo);
 		model.addAttribute("allDates", dates);
 		model.addAttribute("allReferrals", referrals);
+		System.out.println(foundProfile.getSsn() +"found");
+		System.out.println(((user)session.getAttribute("currentUser")).getSsn() + "current");
 		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
 			session.setAttribute("activeProfile", profileID);
+			model.addAttribute("profinfo", new profileInfo());
 			return "profile";
 		}
 		else {

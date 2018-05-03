@@ -57,7 +57,7 @@ public class userrepository {
 
 			jdbcTemplate.queryForObject(selectPPP, new RowMapper<user>(){
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
-					tempuser.setPpp(rs.getString("PPP"));
+					tempuser.setppp(rs.getString("PPP"));
 					return tempuser;
 				}
 			});
@@ -99,7 +99,7 @@ public class userrepository {
 
 			jdbcTemplate.queryForObject(selectPPP, new RowMapper<user>(){
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
-					tempuser.setPpp(rs.getString("PPP"));
+					tempuser.setppp(rs.getString("PPP"));
 					return tempuser;
 				}
 			});
@@ -313,7 +313,7 @@ public class userrepository {
                 newuser.getSsn(), newuser.getPassword(),newuser.getFirstName(),newuser.getLastName(),newuser.getStreet(),newuser.getCity(),newuser.getState(),
                 newuser.getZipcode(),newuser.getEmail(),newuser.getTelephone());
         jdbcTemplate.update("INSERT INTO User(SSN,PPP,Rating,DateOfLastAct)" + "VALUES (?, ?, ?, ?)",
-                newuser.getSsn(), newuser.getPpp(), newuser.getRating(),newuser.getLastAct());
+                newuser.getSsn(), newuser.getppp(), newuser.getRating(),newuser.getLastAct());
         String getMax = "SELECT MAX(AcctNum) FROM Account";
         Integer acctnum = jdbcTemplate.queryForObject(getMax, Integer.class) + 1;
         jdbcTemplate.update("INSERT INTO Account(OwnerSSN, CardNumber, AcctNum, AcctCreationDate)" + 
@@ -477,8 +477,15 @@ public class userrepository {
 				"where SSN= ?",
         reginfo.getPassword(),reginfo.getFirstName(),reginfo.getLastName(),reginfo.getStreet(),reginfo.getCity(),reginfo.getState(),
         reginfo.getZipcode(),reginfo.getEmail(),reginfo.getTelephone(), reginfo.getSsn());
-		//jdbcTemplate.update("update User set PPP = ? + where SSN = ?", reginfo.getppp(), reginfo.getSsn());
+		jdbcTemplate.update("update User set PPP = ? where SSN = ?", reginfo.getppp(), reginfo.getSsn());
 		jdbcTemplate.update("update Account set CardNumber = ? where OwnerSSN = ?", reginfo.getccard(), reginfo.getSsn());
+	}
+
+	public void updateProfile(profileInfo profinfo) {
+		jdbcTemplate.update("update Profile set Age = ?, DatingAgeRangeStart = ?, DatingAgeRangeEnd = ?, DatingGeoRange = ?, Height = ?, Weight =?, HairColor=?, Hobbies=?" +
+						"where ProfileID= ?",
+				profinfo.getAge(),profinfo.getRangeStart(),profinfo.getRangeEnd(),profinfo.getGeoRange(), profinfo.getHeight(),
+				profinfo.getWeight(),profinfo.getHairColor(),profinfo.getHobbies(), profinfo.getProfileID());
 	}
 
 	public void addProfile(profileInfo profileInfo) {
@@ -573,7 +580,7 @@ public class userrepository {
 	}
 
 	public void addLike(String liker, String likee) {
-		jdbcTemplate.update("INSERT INTO Likes(Liker, Likee, Date_Time)" + 
+		jdbcTemplate.update("INSERT INTO Likes(Liker, Likee, Date_Time)" +
 				"VALUES (?, ?, ?)",
 				liker, likee, LocalDateTime.now());
 	}

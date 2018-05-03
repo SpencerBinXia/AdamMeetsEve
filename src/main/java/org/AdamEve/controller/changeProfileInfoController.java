@@ -1,31 +1,29 @@
 package org.AdamEve.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
-import org.AdamEve.object.user;
 import org.AdamEve.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping("/viewprofile/{profileID}/addLike")
-public class addLikeController {
+@RequestMapping("/changeprofinfo")
+public class changeProfileInfoController {
 	
 	@Autowired
-	private userService userService;
-
+	private userService service;
+	
 	@RequestMapping(method=RequestMethod.POST)
-	public String createProfile(@PathVariable("profileID") String profileID, HttpSession session, Model model)
+	public String changeInfo(@ModelAttribute profileInfo profinfo, HttpSession session)
 	{
-		userService.addLike((String)session.getAttribute("activeProfile"), profileID);
-		return "redirect:/viewprofile/" + profileID;
+		service.changeProfInfo(profinfo, session);
+		return "redirect:/viewprofile/" + profinfo.getProfileID();
 	}
+
 	
 }

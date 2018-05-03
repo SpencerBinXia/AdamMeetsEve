@@ -30,7 +30,6 @@ public class registerController {
 	public String registerUser(@ModelAttribute registerInfo reginfo, HttpSession session)
 	{
 		service.registerUser(reginfo, session);
-		System.out.println(reginfo.getFirstName());
 		return "redirect:/viewuser/" + reginfo.getSsn();
 	}
 	

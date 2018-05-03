@@ -32,19 +32,86 @@
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
     <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
+    <ul class="navbar-nav mr-auto">
+        Current Profile: <span th:utext="${session.activeProfile}"></span>
+    </ul>
     <ul class="navbar-nav ml-auto">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Find All Users</button>
-        <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Advanced Search</button>
+        <a th:href="@{/displayall}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Find All Users</a>
+        <button class="btn btn-outline-success my-2 my-sm-0 barBtn" id="advSearchBtn" data-toggle="modal" data-target="#searchModal">Advanced Search</button>
+        <a th:href="@{'/viewprofile/' + ${session.activeProfile}}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Return To Your Profile</a>
         <form action="logout" th:action="@{/logout}" method="post">
-            <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
+            <button type="submit" class="btn btn-info btn-md barBtn">Logout</button>
         </form>
     </ul>
 </nav>
 
+<div id="searchModal" class="modal-fade" style="z-index:9999;" role="dialog";>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="search" th:action="@{/searchresult}" th:object="${searchParameters}" method="post">
+            <p>Advanced Search. Who Are You Looking For?</p><br>
+            <table div id="infoTbl" style="width:100%">
+                <tr>
+                    <th>Min Age: <input type="text" div id="textBox" placeholder="Age Range Start" th:field="*{ageStart}"/></th>
+                    <th>Max Age: <input type="text" div id="textBox" placeholder="Age Range End" th:field="*{ageEnd}"/></th>
+                </tr>
+                <tr>
+                    <th>Gender:<input type="text" div id="textBox" placeholder="Gender" th:field="*{gender}"/></th>
+                </tr>
+                <tr>
+                    <th>Min Height: <input type="text" div id="textBox" placeholder="Min Height" th:field="*{heightstart}"/></th>
+                    <th>Max Height: <input type="text" div id="textBox" placeholder="Max Height" th:field="*{heightend}"/></th>
+
+                </tr>
+                <tr>
+                    <th>Min Weight: <input type="text" div id="textBox" placeholder="Min Weight" th:field="*{weightstart}"/></th>
+                    <th>Max Weight: <input type="text" div id="textBox" placeholder="Max Weight" th:field="*{weightend}"/></th>
+                </tr>
+                <tr>
+                    <th>Hair color: <input type="text" div id="textBox" placeholder="Hair color" th:field="*{hairColor}"/></th>
+                </tr>
+                <tr>
+                    <th><input type="submit"/></th>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 </div>
-<h1>Welcome To <span th:utext="${foundProfile.getProfileID()}"></span>'s profile page!</h1><br><br>
 
+</div>
+<h1>You are viewing <span th:utext="${foundProfile.getProfileID()}"></span>'s profile page.
+    <br>
+    <table>
+        <tr>
+            <th>
+    <button class="btn btn-default profBtn" div id="dateButton">
+        <img src="https://cdn4.iconfinder.com/data/icons/signicon-pt-1-1/100/049_-_meet-256.png" div id="buttonimg">
+    </button>
+            </th>
+            <th>
+    <form action="like" th:action="@{${foundProfile.getProfileID()} + '/addLike'}" method="post">
+        <button type="submit" class="btn btn-default profBtn" div id="likeButton" onclick="likeAlert()">
+            <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" div id="buttonimg">
+        </button>
+    </form>
+            </th>
+            <th>
+    <button class="btn btn-default profBtn" div id="referButton">
+        <img src="http://www.iconsplace.com/icons/preview/orange/arrow-256.png" div id="buttonimg">
+    </button>
+            </th>
+        </tr>
+    </table>
+</h1><br><br>
+
+<script>
+    function likeAlert(){
+        alert("Like added!");
+    }
+</script>
 
 <div class="container">
 
@@ -59,100 +126,111 @@
             Height: <span th:utext="${foundProfile.getHeight()}"></span><br>
             Weight: <span th:utext="${foundProfile.getWeight()}"></span><br>
             Hair Color: <span th:utext="${foundProfile.getHairColor()}"></span><br>
+            Preferred Dating Age Range: <span th:utext="${foundProfile.getRangestart()}"></span> - <span th:utext="${foundProfile.getRangeend()}"></span><br>
+            preferred Dating Location Range: <span th:utext="${foundProfile.getGeorange()}"></span>  miles<br>
+            Hobbies: <span th:utext="${foundProfile.getHobbies()}"></span><br>
         </p>
         <hr size="2">
         <p>
         <div>
+            <span th:utext="${foundProfile.getProfileID()}"></span>'s Dates:
+            <button class="btn btn-default" data-toggle="collapse" data-target="#dates" div id="likesButton">
+                <img src="https://cdn4.iconfinder.com/data/icons/signicon-pt-1-1/100/049_-_meet-256.png" div id="buttonimg">
+            </button>
+        </div>
+        <div id="dates" class="collapse">
+            <table div id="infoTbl">
+                <tr>
+                    <th>See <span th:utext="${foundProfile.getProfileID()}"></span>'s dates.</th>
+                </tr>
+                <tr>
+                    <b>
+                        <th>Profile 1</th>
+                        <th>Profile 2</th>
+                        <th>Customer Representative</th>
+                        <th>Booking Fee</th>
+                        <th>Date Location</th>
+                        <th>Profile 1's Rating</th>
+                        <th>Profile 2's Rating</th>
+                        <th>Date's Time and Date</th>
+                        <th>Date Comments</th>
+                    </b>
+                </tr>
+                <tr th:each="profile: ${allDates}">
+                    <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID1()}}"><span th:text="${profile.getProfileID1()}"></span></a></td>
+                    <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID2()}}"><span th:text="${profile.getProfileID2()}"></span></a></td>
+                    <td><span th:text="${profile.getCustRep()}"></span></a></td>
+                    <td><span th:text="${profile.getBookFee()}"></span></a></td>
+                    <td><span th:text="${profile.getLocation()}"></span></a></td>
+                    <td><span th:text="${profile.getUser1rate()}"></span></a></td>
+                    <td><span th:text="${profile.getUser2rate()}"></span></a></td>
+                    <td><span th:text="${profile.getDateTime()}"></span></a></td><br>
+                    <td><span th:text="${profile.getComments()}"></span></a></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <hr size="2">
             <span th:utext="${foundProfile.getProfileID()}"></span>'s Likes:
             <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
-                <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">
+                <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" div id="buttonimg">
             </button>
         </div>
         <div id="likes" class="collapse">
-            Likes placeholder
+            <table div id="infoTbl">
+                <tr>
+                    <th>Liked To: </th>
+                </tr>
+                <tr th:each="profile: ${likedBy}">
+                    <td><a th:href="@{'/viewprofile/'+ ${profile.getLikee()}}"><span th:text="${profile.getLikee()}"></span></a></td>
+                    <td><span th:text="${profile.getTimeLike()}"></span></a></td>
+                </tr>
+                <tr>
+                    <th>Liked By: </th>
+                </tr>
+                <tr th:each="profile: ${likedTo}">
+                    <td><a th:href="@{'/viewprofile/'+ ${profile.getLiker()}}"><span th:text="${profile.getLiker()}"></span></a></td>
+                    <td><span th:text="${profile.getTimeLike()}"></span></a></td>
+                </tr>
+            </table>
         </div>
         <hr size="2">
         <div>
             <span th:utext="${foundProfile.getProfileID()}"></span>'s Referrals:
-            <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
-                <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">
+            <button class="btn btn-default" data-toggle="collapse" data-target="#referrals" div id="likesButton">
+                <img src="http://www.iconsplace.com/icons/preview/orange/arrow-256.png" div id="buttonimg">
             </button>
         </div>
-        <div id="likes" class="collapse">
-            Likes placeholder
+        <div id="referrals" class="collapse">
+            <table div id="infoTbl">
+                <tr>
+                    <th>See <span th:utext="${foundProfile.getProfileID()}"></span>'s referrals.</th>
+                </tr>
+                </tr>
+                <tr th:each="profile: ${allReferrals}">
+                    <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID1()}}"><span th:text="${profile.getProfileID1()}"></span></a> referred </td>
+                    <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID2()}}"><span th:text="${profile.getProfileID2()}"></span></a> to </td>
+                    <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID3()}}"><span th:text="${profile.getProfileID3()}"></span></a> on </td>
+                    <td><span th:text="${profile.getReferredDate()}"></span>.</td>
+                </tr>
+            </table>
         </div>
-
-
-        <!--
-                <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
-                <table div id="infoTbl">
-                    <tr>
-                        <th><input type="text" div id="textBox" placeholder="New Profile ID" th:field="*{ProfileID}"/> Your New Profile ID</th>
-                    </tr>
-                    <tr>
-                        <th><input type="text" div id="textBox"placeholder="Your Age" th:field="*{age}"/> Your Age </th>
-                    </tr>
-                    <tr>
-                        <th><input type="text" div id="textBox" placeholder="Youngest Age You're Interested In Dating" th:field="*{RangeStart}"/>
-                            <input type="text" div id="textBox" placeholder="Oldest Age You're Interested In Dating" th:field="*{RangeEnd}"/>
-                            Youngest to Oldest Ages You'd Like to Date (ex: 20, 30)</th>
-                    </tr>
-                    <tr>
-                        <th><input type="text" div id="textBox" placeholder="Distance (in miles) you're willing to go for dates" th:field="*{GeoRange}"/>
-                            Distance In Miles You're Interested In For Dating (ex: 50)
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <select th:field="*{Gender}">
-                                <div>
-                                    <option disabled="true" selected="selected" value="">Your Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </div>
-                            </select>
-                            Your Gender:
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><input type="text" div id="textBox" placeholder="Height (as decimal. 5'11 = 5.11)" th:field="*{Height}"/>
-                            Your Height (in decimals. If you're 5'8", type 5.8)
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><input type="text" div id="textBox" placeholder="Weight in pounds" th:field="*{Weight}"/>
-                            Your Weight in Pounds (ex: 160)
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><input type="text" div id="textBox" placeholder="Hair color" th:field="*{HairColor}"/>
-                            Your Hair Color (ex: Red)
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><input type="text" div id="textBox" placeholder="Enter your hobbies!" th:field="*{Hobbies}"/>
-                            Your Hobbies!
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><input type="submit" div id="button"/></th>
-                    </tr>
-                </table>
-                -->
         </p>
-        <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->
     </div>
 
 
 
 </div><!-- /.container -->
 
+<script>
+
+</script>
 
 <script>
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('searchModal');
 
     // Get the button that opens the modal
-    var btn = document.getElementById("loginBtn");
+    var btn = document.getElementById("advSearchBtn");
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -164,7 +242,10 @@
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        modal.style.display = "none";
+        $("#searchModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $("#searchModal").hide();
+        $("#searchModal").removeData();
     }
 
     // When the user clicks anywhere outside of the modal, close it

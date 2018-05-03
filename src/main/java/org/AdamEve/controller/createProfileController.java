@@ -1,5 +1,7 @@
 package org.AdamEve.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
 import org.AdamEve.service.userService;
@@ -19,10 +21,11 @@ public class createProfileController {
 	private userService userService;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String createProfile(@ModelAttribute profileInfo ProfileInfo, Model model)
+	public String createProfile(@ModelAttribute profileInfo ProfileInfo, HttpSession session, Model model)
 	{
 		userService.createProfile(ProfileInfo);
 
+		session.setAttribute("activeProfile", ProfileInfo.getProfileID());
 		return "redirect:/viewprofile/" + ProfileInfo.getProfileID();
 	}
 	

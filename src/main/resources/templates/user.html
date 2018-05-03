@@ -33,8 +33,6 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
   <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
   <ul class="navbar-nav ml-auto">
-      <a th:href="@{/displayall}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Find All Users</a>
-      <button class="btn btn-outline-success my-2 my-sm-0 barBtn" id="advSearchBtn" data-toggle="modal" data-target="#searchModal">Advanced Search</button>
       <form action="logout" th:action="@{/logout}" method="post">
       <button type="submit" class="btn btn-info btn-md barBtn">Logout</button>
       </form>
@@ -44,43 +42,6 @@
 
 </div>
 <h1>Welcome To Your User Page, <span th:utext="${foundUser.getFirstName()}"></span> <span th:utext="${foundUser.getLastName()}"></span>!</h1><br><br>
-
-<!-- Modal -->
-<div id="searchModal" class="modal-fade" style="z-index:9999;" role="dialog";>
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <form action="search" th:action="@{/searchresult}" th:object="${searchParameters}" method="post">
-        <p>Advanced Search. Who Are You Looking For?</p><br>
-            <table div id="infoTbl" style="width:100%">
-                <tr>
-                    <th>Min Age: <input type="text" div id="textBox" placeholder="Age Range Start" th:field="*{ageStart}"/></th>
-                    <th>Max Age: <input type="text" div id="textBox" placeholder="Age Range End" th:field="*{ageEnd}"/></th>
-                </tr>
-                <tr>
-                    <th>Gender:<input type="text" div id="textBox" placeholder="Gender" th:field="*{gender}"/></th>
-                </tr>
-                <tr>
-                    <th>Min Height: <input type="text" div id="textBox" placeholder="Min Height" th:field="*{heightstart}"/></th>
-                    <th>Max Height: <input type="text" div id="textBox" placeholder="Max Height" th:field="*{heightend}"/></th>
-
-                </tr>
-                <tr>
-                    <th>Min Weight: <input type="text" div id="textBox" placeholder="Min Weight" th:field="*{weightstart}"/></th>
-                    <th>Max Weight: <input type="text" div id="textBox" placeholder="Max Weight" th:field="*{weightend}"/></th>
-                </tr>
-                <tr>
-                    <th>Hair color: <input type="text" div id="textBox" placeholder="Hair color" th:field="*{hairColor}"/></th>
-                </tr>
-                <tr>
-                    <th><input type="submit"/></th>
-                </tr>
-            </table>
-        </form>
-    </div>
-
-</div>
 
 <div class="container">
 
@@ -95,7 +56,7 @@
     <button type="btn-md" div id="button" data-toggle="collapse" data-target="#newprofile">Create A New Profile</button>
       <div id="newprofile" class="collapse">
           <form action="newprofile" th:action="@{createProfile}" th:object="${ProfileInfo}" method="post">
-              <input type="hidden" th:value="${foundUser.getSsn()}" th:field="*{OwnerSSN}"/>
+              <input type="hidden" th:value="${foundUser.getSsn()}" name="OwnerSSN" id="OwnerSSN"/>
               <table div id="infoTbl">
                   <tr>
                       <th><input type="text" div id="textBox" placeholder="New Profile ID" th:field="*{ProfileID}"/> Your New Profile ID</th>
@@ -154,18 +115,18 @@
 
           <hr size="2">
       <p class="lead"><b>Your user information:</b></p>
-      <b>Name:   </b> <th><span th:utext="${session.currentUser.getFirstName()}"></span></th> <th><span th:utext="${session.currentUser.getLastName()}"></span></th><br>
+      <b>Name:   </b> <th><span th:utext="${foundUser.getFirstName()}"></span></th> <th><span th:utext="${foundUser.getLastName()}"></span></th><br>
       <b>Address:   </b>
-      <th><span th:utext="${session.currentUser.getStreet()}"></span></th>,
-      <th><span th:utext="${session.currentUser.getCity()}"></span></th>,
-      <th><span th:utext="${session.currentUser.getState()}"></span></th>,
-      <th><span th:utext="${session.currentUser.getZipcode()}"></span></th><br><br>
+      <th><span th:utext="${foundUser.getStreet()}"></span></th>,
+      <th><span th:utext="${foundUser.getCity()}"></span></th>,
+      <th><span th:utext="${foundUser.getState()}"></span></th>,
+      <th><span th:utext="${foundUser.getZipcode()}"></span></th><br><br>
 
       <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view and edit your full user data.</button>
 
     <div id="userinfo" class="collapse">
         <form action="changeinfo" th:action="@{/changeinfo}" th:object="${foundUser}" method="post">
-            <input type="hidden" th:value="${foundUser.getSsn()}" th:field="*{ssn}"/>
+            <input type="hidden" th:value="${foundUser.getSsn()}" name="ssn" id="ssn"/>
             <table div id="infoTbl">
                 <tr>
                     <th><b>SSN: </b></th>
@@ -209,7 +170,7 @@
                 </tr>
                 <tr>
                     <th><b>User Class: </b></th>
-                    <th><span th:utext="${foundUser.getPpp()}"></span><br></th>
+                    <th><span th:utext="${foundUser.getppp()}"></span><br></th>
                     <th>
                         <select th:field="*{ppp}">
                             <div>

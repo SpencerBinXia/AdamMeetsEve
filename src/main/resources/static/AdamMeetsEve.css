@@ -67,6 +67,9 @@ th{
     color: #ffffff;
 }
 
+#btn row{
+    display: inline-block;
+}
 #myModal {
     display: none; /* Hidden by default */
     position: fixed;

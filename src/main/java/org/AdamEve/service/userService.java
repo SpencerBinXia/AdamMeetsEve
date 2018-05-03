@@ -54,6 +54,10 @@ public class userService {
 		userRepo.updateUser(reginfo);
 	}
 
+	public void changeProfInfo(profileInfo profinfo, HttpSession session) {
+		userRepo.updateProfile(profinfo);
+	}
+
 	public void createProfile(profileInfo profileInfo) {
 		userRepo.addProfile(profileInfo);
 	}
