@@ -6,6 +6,7 @@ import org.AdamEve.object.likes;
 import org.AdamEve.object.profile;
 import org.AdamEve.object.profileInfo;
 import org.AdamEve.object.registerInfo;
+import org.AdamEve.object.searchInfo;
 import org.AdamEve.object.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -138,6 +139,132 @@ public class userrepository {
 		}
 		return profiles;
 
+	}
+	
+	public profile findProfilesbyID(String profileID){
+		String selectProfile = "SELECT * FROM Profile WHERE ProfileID='" + profileID + "';";
+		profile tempprofile = new profile();
+		try {
+			jdbcTemplate.queryForObject(selectProfile, new RowMapper<profile>() {
+				public profile mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempprofile.setProfileID(rs.getString("ProfileID"));
+					tempprofile.setSsn(rs.getString("OwnerSSN"));
+					tempprofile.setAge(rs.getInt("Age"));
+					tempprofile.setRangestart(rs.getInt("DatingAgeRangeStart"));
+					tempprofile.setRangeend(rs.getInt("DatingAgeRangeEnd"));
+					tempprofile.setGeorange(rs.getInt("DatingGeoRange"));
+					tempprofile.setMalefemale(rs.getString("M_F"));
+					tempprofile.setHobbies(rs.getString("Hobbies"));
+					tempprofile.setHeight(rs.getDouble("Height"));
+					tempprofile.setWeight(rs.getInt("Weight"));
+					tempprofile.setHairColor(rs.getString("HairColor"));
+					tempprofile.setCreateDate(((Timestamp)rs.getObject("CreationDate")).toLocalDateTime());
+					tempprofile.setLastModDate(((Timestamp)rs.getObject("LastModDate")).toLocalDateTime());
+					return tempprofile;
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+		return tempprofile;
+
+	}
+	
+	public List<profile> findProfilesbySearch(searchInfo parameters){
+		List<List<String>> allsearchresults = new ArrayList<List<String>>();
+		if (parameters.getAgeStart() <= 0) {
+			String selectAgeStart = "SELECT * FROM Profile WHERE DatingAgeRangeStart>=" + parameters.getAgeStart() + ";";
+			List<String> inAgeStart = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectAgeStart);
+			for (Map row : rows) {
+				inAgeStart.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inAgeStart);
+		}
+		if (parameters.getAgeEnd() <= 0) {
+			String selectAgeEnd = "SELECT * FROM Profile WHERE DatingAgeRangeStart<=" + parameters.getAgeEnd() + ";";
+			List<String> inAgeEnd = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectAgeEnd);
+			for (Map row : rows) {
+				inAgeEnd.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inAgeEnd);
+		}
+		if (parameters.getGender() != null) {
+			String selectGender = "SELECT * FROM Profile WHERE Gender='" + parameters.getGender() + "';";
+			List<String> inGender = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectGender);
+			for (Map row : rows) {
+				inGender.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inGender);
+		}
+		if (parameters.getHeightstart() <= 0) {
+			String selectHeightStart = "SELECT * FROM Profile WHERE Height>=" + parameters.getHeightstart() + ";";
+			List<String> inHeightStart = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectHeightStart);
+			for (Map row : rows) {
+				inHeightStart.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inHeightStart);
+		}
+		if (parameters.getHeightend() <= 0) {
+			String selectHeightEnd = "SELECT * FROM Profile WHERE Height<=" + parameters.getHeightend() + ";";
+			List<String> inHeightEnd = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectHeightEnd);
+			for (Map row : rows) {
+				inHeightEnd.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inHeightEnd);
+		}
+		if (parameters.getWeightstart() <= 0) {
+			String selectWeightStart = "SELECT * FROM Profile WHERE Weight>=" + parameters.getWeightstart() + ";";
+			List<String> inWeightStart = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectWeightStart);
+			for (Map row : rows) {
+				inWeightStart.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inWeightStart);
+		}
+		if (parameters.getWeightend() <= 0) {
+			String selectWeightEnd = "SELECT * FROM Profile WHERE Weight<=" + parameters.getWeightend() + ";";
+			List<String> inWeightEnd = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectWeightEnd);
+			for (Map row : rows) {
+				inWeightEnd.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inWeightEnd);
+		}
+		if (parameters.getHairColor() != null) {
+			String selectHairColor = "SELECT * FROM Profile WHERE HairColor='" + parameters.getHairColor() + "';";
+			List<String> inHairColor = new ArrayList<String>();
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectHairColor);
+			for (Map row : rows) {
+				inHairColor.add((String)row.get("ProfileID"));
+			}
+			allsearchresults.add(inHairColor);
+		}
+		if (allsearchresults.isEmpty()){
+			return null;
+		}
+		else {
+			List<profile> finalreturn = new ArrayList<profile>();
+			List<String> first = allsearchresults.get(0);
+			for (String profileID : first) {
+				boolean toAdd = true;
+				for (List<String> inOrder : allsearchresults) {
+					if (inOrder.contains(profileID)){
+						toAdd = false;
+					}
+				}
+				if (toAdd) {
+					finalreturn.add(findProfilebyID(profileID));
+				}
+			}
+			return finalreturn;
+		}
 	}
 	
 	public List<profile> searchByPPP(int PPP){
