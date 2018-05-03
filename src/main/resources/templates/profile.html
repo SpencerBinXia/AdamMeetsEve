@@ -63,6 +63,28 @@
         <hr size="2">
         <p>
             <div>
+                <span th:utext="${foundProfile.getProfileID()}"></span>'s Dates:
+                <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
+                    <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">
+                </button>
+            </div>
+            <div id="likes" class="collapse">
+                <!--
+                <table div id="infoTbl">
+                    <tr>
+                    </tr>
+                    <tr th:each="profile: ${searchResults}">
+                        <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID()}}"><span th:text="${profile.getProfileID()}"></span></a></td>
+                        <td th:text="${profile.getAge()}"></td>
+                        <td th:text="${profile.getMalefemale()}"></td>
+                        <td th:text="${profile.getWeight()}"></td>
+                        <td th:text="${profile.getHairColor()}"></td>
+
+                    </tr>
+                </table>
+                -->
+            </div>
+            <div>
             <span th:utext="${foundProfile.getProfileID()}"></span>'s Likes:
             <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
                 <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">

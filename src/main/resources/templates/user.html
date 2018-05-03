@@ -51,36 +51,33 @@
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
+        <form action="search" th:action="@{/searchresult}" th:object="${searchParameters}" method="post">
         <p>Advanced Search. Who Are You Looking For?</p><br>
             <table div id="infoTbl" style="width:100%">
                 <tr>
-                    <th>ProfileID: </th>
-                   <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
+                    <th>Age Range: <input type="text" div id="textBox" placeholder="Age Range Start" th:field="*{ageStart}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Age Range End" th:field="*{ageEnd}"/></th>
                 </tr>
                 <tr>
-                    <th>Gender:</th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
+                    <th>Gender:<input type="text" div id="textBox" placeholder="Gender" th:field="*{gender}"/></th>
                 </tr>
                 <tr>
-                    <th>Age: </th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
+                    <th>Height range: <input type="text" div id="textBox" placeholder="Min Height" th:field="*{heightstart}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Max Height" th:field="*{heightend}"/></th>
+
                 </tr>
                 <tr>
-                    <th>Height:</th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
+                    <th>Weight range: <input type="text" div id="textBox" placeholder="Min Weight" th:field="*{weightstart}"/></th>
+                    <th><input type="text" div id="textBox" placeholder="Max Weight" th:field="*{weightend}"/></th>
                 </tr>
                 <tr>
-                    <th>Weight: </th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
+                    <th>Hair color: <input type="text" div id="textBox" placeholder="Hair color" th:field="*{hairColor}"/></th>
                 </tr>
                 <tr>
-                    <th>Hair Color:</th>
-                    <!-- <th><input type="text" div id="textBox" title="emailentry" th:field=""/></th> -->
-                </tr>
-                <tr>
-                   <!-- <th><input type="submit"/></th> -->
+                    <th><input type="submit"/></th>
                 </tr>
             </table>
+        </form>
     </div>
 
 </div>

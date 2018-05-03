@@ -1,5 +1,6 @@
 package org.AdamEve.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,6 +39,10 @@ public class userService {
 
 	public List<profile> searchProfiles(searchInfo parameters){
 		List<profile> profiles = userRepo.findProfilesbySearch(parameters);
+		if (profiles == null)
+		{
+			profiles = new ArrayList<profile>();
+		}
 		return profiles;
 	}
 

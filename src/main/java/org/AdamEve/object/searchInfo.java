@@ -1,13 +1,13 @@
 package org.AdamEve.object;
 
 public class searchInfo {
-	
+
 	private int ageStart ;
 	private int ageEnd;
 	private int geoRange;
 	private String gender;
-	private int heightstart;
-	private int heightend;
+	private double heightstart;
+	private double heightend;
 	private int weightstart;
 	private int weightend;
 	private String hairColor;
@@ -42,16 +42,16 @@ public class searchInfo {
 	public void setHairColor(String hairColor) {
 		this.hairColor = hairColor;
 	}
-	public int getHeightstart() {
+	public double getHeightstart() {
 		return heightstart;
 	}
-	public void setHeightstart(int heightstart) {
+	public void setHeightstart(double heightstart) {
 		this.heightstart = heightstart;
 	}
-	public int getHeightend() {
+	public double getHeightend() {
 		return heightend;
 	}
-	public void setHeightend(int heightend) {
+	public void setHeightend(double heightend) {
 		this.heightend = heightend;
 	}
 	public int getWeightstart() {

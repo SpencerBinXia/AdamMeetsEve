@@ -53,10 +53,11 @@
         <table div id="infoTbl">
       <tr>
       </tr>
-        <tr th:each="profile: ${allProfiles}">
+        <tr th:each="profile: ${searchResults}">
             <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID()}}"><span th:text="${profile.getProfileID()}"></span></a></td>
             <td th:text="${profile.getAge()}"></td>
             <td th:text="${profile.getMalefemale()}"></td>
+            <td th:text="${profile.getHeight()}"></td>
             <td th:text="${profile.getWeight()}"></td>
             <td th:text="${profile.getHairColor()}"></td>
 

@@ -174,8 +174,8 @@ public class userrepository {
 	
 	public List<profile> findProfilesbySearch(searchInfo parameters){
 		List<List<String>> allsearchresults = new ArrayList<List<String>>();
-		if (parameters.getAgeStart() <= 0) {
-			String selectAgeStart = "SELECT * FROM Profile WHERE DatingAgeRangeStart>=" + parameters.getAgeStart() + ";";
+		if (parameters.getAgeStart() > 0) {
+			String selectAgeStart = "SELECT * FROM Profile WHERE Age>=" + parameters.getAgeStart() + ";";
 			List<String> inAgeStart = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectAgeStart);
 			for (Map row : rows) {
@@ -183,8 +183,8 @@ public class userrepository {
 			}
 			allsearchresults.add(inAgeStart);
 		}
-		if (parameters.getAgeEnd() <= 0) {
-			String selectAgeEnd = "SELECT * FROM Profile WHERE DatingAgeRangeStart<=" + parameters.getAgeEnd() + ";";
+		if (parameters.getAgeEnd() > 0) {
+			String selectAgeEnd = "SELECT * FROM Profile WHERE Age<=" + parameters.getAgeEnd() + ";";
 			List<String> inAgeEnd = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectAgeEnd);
 			for (Map row : rows) {
@@ -192,8 +192,8 @@ public class userrepository {
 			}
 			allsearchresults.add(inAgeEnd);
 		}
-		if (parameters.getGender() != null) {
-			String selectGender = "SELECT * FROM Profile WHERE Gender='" + parameters.getGender() + "';";
+		if (! (parameters.getGender().equals("") )) {
+			String selectGender = "SELECT * FROM Profile WHERE M_F='" + parameters.getGender() + "';";
 			List<String> inGender = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectGender);
 			for (Map row : rows) {
@@ -201,8 +201,9 @@ public class userrepository {
 			}
 			allsearchresults.add(inGender);
 		}
-		if (parameters.getHeightstart() <= 0) {
-			String selectHeightStart = "SELECT * FROM Profile WHERE Height>=" + parameters.getHeightstart() + ";";
+		System.out.println(parameters.getHeightstart());
+		if (parameters.getHeightstart() > 0) {
+			String selectHeightStart = "SELECT * FROM" + " Profile WHERE Height>=" + parameters.getHeightstart() + ";";
 			List<String> inHeightStart = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectHeightStart);
 			for (Map row : rows) {
@@ -210,7 +211,7 @@ public class userrepository {
 			}
 			allsearchresults.add(inHeightStart);
 		}
-		if (parameters.getHeightend() <= 0) {
+		if (parameters.getHeightend() > 0) {
 			String selectHeightEnd = "SELECT * FROM Profile WHERE Height<=" + parameters.getHeightend() + ";";
 			List<String> inHeightEnd = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectHeightEnd);
@@ -219,7 +220,7 @@ public class userrepository {
 			}
 			allsearchresults.add(inHeightEnd);
 		}
-		if (parameters.getWeightstart() <= 0) {
+		if (parameters.getWeightstart() > 0) {
 			String selectWeightStart = "SELECT * FROM Profile WHERE Weight>=" + parameters.getWeightstart() + ";";
 			List<String> inWeightStart = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectWeightStart);
@@ -228,7 +229,7 @@ public class userrepository {
 			}
 			allsearchresults.add(inWeightStart);
 		}
-		if (parameters.getWeightend() <= 0) {
+		if (parameters.getWeightend() > 0) {
 			String selectWeightEnd = "SELECT * FROM Profile WHERE Weight<=" + parameters.getWeightend() + ";";
 			List<String> inWeightEnd = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectWeightEnd);
@@ -237,7 +238,7 @@ public class userrepository {
 			}
 			allsearchresults.add(inWeightEnd);
 		}
-		if (parameters.getHairColor() != null) {
+		if (!(parameters.getHairColor().equals(""))) {
 			String selectHairColor = "SELECT * FROM Profile WHERE HairColor='" + parameters.getHairColor() + "';";
 			List<String> inHairColor = new ArrayList<String>();
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectHairColor);
@@ -255,14 +256,16 @@ public class userrepository {
 			for (String profileID : first) {
 				boolean toAdd = true;
 				for (List<String> inOrder : allsearchresults) {
-					if (inOrder.contains(profileID)){
+					if (!(inOrder.contains(profileID))){
 						toAdd = false;
 					}
 				}
 				if (toAdd) {
+					System.out.println(profileID);
 					finalreturn.add(findProfilebyID(profileID));
 				}
 			}
+
 			return finalreturn;
 		}
 	}
