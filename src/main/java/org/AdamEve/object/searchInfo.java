@@ -6,8 +6,10 @@ public class searchInfo {
 	private int ageEnd;
 	private int geoRange;
 	private String gender;
-	private int height;
-	private int weight;
+	private int heightstart;
+	private int heightend;
+	private int weightstart;
+	private int weightend;
 	private String hairColor;
 	
 	public int getAgeStart() {
@@ -34,23 +36,35 @@ public class searchInfo {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getHeight() {
-		return height;
-	}
-	public void setHeight(int height) {
-		this.height = height;
-	}
-	public int getWeight() {
-		return weight;
-	}
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
 	public String getHairColor() {
 		return hairColor;
 	}
 	public void setHairColor(String hairColor) {
 		this.hairColor = hairColor;
+	}
+	public int getHeightstart() {
+		return heightstart;
+	}
+	public void setHeightstart(int heightstart) {
+		this.heightstart = heightstart;
+	}
+	public int getHeightend() {
+		return heightend;
+	}
+	public void setHeightend(int heightend) {
+		this.heightend = heightend;
+	}
+	public int getWeightstart() {
+		return weightstart;
+	}
+	public void setWeightstart(int weightstart) {
+		this.weightstart = weightstart;
+	}
+	public int getWeightend() {
+		return weightend;
+	}
+	public void setWeightend(int weightend) {
+		this.weightend = weightend;
 	}
 	
 }

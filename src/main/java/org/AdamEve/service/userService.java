@@ -37,7 +37,8 @@ public class userService {
 	}
 
 	public List<profile> searchProfiles(searchInfo parameters){
-		return null;
+		List<profile> profiles = userRepo.findProfilesbySearch(parameters);
+		return profiles;
 	}
 
 	public void changeUserInfo(registerInfo reginfo, HttpSession session) {
