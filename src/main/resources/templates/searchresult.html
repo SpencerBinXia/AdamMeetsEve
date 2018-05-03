@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/img/ameicon.png">
+
+    <title>Adam Meets Eve</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/user.css" rel="stylesheet">
+    <link href="/AdamMeetsEve.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap.js"></script>
+    <![endif]-->
+</head>
+
+<nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
+  <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
+  <ul class="navbar-nav ml-auto">
+      <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Advanced Search</button>
+      <form action="logout" th:action="@{/logout}" method="post">
+      <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
+      </form>
+  </ul>
+</nav>
+
+
+</div>
+<h1>Search Results Page</span>!</h1><br><br>
+
+
+<div class="container">
+
+  <div class="index-body">
+    <p class="lead">
+        <table div id="infoTbl">
+      <tr>
+      </tr>
+        <tr th:each="profile: ${allProfiles}">
+            <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID()}}"><span th:text="${profile.getProfileID()}"></span></a></td>
+            <td th:text="${profile.getAge()}"></td>
+            <td th:text="${profile.getMalefemale()}"></td>
+            <td th:text="${profile.getWeight()}"></td>
+            <td th:text="${profile.getHairColor()}"></td>
+
+        </tr>
+  </table>
+    </div><br>
+    </p>
+    <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->
+  </div>
+
+
+
+</div><!-- /.container -->
+
+
+<script>
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("loginBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/../../dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="/https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -27,8 +27,6 @@ public class profileController {
 		model.addAttribute("foundProfile", foundProfile);
 		searchInfo searchParameters = new searchInfo();
 		model.addAttribute("searchParameters", searchParameters);
-		System.out.println(foundProfile.getSsn() + foundProfile.getAge() + "profile");
-		System.out.println(((user)session.getAttribute("currentUser")).getSsn() + "session");
 		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
 			return "profile";
 		}

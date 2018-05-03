@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <link rel="icon" href="assets/img/ameicon.png">
 
-  <title>Adam Meets Eve</title>
+  <title>Adam Meets Eve | Welcome!</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,131 +18,85 @@
   <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="/profile.css" rel="stylesheet">
+  <link href="/index.css" rel="stylesheet">
   <link href="/AdamMeetsEve.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <script src="/https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
-  <script src="/assets/js/bootstrap.js"></script>
   <![endif]-->
+
+  <!-- Javascript function checks if session is loaded, then redirects to their page -->
+  <script th:inline="javascript">
+      /*<![CDATA[*/
+      var failedLog = [[${failedlogin}]];
+      if (failedLog == true){
+          alert("Login failed.");
+      }
+      var curuser = [[${session.currentUser}]];
+      if(curuser != null)
+      {
+          var ssn = curuser.ssn;
+          var url = "viewuser/" + ssn;
+          location.replace(url);
+      };
+      /*]]>*/
+  </script>
 </head>
+
+</div>
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
   <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
-  <ul class="navbar-nav ml-auto">
-    <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Find All Users</button>
-    <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Advanced Search</button>
-    <form action="logout" th:action="@{/logout}" method="post">
-      <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
-    </form>
-  </ul>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <button type="button" button id="loginBtn" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Login</button>
+      </li>
+    </ul>
+  </div>
 </nav>
 
+<!-- Modal -->
+<div id="myModal" class="modal-fade" style="z-index:9999;" role="dialog";>
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Returning Users Login.</p><br>
+    <form action="login" th:action="@{/login}" th:object="${info}" method="post">
+      <table style="width:100%">
+        <tr>
+          <th>E-mail:</th>
+          <th><input type="text" div id="textBox" title="emailentry" th:field="*{email}"/></th>
+        </tr>
+        <tr>
+          <th>Password:</th>
+          <th><input type="text" div id="textBox" title="passwordentry" th:field="*{password}"/></th>
+        </tr>
+        <tr>
+          <th><input type="submit"/></th>
+        </tr>
+      </table>
+    </form>
+  </div>
 
 </div>
-<h1>Welcome To Your profile page, <span th:utext="${foundProfile.getProfileID()}"></span>!</h1><br><br>
 
 
 <div class="container">
 
   <div class="index-body">
-    <p class="lead">
-      About <span th:utext="${foundProfile.getProfileID()}"></span>:
-    </p>
-    <hr size="2">
-    <p>
-      Age: <span th:utext="${foundProfile.getAge()}"></span><br>
-      Gender: <span th:utext="${foundProfile.getMalefemale()}"></span><br>
-      Height: <span th:utext="${foundProfile.getHeight()}"></span><br>
-      Weight: <span th:utext="${foundProfile.getWeight()}"></span><br>
-      Hair Color: <span th:utext="${foundProfile.getHairColor()}"></span><br>
-    </p>
-    <hr size="2">
-    <p>
-    <div>
-      <span th:utext="${foundProfile.getProfileID()}"></span>'s Likes:
-      <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
-        <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">
-      </button>
-    </div>
-    <div id="likes" class="collapse">
-      Likes placeholder
-    </div>
-    <hr size="2">
-    <div>
-      <span th:utext="${foundProfile.getProfileID()}"></span>'s Referrals:
-      <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
-        <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">
-      </button>
-    </div>
-    <div id="likes" class="collapse">
-      Likes placeholder
-    </div>
+    <h1>Welcome To Adam Meets Eve.</h1><br>
+    <img
+            src = "https://media.ldscdn.org/images/media-library/gospel-art/old-testament/garden-of-eden-clawson-art-37727-print.jpg?download=true"
+            alt ="Not Found"
+            style="width:100%; border-radius: 90%;">
+    <p class="lead"><br> Your #1 dating site for Christian mingling. Click below to enter paradise.</p>
+    <button type="button" class="btn btn-dark btn-lg" div id="button" onclick="location.href='/register'">Register</button>
 
-
-    <!--
-            <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
-            <table div id="infoTbl">
-                <tr>
-                    <th><input type="text" div id="textBox" placeholder="New Profile ID" th:field="*{ProfileID}"/> Your New Profile ID</th>
-                </tr>
-                <tr>
-                    <th><input type="text" div id="textBox"placeholder="Your Age" th:field="*{age}"/> Your Age </th>
-                </tr>
-                <tr>
-                    <th><input type="text" div id="textBox" placeholder="Youngest Age You're Interested In Dating" th:field="*{RangeStart}"/>
-                        <input type="text" div id="textBox" placeholder="Oldest Age You're Interested In Dating" th:field="*{RangeEnd}"/>
-                        Youngest to Oldest Ages You'd Like to Date (ex: 20, 30)</th>
-                </tr>
-                <tr>
-                    <th><input type="text" div id="textBox" placeholder="Distance (in miles) you're willing to go for dates" th:field="*{GeoRange}"/>
-                        Distance In Miles You're Interested In For Dating (ex: 50)
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <select th:field="*{Gender}">
-                            <div>
-                                <option disabled="true" selected="selected" value="">Your Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </div>
-                        </select>
-                        Your Gender:
-                    </th>
-                </tr>
-                <tr>
-                    <th><input type="text" div id="textBox" placeholder="Height (as decimal. 5'11 = 5.11)" th:field="*{Height}"/>
-                        Your Height (in decimals. If you're 5'8", type 5.8)
-                    </th>
-                </tr>
-                <tr>
-                    <th><input type="text" div id="textBox" placeholder="Weight in pounds" th:field="*{Weight}"/>
-                        Your Weight in Pounds (ex: 160)
-                    </th>
-                </tr>
-                <tr>
-                    <th><input type="text" div id="textBox" placeholder="Hair color" th:field="*{HairColor}"/>
-                        Your Hair Color (ex: Red)
-                    </th>
-                </tr>
-                <tr>
-                    <th><input type="text" div id="textBox" placeholder="Enter your hobbies!" th:field="*{Hobbies}"/>
-                        Your Hobbies!
-                    </th>
-                </tr>
-                <tr>
-                    <th><input type="submit" div id="button"/></th>
-                </tr>
-            </table>
-            -->
-    </p>
-    <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->
   </div>
-
 
 
 </div><!-- /.container -->
@@ -150,23 +104,21 @@
 
 <script>
     var modal = document.getElementById('myModal');
-
     // Get the button that opens the modal
     var btn = document.getElementById("loginBtn");
-
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-
     // When the user clicks on the button, open the modal
     btn.onclick = function() {
         modal.style.display = "block";
     }
-
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        modal.style.display = "none";
+        $("#myModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $("#myModal").hide();
+        $("#myModal").removeData();
     }
-
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
@@ -174,6 +126,7 @@
         }
     }
 </script>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -182,8 +135,5 @@
 <script src="/../../dist/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/../../assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="/https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="/https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
