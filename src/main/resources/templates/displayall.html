@@ -38,7 +38,7 @@
     <ul class="navbar-nav ml-auto">
         <a th:href="@{/displayall}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Find All Users</a>
         <button class="btn btn-outline-success my-2 my-sm-0 barBtn" id="advSearchBtn" data-toggle="modal" data-target="#searchModal">Advanced Search</button>
-        <a th:href="@{'/viewprofile/' + ${session.activeProfile}}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Return To Your Profile</a>
+
         <form action="logout" th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-info btn-md barBtn">Logout</button>
         </form>

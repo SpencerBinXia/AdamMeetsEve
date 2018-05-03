@@ -81,14 +81,14 @@
 
 </div>
 
-<h1><span th:utext="${foundEmployeePerson.getFirstName()}"></span> <span th:utext="${foundEmployeePerson.getLastName()}"></span>'s Employee Page.</h1><br><br>
-
+<h1><span th:utext="${foundEmployeePerson.getFirstName()}"></span> <span th:utext="${foundEmployeePerson.getLastName()}"></span>'s Employee Page.<br>
+    <span th:if="${isManager == true}">Manager Privileges.</span>
+</h1><br><br>
 
 <div class="container">
 
     <div class="index-body">
         <p class="lead">
-            <span th:if="${isManager == true}" th:text="Manager">Manager</span>
             <span th:utext="${foundEmployeePerson.getFirstName()}"></span> <span th:utext="${foundEmployeePerson.getLastName()}"></span>'s info.
         </p>
         <hr size="2">
@@ -154,6 +154,13 @@
                 </table>
             </form>
         </div><br>
+        <hr size="2">
+        <table>
+            <tr th:if="${isManager == true}" th:each="employee: ${allEmployees}">
+                <td>Employee SSN: </td>
+                <td><span th:text="${employee.getSsn()}"></span></td>
+            </tr>
+        </table>
         </p>
     </div>
 

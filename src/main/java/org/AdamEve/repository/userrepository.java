@@ -309,13 +309,13 @@ public class userrepository {
 	
 	public List<profile> searchByPPP(String PPP){
 		String selectSSN = "SELECT * FROM User WHERE PPP='" + PPP + "';";
-		List<Integer> userssn = new ArrayList<Integer>();
+		List<String> userssn = new ArrayList<String>();
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectSSN);
 		for (Map row : rows) {
-			userssn.add((int)row.get("Ssn"));
+			userssn.add((String)row.get("Ssn"));
 		}
 		List<profile> profiles = new ArrayList<profile>();
-		for (int ssn : userssn) {
+		for (String ssn : userssn) {
 			String selectProfiles = "SELECT * FROM Profile WHERE OwnerSSN='" + ssn + "';";
 			rows = jdbcTemplate.queryForList(selectProfiles);
 			for (Map row : rows) {
@@ -578,8 +578,8 @@ public class userrepository {
 
 	public List<profile> getAllProfiles() {
 		List<profile> SuperUsers = searchByPPP("Super-User");
-		List<profile> GoodUsers = searchByPPP("Super-User");
-		List<profile> UserUsers = searchByPPP("Super-User");
+		List<profile> GoodUsers = searchByPPP("Good-User");
+		List<profile> UserUsers = searchByPPP("User-User");
 		String selectProfiles = "SELECT * FROM Profile;";
 		List<profile> Profiles = new ArrayList<profile>();
 		for (profile x : SuperUsers) {
