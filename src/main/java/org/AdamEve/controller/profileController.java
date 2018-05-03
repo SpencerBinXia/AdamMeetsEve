@@ -1,7 +1,10 @@
 package org.AdamEve.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.AdamEve.object.profile;
 import org.AdamEve.object.searchInfo;
+import org.AdamEve.object.user;
 import org.AdamEve.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +21,18 @@ public class profileController {
 	private userService userService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String displayProfile(@PathVariable("profileID") String profileID, Model model)
+	public String displayProfile(@PathVariable("profileID") String profileID,HttpSession session, Model model)
 	{
 		profile foundProfile = userService.findProfile(profileID);
-		model.addAttribute("foundProfile", foundProfile);
-		searchInfo searchParameters = new searchInfo();
-		model.addAttribute("searchParameters", searchParameters);
-		return "profile";
+		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
+			model.addAttribute("foundProfile", foundProfile);
+			searchInfo searchParameters = new searchInfo();
+			model.addAttribute("searchParameters", searchParameters);
+			return "profile";
+		}
+		else {
+			return "redirect:/viewuser/" + ((user)session.getAttribute("currentUser")).getSsn();
+		}
 	}
 	
 }

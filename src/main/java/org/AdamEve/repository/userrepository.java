@@ -472,6 +472,47 @@ public class userrepository {
         employeeinfo.getPassword(),employeeinfo.getFirstName(),employeeinfo.getLastName(),employeeinfo.getStreet(),employeeinfo.getCity(),employeeinfo.getState(),
         employeeinfo.getZipcode(),employeeinfo.getEmail(),employeeinfo.getTelephone(), employeeinfo.getSsn());
 		jdbcTemplate.update("update Employee set Role = ?, HourlyRate= ? where SSN = ?", employeeinfo.getRole(), employeeinfo.getHourlyRate(), employeeinfo.getSsn());
+	}
+
+	public List<employee> getAllEmployees() {
+		String selectEmployee = "SELECT * FROM Employee;";
+		List<employee> Employees = new ArrayList<employee>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectEmployee);
+		for (Map row : rows) {
+			employee newemployee = new employee();
+			newemployee.setSsn((String)row.get("SSN"));
+			newemployee.setRole((String)row.get("Role"));
+			newemployee.setStartDate((Date)row.get("StartDate"));
+			newemployee.setHourlyRate((int)row.get("HourlyRate"));
+			Employees.add(newemployee);
+		}
+		
+		return Employees;
+	}
+
+	public List<profile> getAllProfiles() {
+		String selectProfiles = "SELECT * FROM Profile;";
+		List<profile> Profiles = new ArrayList<profile>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectProfiles);
+		for (Map row : rows) {
+			profile newprofile = new profile();
+			newprofile.setProfileID((String)row.get("ProfileID"));
+			newprofile.setSsn((String)row.get("OwnerSSN"));
+			newprofile.setAge((int)row.get("Age"));
+			newprofile.setRangestart((int)row.get("DatingAgeRangeStart"));
+			newprofile.setRangeend((int)row.get("DatingAgeRangeEnd"));
+			newprofile.setGeorange((int)row.get("DatingGeoRange"));
+			newprofile.setMalefemale((String)row.get("M_F"));
+			newprofile.setHobbies((String)row.get("Hobbies"));
+			newprofile.setHeight((double)row.get("Height"));
+			newprofile.setWeight((int)row.get("Weight"));
+			newprofile.setHairColor((String)row.get("HairColor"));
+			newprofile.setCreateDate(((Timestamp)row.get("CreationDate")).toLocalDateTime());
+			newprofile.setLastModDate(((Timestamp)row.get("LastModDate")).toLocalDateTime());
+			Profiles.add(newprofile);
+		}
+		
+		return Profiles;
 	}	
 	
 
