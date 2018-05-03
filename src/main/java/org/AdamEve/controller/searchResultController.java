@@ -14,7 +14,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/serchresult")
+@RequestMapping("/searchresult")
 public class searchResultController {
 	
 	@Autowired

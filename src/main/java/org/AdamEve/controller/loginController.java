@@ -23,14 +23,11 @@ public class loginController {
 	public String login(@ModelAttribute loginInfo info, HttpSession session, Model model)
 	{
 		if (service.loginUser(info, session) == true) {
-			model.addAttribute("failedlogin", false);
 			user tempuser = (user)session.getAttribute("currentUser");
 			return "redirect:/viewuser/" + tempuser.getSsn();
 		}
-		else {
-			model.addAttribute("failedlogin", true);
-			model.addAttribute("info", new loginInfo());
-			return "index";
+		else {;
+			return "redirect:/";
 		}
 	}
 	
