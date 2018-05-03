@@ -22,7 +22,8 @@ public class createProfileController {
 	public String createProfile(@ModelAttribute profileInfo ProfileInfo, Model model)
 	{
 		userService.createProfile(ProfileInfo);
-		return "profile";
+
+		return "redirect:/viewprofile/" + ProfileInfo.getProfileID();
 	}
 	
 }

@@ -54,7 +54,7 @@
       <tr>
       </tr>
         <tr th:each="profile: ${allProfiles}">
-            <td th:text="${profile.getProfileID()}"></td>
+            <td><a th:href="@{'/viewprofile/'+ ${profile.getProfileID()}}"><span th:text="${profile.getProfileID()}"></span></a></td>
             <td th:text="${profile.getAge()}"></td>
             <td th:text="${profile.getMalefemale()}"></td>
             <td th:text="${profile.getWeight()}"></td>

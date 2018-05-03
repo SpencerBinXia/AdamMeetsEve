@@ -24,10 +24,12 @@ public class profileController {
 	public String displayProfile(@PathVariable("profileID") String profileID,HttpSession session, Model model)
 	{
 		profile foundProfile = userService.findProfile(profileID);
+		model.addAttribute("foundProfile", foundProfile);
+		searchInfo searchParameters = new searchInfo();
+		model.addAttribute("searchParameters", searchParameters);
+		System.out.println(foundProfile.getSsn() + foundProfile.getAge() + "profile");
+		System.out.println(((user)session.getAttribute("currentUser")).getSsn() + "session");
 		if ((foundProfile.getSsn()).equals(((user)session.getAttribute("currentUser")).getSsn())) {
-			model.addAttribute("foundProfile", foundProfile);
-			searchInfo searchParameters = new searchInfo();
-			model.addAttribute("searchParameters", searchParameters);
 			return "profile";
 		}
 		else {

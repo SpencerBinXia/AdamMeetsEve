@@ -98,7 +98,7 @@
     <button type="btn-md" div id="button" data-toggle="collapse" data-target="#newprofile">Create A New Profile</button>
       <div id="newprofile" class="collapse">
           <form action="newprofile" th:action="@{createProfile}" th:object="${ProfileInfo}" method="post">
-              <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
+              <input type="hidden" th:value="${foundUser.getSsn()}" th:field="*{OwnerSSN}"/>
               <table div id="infoTbl">
                   <tr>
                       <th><input type="text" div id="textBox" placeholder="New Profile ID" th:field="*{ProfileID}"/> Your New Profile ID</th>
@@ -168,8 +168,12 @@
 
     <div id="userinfo" class="collapse">
         <form action="changeinfo" th:action="@{/changeinfo}" th:object="${foundUser}" method="post">
-            <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
+            <input type="hidden" th:value="${foundUser.getSsn()}" th:field="*{ssn}"/>
             <table div id="infoTbl">
+                <tr>
+                    <th><b>SSN: </b></th>
+                    <th><span th:utext="${foundUser.getSsn()}"></span></th>
+                </tr>
                 <tr>
                     <th><b>E-mail:</b></th>
                     <th><span th:utext="${foundUser.getEmail()}"></span></th>
@@ -178,7 +182,7 @@
                 <tr>
                     <th><b>Password:</b></th>
                     <th><span th:utext="${foundUser.getPassword()}"></span></th>
-                    <th><input type="text" div id="textBox" th:value="${session.foundUser.getPassword()}" placeholder="Change Password" th:field="*{password}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${foundUser.getPassword()}" placeholder="Change Password" th:field="*{password}"/></th>
                 </tr>
                 <tr>
                     <th><b>Name: </b></th>

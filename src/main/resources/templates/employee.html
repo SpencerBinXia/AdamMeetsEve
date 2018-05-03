@@ -43,7 +43,7 @@
 
 
 </div>
-<h1>Welcome To Your profile page, <span th:utext="${foundProfile.getProfileID()}"></span>!</h1><br><br>
+<h1><span th:utext="${foundEmployeePerson.getFirstName}"></span> <span th:utext="${foundEmployeePerson.getLastName}"></span>'s Employee Page.</h1><br><br>
 
 
 <div class="container">
@@ -53,38 +53,86 @@
             About <span th:utext="${foundProfile.getProfileID()}"></span>:
         </p>
         <hr size="2">
-        <p>
-        Age: <span th:utext="${foundProfile.getAge()}"></span><br>
-        Gender: <span th:utext="${foundProfile.getMalefemale()}"></span><br>
-        Height: <span th:utext="${foundProfile.getHeight()}"></span><br>
-        Weight: <span th:utext="${foundProfile.getWeight()}"></span><br>
-        Hair Color: <span th:utext="${foundProfile.getHairColor()}"></span><br>
-        </p>
+        <p class="lead"><b>Your user information:</b></p>
+        <b>Name:   </b> <th><span th:utext="${foundEmployeePerson.getFirstName()}"></span></th> <th><span th:utext="${foundEmployeePerson.getLastName()}"></span></th><br>
+        <b>Address:   </b>
+        <th><span th:utext="${foundEmployeePerson.getStreet()}"></span></th>,
+        <th><span th:utext="${foundEmployeePerson.getCity()}"></span></th>,
+        <th><span th:utext="${foundEmployeePerson.getState()}"></span></th>,
+        <th><span th:utext="${foundEmployeePerson.getZipcode()}"></span></th><br><br>
+
+        <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view and edit your full user data.</button>
+
+        <div id="userinfo" class="collapse">
+            <form action="changeinfo" th:action="@{/changeinfo}" th:object="${foundEmployeePerson}" method="post">
+                <input type="hidden" th:value="${foundEmployeePerson.getSsn()}" th:field="*{ssn}"/>
+                <table div id="infoTbl">
+                    <tr>
+                        <th><b>SSN: </b></th>
+                        <th><span th:utext="${foundEmployeePerson.getSsn()}"></span></th>
+                    </tr>
+                    <tr>
+                        <th><b>E-mail:</b></th>
+                        <th><span th:utext="${foundEmployeePerson.getEmail()}"></span></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getEmail()}" placeholder="Change E-mail" th:field="*{email}"/></th>
+                    </tr>
+                    <tr>
+                        <th><b>Password:</b></th>
+                        <th><span th:utext="${foundEmployeePerson.getPassword()}"></span></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getPassword()}" placeholder="Change Password" th:field="*{password}"/></th>
+                    </tr>
+                    <tr>
+                        <th><b>Name: </b></th>
+                        <th><span th:utext="${foundEmployeePerson.getFirstName()}"></span> <span th:utext="${foundEmployeePerson.getLastName()}"></span></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getFirstName()}" placeholder="Change First Name" th:field="*{firstName}"/></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getLastName()}" placeholder="Change Last Name" th:field="*{lastName}"/></th>
+                    </tr>
+                    <tr>
+                        <th><b>Address: </b></th>
+                        <th><span th:utext="${foundEmployeePerson.getStreet()}"></span>, <span th:utext="${foundEmployeePerson.getCity()}"></span>, <span th:utext="${foundEmployeePerson.getState()}"></span>, <th><span th:utext="${foundEmployeePerson.getZipcode()}"></span></th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getStreet()}" placeholder="Change Street" th:field="*{street}"/></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getCity()}" placeholder="Change City" th:field="*{city}"/></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getState()}"placeholder="Change State" th:field="*{state}"/></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getZipcode()}" placeholder="Change Zip Code" th:field="*{zipcode}"/></th>
+                    </tr>
+                    <tr>
+                        <th><b>Telephone #:</b></th>
+                        <th><span th:utext="${foundEmployeePerson.getTelephone()}"></span><br></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getTelephone()}" placeholder="Change Phone #" th:field="*{telephone}"/></th>
+                    </tr>
+                    <tr>
+                        <th><b>16-digit Credit Card:</b></th>
+                        <th><span th:utext="${foundEmployeePerson.getccard()}"></span></th>
+                        <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
+                    </tr>
+                    <tr>
+                        <th><b>User Class: </b></th>
+                        <th><span th:utext="${foundEmployeePerson.getPpp()}"></span><br></th>
+                        <th>
+                            <select th:field="*{ppp}">
+                                <div>
+                                    <option disabled="true" selected="selected" value="">Select</option>
+                                    <option value="User-User">Basic User (free!)</option>
+                                    <option value="Good-User">Good User ($50/yr)</option>
+                                    <option value="Super-User">Super User ($100/yr)</option>
+                                </div>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><input type="submit" div id="button" onclick="reloadPage()"/></th>
+                    </tr>
+                </table>
+            </form>
+        </div><br>
         <hr size="2">
-        <p>
-            <div>
-            <span th:utext="${foundProfile.getProfileID()}"></span>'s Likes:
-            <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
-                <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">
-            </button>
-            </div>
-            <div id="likes" class="collapse">
-            Likes placeholder
-            </div>
-        <hr size="2">
-        <div>
-            <span th:utext="${foundProfile.getProfileID()}"></span>'s Referrals:
-            <button class="btn btn-default" data-toggle="collapse" data-target="#likes" div id="likesButton">
-                <img src="https://macho-men.com/wp-content/uploads/2016/01/cropped-heart.png" style="max-width: 12px; max-height: 12px; width: auto; height: auto;">
-            </button>
-        </div>
-        <div id="likes" class="collapse">
-            Likes placeholder
-        </div>
+
 
 
             <!--
-                    <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
+                    <input type="hidden" th:value="${foundEmployeePerson.getSsn()}" name="ssn" id="ssn"/>
                     <table div id="infoTbl">
                         <tr>
                             <th><input type="text" div id="textBox" placeholder="New Profile ID" th:field="*{ProfileID}"/> Your New Profile ID</th>
