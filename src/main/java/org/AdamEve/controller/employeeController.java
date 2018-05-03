@@ -27,9 +27,11 @@ public class employeeController{
 	@RequestMapping(method=RequestMethod.GET)
 	public String displayProfile(@PathVariable("ssn") String employeeid, HttpSession session, Model model)
 	{
+		System.out.println("employee reached");
 		if (((user)session.getAttribute("currentUser")).getSsn().equals(employeeid)) {
 			employee foundEmployee = userService.findEmployee(employeeid);
 			model.addAttribute("foundEmployee", foundEmployee);
+			System.out.println(foundEmployee.getRole());
 			if (foundEmployee.getRole().equals("Manager")) {
 				model.addAttribute("isManager", true);
 				List<employee> allEmployees = userService.getEmployees();
@@ -39,7 +41,7 @@ public class employeeController{
 				model.addAttribute("isManager", false);
 				model.addAttribute("allEmployees", null);
 			}
-			user foundEmployeePerson = userService.findUser(employeeid);
+			user foundEmployeePerson = userService.findEmployeeUser(employeeid);
 			model.addAttribute("foundEmployeePerson", foundEmployeePerson);
 			searchInfo searchParameters = new searchInfo();
 			model.addAttribute("searchParameters", searchParameters);

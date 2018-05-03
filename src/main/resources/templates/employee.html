@@ -18,7 +18,7 @@
     <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/profile.css" rel="stylesheet">
+    <link href="/user.css" rel="stylesheet">
     <link href="/AdamMeetsEve.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -32,40 +32,76 @@
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
     <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
+    <ul class="navbar-nav mr-auto">
+        Current Profile: <span th:utext="${session.activeProfile}"></span>
+    </ul>
     <ul class="navbar-nav ml-auto">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Find All Users</button>
-        <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Advanced Search</button>
+        <a th:href="@{/displayall}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Find All Users</a>
+        <button class="btn btn-outline-success my-2 my-sm-0 barBtn" id="advSearchBtn" data-toggle="modal" data-target="#searchModal">Advanced Search</button>
+        <a th:href="@{'/viewprofile/' + ${session.activeProfile}}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Return To Your Profile</a>
         <form action="logout" th:action="@{/logout}" method="post">
-            <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
+            <button type="submit" class="btn btn-info btn-md barBtn">Logout</button>
         </form>
     </ul>
 </nav>
 
+<div id="searchModal" class="modal-fade" style="z-index:9999;" role="dialog";>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="search" th:action="@{/searchresult}" th:object="${searchParameters}" method="post">
+            <p>Advanced Search. Who Are You Looking For?</p><br>
+            <table div id="infoTbl" style="width:100%">
+                <tr>
+                    <th>Min Age: <input type="text" div id="textBox" placeholder="Age Range Start" th:field="*{ageStart}"/></th>
+                    <th>Max Age: <input type="text" div id="textBox" placeholder="Age Range End" th:field="*{ageEnd}"/></th>
+                </tr>
+                <tr>
+                    <th>Gender:<input type="text" div id="textBox" placeholder="Gender" th:field="*{gender}"/></th>
+                </tr>
+                <tr>
+                    <th>Min Height: <input type="text" div id="textBox" placeholder="Min Height" th:field="*{heightstart}"/></th>
+                    <th>Max Height: <input type="text" div id="textBox" placeholder="Max Height" th:field="*{heightend}"/></th>
+
+                </tr>
+                <tr>
+                    <th>Min Weight: <input type="text" div id="textBox" placeholder="Min Weight" th:field="*{weightstart}"/></th>
+                    <th>Max Weight: <input type="text" div id="textBox" placeholder="Max Weight" th:field="*{weightend}"/></th>
+                </tr>
+                <tr>
+                    <th>Hair color: <input type="text" div id="textBox" placeholder="Hair color" th:field="*{hairColor}"/></th>
+                </tr>
+                <tr>
+                    <th><input type="submit"/></th>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 </div>
-<h1><span th:utext="${foundEmployeePerson.getFirstName}"></span> <span th:utext="${foundEmployeePerson.getLastName}"></span>'s Employee Page.</h1><br><br>
+
+<h1><span th:utext="${foundEmployeePerson.getFirstName()}"></span> <span th:utext="${foundEmployeePerson.getLastName()}"></span>'s Employee Page.</h1><br><br>
 
 
 <div class="container">
 
     <div class="index-body">
         <p class="lead">
-            About <span th:utext="${foundProfile.getProfileID()}"></span>:
+            <span th:if="${isManager == true}" th:text="Manager">Manager</span>
+            <span th:utext="${foundEmployeePerson.getFirstName()}"></span> <span th:utext="${foundEmployeePerson.getLastName()}"></span>'s info.
         </p>
         <hr size="2">
-        <p class="lead"><b>Your user information:</b></p>
-        <b>Name:   </b> <th><span th:utext="${foundEmployeePerson.getFirstName()}"></span></th> <th><span th:utext="${foundEmployeePerson.getLastName()}"></span></th><br>
-        <b>Address:   </b>
-        <th><span th:utext="${foundEmployeePerson.getStreet()}"></span></th>,
-        <th><span th:utext="${foundEmployeePerson.getCity()}"></span></th>,
-        <th><span th:utext="${foundEmployeePerson.getState()}"></span></th>,
-        <th><span th:utext="${foundEmployeePerson.getZipcode()}"></span></th><br><br>
+        <p>
+            Employee Role: <span th:utext="${foundEmployee.getRole()}"></span><br>
+            Hourly Wages: <span th:utext="${foundEmployee.getHourlyRate()}"></span><br>
+            Start Date: <span th:utext="${foundEmployee.getStartDate()}"></span><br>
 
-        <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view and edit your full user data.</button>
+            <button type="btn-md" data-toggle="collapse" div id="button" data-target="#employeeinfo">Click to view and edit full employee data.</button>
 
-        <div id="userinfo" class="collapse">
-            <form action="changeinfo" th:action="@{/changeinfo}" th:object="${foundEmployeePerson}" method="post">
-                <input type="hidden" th:value="${foundEmployeePerson.getSsn()}" th:field="*{ssn}"/>
+        <div id="employeeinfo" class="collapse">
+            <form action="changeempinfo" th:action="@{/changeemployeeinfo}" th:object="${employeeChangeInfo}" method="post">
+                <input type="hidden" th:value="${foundEmployeePerson.getSsn()}" name="ssn" id="ssn"/>
                 <table div id="infoTbl">
                     <tr>
                         <th><b>SSN: </b></th>
@@ -103,23 +139,14 @@
                         <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getTelephone()}" placeholder="Change Phone #" th:field="*{telephone}"/></th>
                     </tr>
                     <tr>
-                        <th><b>16-digit Credit Card:</b></th>
-                        <th><span th:utext="${foundEmployeePerson.getccard()}"></span></th>
-                        <th><input type="text" div id="textBox" placeholder="Credit Card #" th:field="*{ccard}"/></th>
+                        <th><b>Role: </b></th>
+                        <th><span th:utext="${foundEmployee.getRole()}"></span></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getPassword()}" placeholder="Change Password" th:field="*{role}"/></th>
                     </tr>
                     <tr>
-                        <th><b>User Class: </b></th>
-                        <th><span th:utext="${foundEmployeePerson.getPpp()}"></span><br></th>
-                        <th>
-                            <select th:field="*{ppp}">
-                                <div>
-                                    <option disabled="true" selected="selected" value="">Select</option>
-                                    <option value="User-User">Basic User (free!)</option>
-                                    <option value="Good-User">Good User ($50/yr)</option>
-                                    <option value="Super-User">Super User ($100/yr)</option>
-                                </div>
-                            </select>
-                        </th>
+                        <th><b>Start Date:</b></th>
+                        <th><span th:utext="${foundEmployee.getHourlyRate()}"></span></th>
+                        <th><input type="text" div id="textBox" th:value="${foundEmployeePerson.getPassword()}" placeholder="Change Password" th:field="*{hourlyRate}"/></th>
                     </tr>
                     <tr>
                         <th><input type="submit" div id="button" onclick="reloadPage()"/></th>
@@ -127,80 +154,20 @@
                 </table>
             </form>
         </div><br>
-        <hr size="2">
-
-
-
-            <!--
-                    <input type="hidden" th:value="${foundEmployeePerson.getSsn()}" name="ssn" id="ssn"/>
-                    <table div id="infoTbl">
-                        <tr>
-                            <th><input type="text" div id="textBox" placeholder="New Profile ID" th:field="*{ProfileID}"/> Your New Profile ID</th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" div id="textBox"placeholder="Your Age" th:field="*{age}"/> Your Age </th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" div id="textBox" placeholder="Youngest Age You're Interested In Dating" th:field="*{RangeStart}"/>
-                                <input type="text" div id="textBox" placeholder="Oldest Age You're Interested In Dating" th:field="*{RangeEnd}"/>
-                                Youngest to Oldest Ages You'd Like to Date (ex: 20, 30)</th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" div id="textBox" placeholder="Distance (in miles) you're willing to go for dates" th:field="*{GeoRange}"/>
-                                Distance In Miles You're Interested In For Dating (ex: 50)
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                <select th:field="*{Gender}">
-                                    <div>
-                                        <option disabled="true" selected="selected" value="">Your Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </div>
-                                </select>
-                                Your Gender:
-                            </th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" div id="textBox" placeholder="Height (as decimal. 5'11 = 5.11)" th:field="*{Height}"/>
-                                Your Height (in decimals. If you're 5'8", type 5.8)
-                            </th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" div id="textBox" placeholder="Weight in pounds" th:field="*{Weight}"/>
-                                Your Weight in Pounds (ex: 160)
-                            </th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" div id="textBox" placeholder="Hair color" th:field="*{HairColor}"/>
-                                Your Hair Color (ex: Red)
-                            </th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" div id="textBox" placeholder="Enter your hobbies!" th:field="*{Hobbies}"/>
-                                Your Hobbies!
-                            </th>
-                        </tr>
-                        <tr>
-                            <th><input type="submit" div id="button"/></th>
-                        </tr>
-                    </table>
-                    -->
         </p>
-        <!--<button type="button" class="btn btn-dark btn-lg" div id="button" href="">Register</button>-->
     </div>
 
-
-
-</div><!-- /.container -->
-
+<script>
+    function reloadPage(){
+        location.reload();
+    }
+</script>
 
 <script>
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('searchModal');
 
     // Get the button that opens the modal
-    var btn = document.getElementById("loginBtn");
+    var btn = document.getElementById("advSearchBtn");
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -212,7 +179,10 @@
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        modal.style.display = "none";
+        $("#searchModal").removeClass("in");
+        $(".modal-backdrop").remove();
+        $("#searchModal").hide();
+        $("#searchModal").removeData();
     }
 
     // When the user clicks anywhere outside of the modal, close it
@@ -222,6 +192,7 @@
         }
     }
 </script>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

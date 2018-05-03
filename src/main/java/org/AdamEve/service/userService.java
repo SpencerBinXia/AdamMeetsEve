@@ -31,6 +31,11 @@ public class userService {
 		return user;
 	}
 
+	public user findEmployeeUser(String id){
+		user user = userRepo.findEmployeeUserBySsn(id);
+		return user;
+	}
+
 	public profile findProfile(String profileID) {
 		profile profile = userRepo.findProfilebyID(profileID);
 		return profile;

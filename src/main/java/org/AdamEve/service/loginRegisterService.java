@@ -22,12 +22,15 @@ public class  loginRegisterService {
 
 	public boolean loginUser(loginInfo info, HttpSession session) {
 		String emailAddress = info.getEmail();
+		System.out.println(emailAddress);
 		user newuser = repository.findUserByEmail(emailAddress);
+		System.out.println(newuser.getSsn());
 		String password = info.getPassword();
 		if (newuser != null) {
 			user validUser = newuser;
 			if (password.equals(validUser.getPassword()))
 			{;
+				System.out.println(validUser.getSsn());
 				session.setAttribute("currentUser", validUser);
 				session.setAttribute("foundUser", validUser);
 

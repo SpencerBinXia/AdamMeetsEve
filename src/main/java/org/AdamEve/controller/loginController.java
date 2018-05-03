@@ -24,6 +24,7 @@ public class loginController {
 	{
 		if (service.loginUser(info, session) == true) {
 			user tempuser = (user)session.getAttribute("currentUser");
+			System.out.println(tempuser.getSsn());
 			if (service.isEmployee(tempuser.getSsn())) {
 				return "redirect:/viewemployee/" + tempuser.getSsn();
 			}

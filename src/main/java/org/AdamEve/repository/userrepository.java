@@ -51,9 +51,15 @@ public class userrepository {
 				}
 			});
 
+			String selectEmpcheck = "SELECT * FROM Employee WHERE SSN='" + tempuser.getSsn() + "';";
 			String selectPPP = "SELECT * FROM User WHERE SSN='" + tempuser.getSsn() + "';";
 			String selectCcard = "SELECT * FROM Account WHERE OwnerSSN='" + tempuser.getSsn() + "';";
 
+
+			if (findEmployeeUserBySsn(tempuser.getSsn()) != null)
+			{
+				return findEmployeeUserBySsn(tempuser.getSsn());
+			}
 
 			jdbcTemplate.queryForObject(selectPPP, new RowMapper<user>(){
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -67,6 +73,7 @@ public class userrepository {
 					return tempuser;
 				}
 			});
+
 		}
 		catch (Exception e)
 		{
@@ -107,6 +114,33 @@ public class userrepository {
 			jdbcTemplate.queryForObject(selectCcard, new RowMapper<user>(){
 				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
 					tempuser.setccard(rs.getString("CardNumber"));
+					return tempuser;
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+		return tempuser;
+	}
+
+	public user findEmployeeUserBySsn(String ssn) {
+		String selectSsn = "SELECT * FROM Person WHERE SSN='" + ssn + "';";
+		user tempuser = new user();
+		try {
+			jdbcTemplate.queryForObject(selectSsn, new RowMapper<user>() {
+				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempuser.setEmail(rs.getString("Email"));
+					tempuser.setSsn(rs.getString("Ssn"));
+					tempuser.setPassword(rs.getString("Password"));
+					tempuser.setFirstName(rs.getString("FirstName"));
+					tempuser.setLastName(rs.getString("LastName"));
+					tempuser.setStreet(rs.getString("Street"));
+					tempuser.setCity(rs.getString("City"));
+					tempuser.setState(rs.getString("State"));
+					tempuser.setZipcode(rs.getInt("Zipcode"));
+					tempuser.setTelephone(rs.getString("Telephone"));
 					return tempuser;
 				}
 			});
@@ -496,7 +530,8 @@ public class userrepository {
 	}
 
 	public employee findEmployeeBySsn(String employeeid) {
-		String selectSsn = "SELECT * FROM Person WHERE SSN='" + employeeid + "';";
+		System.out.println(employeeid + "ssn method");
+		String selectSsn = "SELECT * FROM Employee WHERE SSN='" + employeeid + "';";
 	    employee tempemployee = new employee();
 	    try {
 			jdbcTemplate.queryForObject(selectSsn, new RowMapper<employee>() {
@@ -518,7 +553,7 @@ public class userrepository {
 
 	public void updateEmployee(employeeChangeInfo employeeinfo) {
 		
-		jdbcTemplate.update("update Person set Password = ?, FirstName = ?, LastName= ?, Street= ?, City = ?, State= ?, Zipcode=? Email=? Telephone=?" + 
+		jdbcTemplate.update("update Person set Password = ?, FirstName = ?, LastName= ?, Street= ?, City = ?, State= ?, Zipcode=?, Email=?, Telephone=?" +
 				"where SSN= ?",
         employeeinfo.getPassword(),employeeinfo.getFirstName(),employeeinfo.getLastName(),employeeinfo.getStreet(),employeeinfo.getCity(),employeeinfo.getState(),
         employeeinfo.getZipcode(),employeeinfo.getEmail(),employeeinfo.getTelephone(), employeeinfo.getSsn());
@@ -567,13 +602,17 @@ public class userrepository {
 	}
 
 	public boolean isEmployee(String ssn) {
+		System.out.println("employee method reached");
 		String selectEmployees = "SELECT * FROM Employee";
 		List<String> employeeSSN = new ArrayList<String>();
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectEmployees);
 		for (Map row : rows) {
 			employeeSSN.add((String)row.get("SSN"));
+			System.out.println("employee loop reached");
+			System.out.println(employeeSSN.get(0));
 		}
 		if (employeeSSN.contains(ssn)) {
+			System.out.println(ssn);
 			return true;
 		}
 		return false;
