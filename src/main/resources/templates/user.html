@@ -120,7 +120,9 @@
       <th><span th:utext="${foundUser.getStreet()}"></span></th>,
       <th><span th:utext="${foundUser.getCity()}"></span></th>,
       <th><span th:utext="${foundUser.getState()}"></span></th>,
-      <th><span th:utext="${foundUser.getZipcode()}"></span></th><br><br>
+      <th><span th:utext="${foundUser.getZipcode()}"></span></th><br>
+      <b>Your rating: </b><th><span th:utext="${foundUser.getRating()}"></span></th><br>
+      <b>Last active: </b><th><span th:utext="${foundUser.getLastAct()}"></span></th><br><br>
 
       <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view and edit your full user data.</button>
 

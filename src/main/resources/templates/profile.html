@@ -100,8 +100,11 @@
         Preferred Dating Age Range: <span th:utext="${foundProfile.getRangestart()}"></span> - <span th:utext="${foundProfile.getRangeend()}"></span><br>
         preferred Dating Location Range: <span th:utext="${foundProfile.getGeorange()}"></span>  miles<br>
         Hobbies: <span th:utext="${foundProfile.getHobbies()}"></span><br>
+        Profile Creation Date: <span th:utext="${foundProfile.getCreateDate()"}></span><br>
+        Profile Last Active: <span th:utext="${foundProfile.getLastModDate()"}></span><br>
 
-        <button type="btn-md" data-toggle="collapse" div id="button" data-target="#profileinfo">Edit your profile data</button>
+
+            <button type="btn-md" data-toggle="collapse" div id="button" data-target="#profileinfo">Edit your profile data</button>
 
         <div id="profileinfo" class="collapse">
             <form action="changeinfo" th:action="@{/changeprofinfo}" th:object="${profinfo}" method="post">

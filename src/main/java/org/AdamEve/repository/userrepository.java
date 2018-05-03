@@ -626,7 +626,6 @@ public class userrepository {
 
 	public void addDate(dateInfo dateInfo) {
 		LocalDateTime dateTime = LocalDateTime.now();
-		int tempRating2 = 0;
 		jdbcTemplate.update("INSERT INTO Date(Profile1, Profile2, Date_Time, Location, BookingFee, User1Rating, User2Rating, Comments)" +
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
 				dateInfo.getProfileID1(), dateInfo.getProfileID2(), 
