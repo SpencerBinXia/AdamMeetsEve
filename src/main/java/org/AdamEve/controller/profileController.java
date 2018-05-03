@@ -31,7 +31,7 @@ public class profileController {
 			return "profile";
 		}
 		else {
-			return "redirect:/viewuser/" + ((user)session.getAttribute("currentUser")).getSsn();
+			return "otherProfile";
 		}
 	}
 	

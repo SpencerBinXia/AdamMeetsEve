@@ -20,7 +20,7 @@ public class browseAllController {
 	@Autowired
 	private userService service;
 	
-	@PostMapping
+	@GetMapping
 	public String getAllProfiles(Model model)
 	{
 		List<profile> allProfiles = service.getAllProfiles();
