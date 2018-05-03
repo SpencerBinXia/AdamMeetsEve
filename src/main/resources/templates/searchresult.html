@@ -31,18 +31,52 @@
 </head>
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
-  <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
-  <ul class="navbar-nav ml-auto">
-      <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Search</button>
-      <button class="btn btn-outline-success my-2 my-sm-0" id="loginBtn" type="submit">Advanced Search</button>
-      <form action="logout" th:action="@{/logout}" method="post">
-      <button type="submit" button id="loginBtn" class="btn btn-info btn-md">Logout</button>
-      </form>
-  </ul>
+    <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
+    <ul class="navbar-nav ml-auto">
+        <a th:href="@{/displayall}" class="btn btn-outline-success my-2 my-sm-0 barBtn">Find All Users</a>
+        <button class="btn btn-outline-success my-2 my-sm-0 barBtn" id="advSearchBtn" data-toggle="modal" data-target="#searchModal">Advanced Search</button>
+        <form action="logout" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-info btn-md barBtn">Logout</button>
+        </form>
+    </ul>
 </nav>
 
+<div id="searchModal" class="modal-fade" style="z-index:9999;" role="dialog";>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="search" th:action="@{/searchresult}" th:object="${searchParameters}" method="post">
+            <p>Advanced Search. Who Are You Looking For?</p><br>
+            <table div id="infoTbl" style="width:100%">
+                <tr>
+                    <th>Min Age: <input type="text" div id="textBox" placeholder="Age Range Start" th:field="*{ageStart}"/></th>
+                    <th>Max Age: <input type="text" div id="textBox" placeholder="Age Range End" th:field="*{ageEnd}"/></th>
+                </tr>
+                <tr>
+                    <th>Gender:<input type="text" div id="textBox" placeholder="Gender" th:field="*{gender}"/></th>
+                </tr>
+                <tr>
+                    <th>Min Height: <input type="text" div id="textBox" placeholder="Min Height" th:field="*{heightstart}"/></th>
+                    <th>Max Height: <input type="text" div id="textBox" placeholder="Max Height" th:field="*{heightend}"/></th>
+
+                </tr>
+                <tr>
+                    <th>Min Weight: <input type="text" div id="textBox" placeholder="Min Weight" th:field="*{weightstart}"/></th>
+                    <th>Max Weight: <input type="text" div id="textBox" placeholder="Max Weight" th:field="*{weightend}"/></th>
+                </tr>
+                <tr>
+                    <th>Hair color: <input type="text" div id="textBox" placeholder="Hair color" th:field="*{hairColor}"/></th>
+                </tr>
+                <tr>
+                    <th><input type="submit"/></th>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 </div>
+
 <h1>Search Results Page</span>!</h1><br><br>
 
 

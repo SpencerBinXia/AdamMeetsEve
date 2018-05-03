@@ -347,7 +347,7 @@ public class userrepository {
 			likes like = new likes();
 			like.setLiker((String)row.get("Liker"));
 			like.setLikee((String)row.get("Likee"));
-			like.setTimeLike((LocalDateTime)row.get("Date_Time"));
+			like.setTimeLike(((Timestamp)row.get("Date_Time")).toLocalDateTime());
 			liked.add(like);
 		}
 		
@@ -363,7 +363,7 @@ public class userrepository {
 			likes like = new likes();
 			like.setLiker((String)row.get("Liker"));
 			like.setLikee((String)row.get("Likee"));
-			like.setTimeLike((LocalDateTime)row.get("Date_Time"));
+			like.setTimeLike(((Timestamp)row.get("Date_Time")).toLocalDateTime());
 			likes.add(like);
 		}
 		
