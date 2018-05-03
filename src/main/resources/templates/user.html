@@ -33,7 +33,7 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-dark" div id="navbar">
   <a class="navbar-brand abs" th:href="@{/}">AdamMeetsEve</a>
   <ul class="navbar-nav ml-auto">
-      <button class="btn btn-outline-success my-2 my-sm-0 barBtn" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0 barBtn" type="submit">Find All Users</button>
       <button class="btn btn-outline-success my-2 my-sm-0 barBtn" id="advSearchBtn" data-toggle="modal" data-target="#searchModal">Advanced Search</button>
       <form action="logout" th:action="@{/logout}" method="post">
       <button type="submit" class="btn btn-info btn-md barBtn">Logout</button>
@@ -43,7 +43,7 @@
 
 
 </div>
-<h1>Welcome To Your User Page, <span th:utext="${session.currentUser.getFirstName()}"></span> <span th:utext="${session.currentUser.getLastName()}"></span>!</h1><br><br>
+<h1>Welcome To Your User Page, <span th:utext="${foundUser.getFirstName()}"></span> <span th:utext="${foundUser.getLastName()}"></span>!</h1><br><br>
 
 <!-- Modal -->
 <div id="searchModal" class="modal-fade" style="z-index:9999;" role="dialog";>
