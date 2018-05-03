@@ -29,6 +29,8 @@ public class  loginRegisterService {
 			if (password.equals(validUser.getPassword()))
 			{;
 				session.setAttribute("currentUser", validUser);
+				session.setAttribute("foundUser", validUser);
+
 				return true;
 			}
 			else

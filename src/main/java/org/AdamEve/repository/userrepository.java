@@ -46,6 +46,23 @@ public class userrepository {
 					return tempuser;
 				}
 			});
+
+			String selectPPP = "SELECT * FROM User WHERE SSN='" + tempuser.getSsn() + "';";
+			String selectCcard = "SELECT * FROM Account WHERE SSN='" + tempuser.getSsn() + "';";
+
+			jdbcTemplate.queryForObject(selectPPP, new RowMapper<user>(){
+				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempuser.setPpp(rs.getString("PPP"));
+					return tempuser;
+				}
+			});
+
+			jdbcTemplate.queryForObject(selectCcard, new RowMapper<user>(){
+				public user mapRow(ResultSet rs, int rowNum) throws SQLException {
+					tempuser.setccard(rs.getString("CardNumber"));
+					return tempuser;
+				}
+			});
 		}
 		catch (Exception e)
 		{

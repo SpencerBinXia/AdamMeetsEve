@@ -164,18 +164,18 @@
       <button type="btn-md" data-toggle="collapse" div id="button" data-target="#userinfo">Click to view and edit your full user data.</button>
 
     <div id="userinfo" class="collapse">
-        <form action="changeinfo" th:action="@{/changeinfo}" th:object="${reginfo}" method="post">
+        <form action="changeinfo" th:action="@{/changeinfo}" th:object="${foundUser}" method="post">
             <input type="hidden" th:value="${session.currentUser.getSsn()}" name="ssn" id="ssn"/>
             <table div id="infoTbl">
                 <tr>
                     <th><b>E-mail:</b></th>
                     <th><span th:utext="${session.currentUser.getEmail()}"></span></th>
-                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getEmail()}" placeholder="Change E-mail" th:field="*{email}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.foundUser.getEmail()}" placeholder="Change E-mail" th:field="*{email}"/></th>
                 </tr>
                 <tr>
                     <th><b>Password:</b></th>
                     <th><span th:utext="${session.currentUser.getPassword()}"></span></th>
-                    <th><input type="text" div id="textBox" th:value="${session.currentUser.getPassword()}" placeholder="Change Password" th:field="*{password}"/></th>
+                    <th><input type="text" div id="textBox" th:value="${session.foundUser.getPassword()}" placeholder="Change Password" th:field="*{password}"/></th>
                 </tr>
                 <tr>
                     <th><b>Name: </b></th>
